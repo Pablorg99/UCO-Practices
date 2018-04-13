@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int divEntera (int D, int d, int c) {
-  if (D <º d) {
+  if (D < d) {
     return c;
   }
   else  {
@@ -17,6 +17,6 @@ int main (void) {
   printf("Introduzca el divisor\n");
   scanf("%i", &divisor);
   cociente = divEntera (Dividendo, divisor, 0);
-  printf("%i\n", cociente);
+  printf("%d entre %d es %d\n", Dividendo, divisor, cociente);
   return 0;
 }
