@@ -1,5 +1,5 @@
-#ifndef EJ6_FUNCIONES_H
-#define EJ6_FUNCIONES_H
+#ifndef EJ6_H
+#define EJ6_H
 
 /* -----------------------------------------------------------------------------
 6. Codifica un programa en C que, utilizando funciones, abra un fichero en modo
