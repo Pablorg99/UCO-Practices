@@ -9,7 +9,7 @@ void pedirNombre (char *file, int nchar) {
 
 int randomNumber(int min, int max) {
   int random;
-  random = ((min + rand() % (máx + 1 - min));
+  random = ((min + rand() % (max + 1 - min)));
   return random;
 }
 

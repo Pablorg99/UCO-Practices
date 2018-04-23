@@ -13,7 +13,7 @@ int main() {
   printf("\nEl archivo se llenará con numeros aleatorios entre el rango especificado:");
   printf("\n\tIndique el máximo del intervalo: ");
   scanf("%d", &min);
-  printf("\n\tIndique el mínimo del intervalo: ");
+  printf("\tIndique el mínimo del intervalo: ");
   scanf("%d", &max);
 
   rellenarFichero(file, nEle, min, max);
