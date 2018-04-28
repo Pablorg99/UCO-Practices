@@ -37,9 +37,9 @@ int main(int argc, char const *argv[]) {
   int *vector;
 
   vector = vectorDeAleatorios(nEle, min, max);
-  for (int i = 0; i < nEle; i++) {
-    printf("%d\n", vector[i]);
-  }
+  //for (int i = 0; i < nEle; i++) {
+  //  printf("%d\n", vector[i]);
+  //}
   writeInFile(file, vector, nEle);
 
   free(vector);
