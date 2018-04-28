@@ -16,18 +16,24 @@ fichero y los extremos superior e inferior del intervalo.
 
   /*----------------------------------------------------------------------------
   Genera un número aleatorio usando rand() entre los valores min y max que
-  también son pedidos por teclado en ej7_main.c
+  vienen dados como argumentos en la línea de ordenes
   ----------------------------------------------------------------------------*/
   int randomNumber(int min, int max);
 
   /*----------------------------------------------------------------------------
+  Crea un vector dinámico con el tamaño de nEle (especificado en un argumento en
+  la línea de órdenes), pone srand(time) a NULL y recorre el vector, asignandole
+  a cada uno de sus elementos el entero devuelto por randomNumber(). Por último
+  devuelve un puntero al vector.
+  ----------------------------------------------------------------------------*/
+  int * vectorDeAleatorios (int nEle, int min, int max);
 
+  /*----------------------------------------------------------------------------
+  Crea un fichero con el nombre especificado en la línea de órdenes, y si no se
+  produce ningún error, escribe el vector de aleatorios creado durante la
+  ejecución del programa en el fichero binario usando fwrite.
   ----------------------------------------------------------------------------*/
   void writeInFile (char *file, int* vector, int nEle);
 
-  /*----------------------------------------------------------------------------
-
-  ----------------------------------------------------------------------------*/
-  int * vectorDeAleatorios (int nEle, int min, int max);
 
 #endif
