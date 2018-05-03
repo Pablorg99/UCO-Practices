@@ -29,11 +29,24 @@ fichero y los extremos superior e inferior del intervalo.
   int * vectorDeAleatorios (int nEle, int min, int max);
 
   /*----------------------------------------------------------------------------
+  Esta función imprime el vector pasado como argumento (se debe especificar el
+  tamaño del mismo) con un formato tal que: Vector = {u1, u2,...,up} siendo u1
+  cada uno de los elementos del vector.
+  ----------------------------------------------------------------------------*/
+  void printVector (int * vector, int nEle);
+
+  /*----------------------------------------------------------------------------
   Crea un fichero con el nombre especificado en la línea de órdenes, y si no se
   produce ningún error, escribe el vector de aleatorios creado durante la
   ejecución del programa en el fichero binario usando fwrite.
   ----------------------------------------------------------------------------*/
   void writeInFile (char *file, int* vector, int nEle);
+
+  /*----------------------------------------------------------------------------
+  Esta función lee los datos del fichero binario creado en writeInFile() y los
+  guarda en un vector dinamico (usando fread()) que devuelve al main. 
+  ----------------------------------------------------------------------------*/
+  int * readFile (char* file, int*  vector, int nEle);
 
 
 #endif

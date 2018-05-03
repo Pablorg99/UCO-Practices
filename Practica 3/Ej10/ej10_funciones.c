@@ -19,11 +19,36 @@ int * vectorDeAleatorios (int nEle, int min, int max) {
   return ptrv;
 }
 
+void printVector (int * vector, int nEle) {
+  printf("Vector = ");
+  printf("{");
+  for (int i = 0; i < nEle; i++) {
+    if (i == nEle - 1) printf("%d", vector[i]);
+    else printf("%d, ", vector[i]);
+  }
+  printf("}\n");
+}
+
 void writeInFile (char *file, int* vector, int nEle) {
   FILE *f;
   if ((f = fopen (file, "wb")) == NULL) {
     printf("No se ha podido abrir el fichero <%s>\n", file);
     exit(-4);
   }
+
   fwrite (vector, sizeof(int), nEle, f);
+  fclose(f);
+}
+
+int * readFile (char* file, int* vector, int nEle) {
+  FILE *f;
+  if ((f = fopen (file, "rb")) == NULL) {
+    printf("No se ha podido abrir el fichero <%s>\n", file);
+    exit(-4);
+  }
+
+  fread(vector, sizeof(int), nEle, f);
+  fclose(f);
+
+  return vector;
 }
