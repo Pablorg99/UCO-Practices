@@ -6,7 +6,7 @@ int main(int argc, char const *argv[]) {
     nombreFichero númeroElementosFichero númeroMáximo númeroMínimo\n");
     exit(-1);
   }
-  char *file = argv[1];
+  char *file = argv[1];asodhas
 
   /*----------------------------------------------------------------------------
   Utilizo la función strtol() para convertir los strings obtenidos en línea de
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
   writeInFile(file, vector, nEle);
   vector = readFile(file, vector, nEle);
   printVector (vector, nEle);
-  
+
   free(vector);
   return 0;
 }
