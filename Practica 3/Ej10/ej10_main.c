@@ -18,6 +18,7 @@ int main(int argc, char const *argv[]) {
   especial 0.
   ----------------------------------------------------------------------------*/
   char *ptr;
+  int aux;
   int nEle = strtol(argv[2], &ptr, 10);
   if (*ptr != '\0') {
     printf("Error al convertir númeroElementosFichero a int\n");
@@ -33,7 +34,12 @@ int main(int argc, char const *argv[]) {
     printf("Error al convertir númeroMínimo a int\n");
     exit(-2);
   }
-  if (max < min) min = max;
+  //Intercambia valores de max y min si están al revés.
+  if (max < min) {
+    aux = max;
+    max = min;
+    min = aux;
+  }
   int *vector;
 
   vector = vectorDeAleatorios(nEle, min, max);
