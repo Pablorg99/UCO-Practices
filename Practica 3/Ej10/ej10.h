@@ -13,6 +13,7 @@ fichero y los extremos superior e inferior del intervalo.
   #include <stdio.h>
   #include <stdlib.h> //Permite usar srand() y rand()
   #include <time.h>   //Permite usar time()
+  #include <string.h> //Permite usar strcpy()
 
   /*----------------------------------------------------------------------------
   Genera un número aleatorio usando rand() entre los valores min y max que
@@ -44,7 +45,7 @@ fichero y los extremos superior e inferior del intervalo.
 
   /*----------------------------------------------------------------------------
   Esta función lee los datos del fichero binario creado en writeInFile() y los
-  guarda en un vector dinamico (usando fread()) que devuelve al main. 
+  guarda en un vector dinamico (usando fread()) que devuelve al main.
   ----------------------------------------------------------------------------*/
   int * readFile (char* file, int*  vector, int nEle);
 

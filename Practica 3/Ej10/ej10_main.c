@@ -6,7 +6,8 @@ int main(int argc, char const *argv[]) {
     nombreFichero númeroElementosFichero númeroMáximo númeroMínimo\n");
     exit(-1);
   }
-  char *file = argv[1];
+  char file[100];
+  strcpy (file, argv[1]);
 
   /*----------------------------------------------------------------------------
   Utilizo la función strtol() para convertir los strings obtenidos en línea de
