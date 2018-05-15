@@ -1,0 +1,14 @@
+# Nombre del proyecto
+PROJECT_NAME           = Pasatiempos
+
+# Idioma: español
+OUTPUT_LANGUAGE        = Spanish
+
+# Muestra la parte privada
+EXTRACT_PRIVATE        = YES
+
+# Muestra los ficheros de "c"
+SOURCE_BROWSER         = YES
+
+# No se genera la documentación en latex
+GENERATE_LATEX         = NO
