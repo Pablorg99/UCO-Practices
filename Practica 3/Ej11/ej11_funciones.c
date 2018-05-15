@@ -1,12 +1,5 @@
 #include "ej11.h"
 
-char* fileInPath (char* file, char* file_path) {
-  char *aux = malloc (1 + strlen(file) + strlen(file_path));
-  strcpy(aux, file_path);
-  strcat(aux, file);
-  return aux;
-}
-
 void pedirNombre (char *file, int nchar) {
   fgets (file, nchar, stdin);
   for (int i = 0; i < strlen(file) + 1; i++) {
@@ -23,7 +16,6 @@ int * reservaVectorDinamico (int nEle) {
   return ptrv;
 }
 
-
 int * getArrayFromFile (char *file, int *nEle) {
   int *vector;
   int aux;
@@ -33,13 +25,12 @@ int * getArrayFromFile (char *file, int *nEle) {
     printf("Error al abrir el fichero <%s>\n", file);
     exit(-1);
   }
-  while ((fread(&aux, sizeof(int), 1, f)) == 1) (*nEle)++;
+
+  fseek(f, 0L, SEEK_END);
+  *nEle = ftell(f) / sizeof(int);
   vector = reservaVectorDinamico (*nEle);
 
-  if ((fseek(f, 0L, SEEK_SET)) != 0) {
-    printf("Error al reposicionar cursor del fichero\n");
-    exit(-3);
-  }
+  fseek(f, 0L, SEEK_SET);
   if ((fread (vector, sizeof(int), *nEle, f)) != *nEle){
     printf("Error en la lectura del fichero\n");
     exit(-4);

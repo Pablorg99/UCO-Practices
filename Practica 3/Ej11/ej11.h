@@ -8,23 +8,10 @@ en un vector dinámico y, a continuación, calcule la media de los números pare
 El nombre del fichero se le preguntará al usuario.
 ------------------------------------------------------------------------------*/
 
-  #define CHAR_NAME 30 //Nº máximo de caracteres del nombre del fichero
+  #define CHAR_NAME 50 //Nº máximo de caracteres del nombre del fichero
   #include <stdio.h>
   #include <stdlib.h> //Permite usar calloc()
   #include <string.h> //Permite usar strlen(), strcpy() y strcat()
-
-  /*----------------------------------------------------------------------------
-  Como el fichero que nos interesa está en la carpeta /Ej10/, para acceder a esta
-  ruta debemos escribir el directorio que corresponde a esa carpeta desde la
-  carpeta /Ej11/ en la que se encuentra el programa.
-  En linux, para acceder a la carpeta anterior (Practica 3 en este caso) usamos
-  ".." de manera que la ruta que buscamos es "../Ej10/" + "nombreFichero".
-  En esta función se concatenan los 2 char * en la cadena dinámica aux. Se
-  utiliza strcpy() y strcat() porque no funciona de otro modo con char * (por
-  lo que he leído en foros).
-  Devuelve un char * que apunta a la cadena concatenada "../Ej10/nombreFichero"
-  ----------------------------------------------------------------------------*/
-  char* fileInPath (char* file, char* file_path);
 
   /*----------------------------------------------------------------------------
   Pide al usuario un nombre de fichero por teclado mediante fgets() y cambia el
