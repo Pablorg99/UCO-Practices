@@ -30,11 +30,12 @@ El nombre del fichero se le preguntará al usuario.
   Esta función abre el fichero indicado por el usuario en la carpeta del
   ejercicio 10 y guarda sus datos en un vector. Para ello:
     - Abre el archivo y comprueba que no ha habido errores.
-    - Cuenta el numero de elementos del fichero usando fread con un buffer
-      auxiliar y tamaño de buffer 1, y guarda dicho valor en nEle.
+    - Cuenta el numero de bytes del fichero usando ftell() con el cursor
+      colocado al final (se coloca al final usando fseek()) del fichero y
+      dividiendo por sizeof(int) (numero de bytes que ocupa un entero) obtengo
+      el número de enteros que hay en el vector, guardo este valor en nEle.
     - Llama a reservaVectorDinamico() pasando nEle como argumento.
-    - Coloca el cursor del fichero en el inicio mediante fseek() (al recorrer el
-      fichero con el primer fread(), dicho cursor se coloca al final).
+    - Coloca el cursor del fichero en el inicio mediante fseek().
     - Guarda todos los datos del fichero en el vector mediante fread().
     - Cierra el fichero y devuelve el puntero al vector.
   ----------------------------------------------------------------------------*/
