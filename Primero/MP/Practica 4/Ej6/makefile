@@ -1,5 +1,5 @@
-crucigrama: crucigrama.o main.o ficheros.o libMemoria.a
-	gcc -o crucigrama crucigrama.o main.o ficheros.o libMemoria.a
+crucigrama.out: crucigrama.o main.o ficheros.o libMemoria.a
+	gcc -o crucigrama.out crucigrama.o main.o ficheros.o libMemoria.a
 
 libMemoria.a: reservaMemoria.o liberaMemoria.o
 	ar -rsv libMemoria.a reservaMemoria.o liberaMemoria.o
