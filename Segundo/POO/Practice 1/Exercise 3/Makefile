@@ -1,4 +1,4 @@
-#FILE PROVIDED BY THE UNIVERSITY (MOODLE)
+#FILE PROVIDED BY THE UNIVERSITY (Modified by me)
 
 
 # A sample Makefile for building Google Test and using it in user
@@ -80,4 +80,4 @@ dados_unittest.o : dados_unittest.cc dados.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c dados_unittest.cc
 
 dados_unittest : dados.o dados_unittest.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o dados_unittest.out

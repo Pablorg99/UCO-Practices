@@ -25,6 +25,8 @@ class Dados {
     void lanzamiento();
     //returns d1_ + d2_
     int getSuma();
+    //returns d1_ - d2_
+    int getDiferencia();
 };
 
 #endif

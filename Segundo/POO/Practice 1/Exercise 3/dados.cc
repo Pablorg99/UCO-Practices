@@ -47,3 +47,9 @@ int Dados::getSuma () {
   suma = d1_ + d2_;
   return suma;
 }
+
+int Dados::getDiferencia () {
+  int diferencia;
+  diferencia = d1_ - d2_;
+  return diferencia;
+}

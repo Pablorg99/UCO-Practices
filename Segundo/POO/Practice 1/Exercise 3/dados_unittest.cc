@@ -1,4 +1,5 @@
-//FILE PROVIDED BY THE UNIVERSITY (MOODLE)
+//FILE PROVIDED BY THE UNIVERSITY (Modified by me)
+
 
 
 // dados_unittest.cc: Juan A. Romero
@@ -44,7 +45,17 @@ TEST(Dados, Lanzamiento) {
 TEST(Dados, Suma) {
   Dados d;
 
-  EXPECT_EQ(d.getDado1()+d.getDado2(), d.getSuma());
+  EXPECT_EQ(d.getDado1() + d.getDado2(), d.getSuma());
+}
+
+//Tets operación resta
+TEST(Dados, Resta) {
+  Dados d;
+
+  EXPECT_EQ(d.getDado1() - d.getDado2(), d.getDiferencia());
+  d.setDado1(4);
+  d.setDado2(2);
+  EXPECT_EQ(2, d.getDiferencia());
 }
 
 // Tests modificadores
