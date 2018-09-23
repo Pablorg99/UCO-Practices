@@ -78,24 +78,24 @@ create table consultas_datos
 	constraint ck_respuesta CHECK (respuesta in ('Si','No')));
 
 insert into partidos
-values (1, 'Partido Popular', 'PP', 'c/ G�nova 13', 'Madrid', 'Pablo Casado Blanco', '20/01/1989', 324143);
+values (1, 'Partido Popular', 'PP', 'c/ Génova 13', 'Madrid', 'Pablo Casado Blanco', '20/01/1989', 324143);
 insert into partidos
-values (2, 'Partido Socialista Obrero Espa�ol', 'PSOE', 'c/ Ferraz 70', 'Madrid', 'Pedro Sanchez Perez-Castejon', '02/05/1879', 420198);
+values (2, 'Partido Socialista Obrero Español', 'PSOE', 'c/ Ferraz 70', 'Madrid', 'Pedro Sanchez Perez-Castejon', '02/05/1879', 420198);
 insert into partidos
-values (3, 'Ciudadanos', 'Cs', 'c/ Alcal� 253', 'Madrid', 'Albert Rivera Diaz', '01/06/2006', 35200);
+values (3, 'Ciudadanos', 'Cs', 'c/ Alcalá 253', 'Madrid', 'Albert Rivera Diaz', '01/06/2006', 35200);
 insert into partidos
-values (4, 'Podemos', null, 'c/ Zurita 21', 'Madrid', 'Pablo Iglesias Turri�n', '17/01/2014', 56290);
+values (4, 'Podemos', null, 'c/ Zurita 21', 'Madrid', 'Pablo Iglesias Turrión', '17/01/2014', 56290);
 insert into partidos
-values (5, 'Izquierda Unida', 'IU', 'c/ Olimpo 35', 'Madrid', 'Alberto Garz�n Espinosa', '29/04/1986', 101310);
+values (5, 'Izquierda Unida', 'IU', 'c/ Olimpo 35', 'Madrid', 'Alberto Garzón Espinosa', '29/04/1986', 101310);
 
 insert into provincias
-values (1, 'C�rdoba', 788219, 'Andalucia');
+values (1, 'Córdoba', 788219, 'Andalucia');
 insert into provincias
 values (2, 'Sevilla', 1939775, 'Andalucia');
 insert into provincias
 values (3, 'Madrid', 6507184, 'Madrid');
 insert into provincias
-values (4, 'Barcelona', 5576037, 'Catalu�a');
+values (4, 'Barcelona', 5576037, 'Cataluña');
 insert into provincias
 values (5, 'Zaragoza', 970313, 'Aragon');
 insert into provincias
@@ -143,9 +143,9 @@ values (44826745, 'Pedro Jimenez Santos', 'Basicos', 'Estudiante','jimsanped@yah
 insert into votantes
 values (30725352, 'Marta Sanchez Rodriguez', 'Ninguno', 'Parado','martita00@hotmail.com',1,'28/01/2000',654825492);
 insert into votantes
-values (45245264, 'Ana Mar�a Exp�sito Escudero', 'Superiores', 'Activo','expositoeam@yahoo.es',6,'30/07/1992',692547885);
+values (45245264, 'Ana María Expósito Escudero', 'Superiores', 'Activo','expositoeam@yahoo.es',6,'30/07/1992',692547885);
 insert into votantes
-values (31075940, 'Alberto Nu�ez Fernandez', 'Basicos', 'Jubilado','anfernandez@outlook.com',1,'14/05/1950',666350983);
+values (31075940, 'Alberto Nuñez Fernandez', 'Basicos', 'Jubilado','anfernandez@outlook.com',1,'14/05/1950',666350983);
 insert into votantes
 values (45374737, 'Carolina Lopez Muriel', 'Basicos', 'Activo','karolop90@hotmail.com',5,'19/11/1988',643176224);
 insert into votantes
@@ -174,15 +174,15 @@ values (1, 'Europa2018', '23/04/2018', 'Europeas','Elecciones al parlamento euro
 insert into eventos
 values (2, 'Europa2015', '20/03/2015', 'Europeas','Elecciones al parlamento europeo');
 insert into eventos
-values (3, 'Espa�a17', '26/05/2017', 'Generales','Elecciones generales');
+values (3, 'España17', '26/05/2017', 'Generales','Elecciones generales');
 insert into eventos
-values (4, 'Espa�a13', '30/05/2013', 'Generales','Elecciones generales');
+values (4, 'España13', '30/05/2013', 'Generales','Elecciones generales');
 insert into eventos
 values (5, 'Andalucia', '23/09/2018', 'Autonomicas','Elecciones al parlamento andaluz');
 insert into eventos
 values (6, 'Madrid', '23/09/2018', 'Autonomicas','Elecciones a la comunidad de madrid');
 insert into eventos
-values (7, 'Catalu�a', '23/09/2018', 'Autonomicas','Elecciones a la generalitat');
+values (7, 'Cataluña', '23/09/2018', 'Autonomicas','Elecciones a la generalitat');
 insert into eventos
 values (8, 'Cordoba', '22/01/2018', 'Locales','Elecciones al ayuntamiento de Cordoba');
 insert into eventos
@@ -514,4 +514,3 @@ insert into consultas_datos
 values (60, 54, 4, 'No', 0.92);
 insert into consultas_datos
 values (61, 54, 5, 'No', 0.82);
-
