@@ -26,23 +26,23 @@ int main()
     // Shared memory
     key = ftok("shmemory.c", 1);
     if ((shmid = shmget(key, sizeof(double), IPC_CREAT | 0777)) == -1)
-	exit(1);
+	     exit(1);
 
     counter = (double *) shmat(shmid, NULL, 0);
     *counter = 0.0;
 
     // Run children
     for (i = 0; i < CHILDREN; i++) {
-	if (!fork()) {
-	    adder(i);
-	    exit(0);
-	}
+    	if (!fork()) {
+    	    adder(i);
+    	    exit(0);
+	    }
     }
 
     // Wait to finish
     for (i = 0; i < CHILDREN; i++) {
-	pid_t pid = wait(&status);
-	printf("\nChild %d finished with status %d\n", pid, WEXITSTATUS(status));
+    	pid_t pid = wait(&status);
+    	printf("\nChild %d finished with status %d\n", pid, WEXITSTATUS(status));
     }
 
     // Final result
@@ -67,14 +67,14 @@ void adder(int id)
     // Shared memory
     key = ftok("shmemory.c", 1);
     if ((shmid = shmget(key, sizeof(double), 0)) == -1)
-	perror("Child: ");
+	     perror("Child: ");
     counter = (double *) shmat(shmid, NULL, 0);
 
     for (i = 0; i < ITER; i++) {
-	l = *counter;
-	fprintf(stdout, "Process %d: %lf\n", id, *counter);
-	l += x;
-	*counter = l;
+    	l = *counter;
+    	fprintf(stdout, "Process %d: %lf\n", id, *counter);
+    	l += x;
+    	*counter = l;
     }
     fprintf(stdout, "*Process %d: %lf\n", id, *counter);
     shmdt(counter);
