@@ -51,5 +51,8 @@ int Dados::getSuma () {
 int Dados::getDiferencia () {
   int diferencia;
   diferencia = d1_ - d2_;
+  if (diferencia < 0) {
+    diferencia = -1 * diferencia;
+  }
   return diferencia;
 }

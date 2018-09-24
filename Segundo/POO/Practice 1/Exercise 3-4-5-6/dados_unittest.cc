@@ -50,11 +50,15 @@ TEST(Dados, Suma) {
 //Tets operación resta
 TEST(Dados, Resta) {
   Dados d;
-
-  EXPECT_EQ(d.getDado1() - d.getDado2(), d.getDiferencia());
   d.setDado1(4);
   d.setDado2(2);
   EXPECT_EQ(2, d.getDiferencia());
+  d.setDado1(2);
+  d.setDado2(5);
+  EXPECT_EQ(3, d.getDiferencia());
+  d.setDado1(2);
+  d.setDado2(2);
+  EXPECT_EQ(0, d.getDiferencia());
 }
 
 // Tests modificadores
