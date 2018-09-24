@@ -47,9 +47,10 @@ TEST(Dados, Suma) {
   EXPECT_EQ(d.getDado1() + d.getDado2(), d.getSuma());
 }
 
-//Tets operación resta
-TEST(Dados, Resta) {
+//Tets operación diferenci
+;TEST(Dados, Resta) {
   Dados d;
+
   d.setDado1(4);
   d.setDado2(2);
   EXPECT_EQ(2, d.getDiferencia());
@@ -74,4 +75,47 @@ TEST(Dados, Modificadores) {
   d.setDado2(2);
   EXPECT_EQ(2, d.getDado2());
   EXPECT_EQ(5, d.getSuma());
+}
+
+//Tests get Lanzamientos
+TEST(Dados, Lanzamientos) {
+  Dados d;
+
+  EXPECT_EQ(0, d.getLanzamientos1());
+  EXPECT_EQ(0, d.getLanzamientos2());
+  d.lanzamiento();
+  EXPECT_EQ(1, d.getLanzamientos1());
+  EXPECT_EQ(1, d.getLanzamientos2());
+  d.setDado1(4);
+  EXPECT_EQ(2, d.getLanzamientos1());
+  EXPECT_EQ(1, d.getLanzamientos2());
+  d.setDado1(7);
+  EXPECT_EQ(2, d.getLanzamientos1());
+  EXPECT_EQ(1, d.getLanzamientos2());
+  d.setDado2(4);
+  EXPECT_EQ(2, d.getLanzamientos1());
+  EXPECT_EQ(2, d.getLanzamientos2());
+  d.setDado2(7);
+  EXPECT_EQ(2, d.getLanzamientos1());
+  EXPECT_EQ(2, d.getLanzamientos2());
+}
+
+//Tests para la media
+TEST(Dados, media) {
+  Dados d;
+  EXPECT_NEAR(0, d.getMedia1(), 0);
+  EXPECT_NEAR(0, d.getMedia2(), 0);
+  d.setDado1(2);
+  d.setDado2(4);
+  EXPECT_NEAR(2, d.getMedia1(), 0);
+  EXPECT_NEAR(4, d.getMedia2(), 0);
+  d.setDado1(3);
+  d.setDado2(5);
+  EXPECT_NEAR(2.5, d.getMedia1(), 0);
+  EXPECT_NEAR(4.5, d.getMedia2(), 0);
+    for (int i = 0; i < 1000; i++) {
+    d.lanzamiento();
+  }
+  EXPECT_NEAR(3.5, d.getMedia1(), 0.2);
+  EXPECT_NEAR(3.5, d.getMedia2(), 0.2);
 }
