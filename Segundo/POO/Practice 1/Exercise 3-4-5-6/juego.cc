@@ -9,7 +9,8 @@ call all the methods of the class.
 #include "dados.h"
 
 int main() {
-  using namespace std;
+  using std::cout;
+  using std::cin;
   Dados d;
   int aux;  //used to save values introduced by keyboard
 
