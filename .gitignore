@@ -1,3 +1,5 @@
+.gitignore
+
 # Compiled Object files
 *.o
 
@@ -10,4 +12,3 @@
 # Directories from Moodle
 Segundo/POO/GoogleTest-Master
 Segundo/SO/Practice 1/Demos (UCO)
-
