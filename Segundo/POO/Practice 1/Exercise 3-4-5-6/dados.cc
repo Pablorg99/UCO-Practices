@@ -17,14 +17,6 @@ Dados::Dados () {
   addition_d2_ = 0;
 }
 
-int Dados::getDado1 () {
-  return d1_;
-}
-
-int Dados::getDado2 () {
-  return d2_;
-}
-
 bool Dados::setDado1 (int n) {
   if (n < 1 || n > 6) return false;
   else {
@@ -54,28 +46,15 @@ void Dados::lanzamiento () {
   addition_d2_ += d2_;
 }
 
-int Dados::getSuma () {
-  int suma;
-  suma = d1_ + d2_;
-  return suma;
-}
-
 int Dados::getDiferencia () {
   int diferencia;
-  diferencia = d1_ - d2_;
+  diferencia = getDado1() - getDado2();
   if (diferencia < 0) {
     diferencia = -1 * diferencia;
   }
   return diferencia;
 }
 
-int Dados::getLanzamientos1 () {
-    return throws_d1_;
-}
-
-int Dados::getLanzamientos2 () {
-  return throws_d2_;
-}
 
 float Dados::getMedia1 () {
   if (throws_d1_ == 0) {
