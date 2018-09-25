@@ -13,8 +13,8 @@ Dados::Dados () {
   d2_ = 1;
   throws_d1_ = 0;
   throws_d2_ = 0;
-  average_d1_ = 0;
-  average_d2_ = 0;
+  addition_d1_ = 0;
+  addition_d2_ = 0;
 }
 
 int Dados::getDado1 () {
@@ -30,7 +30,7 @@ bool Dados::setDado1 (int n) {
   else {
     d1_ = n;
     throws_d1_++;
-    average_d1_ += d1_;
+    addition_d1_ += d1_;
     return true;
   }
 }
@@ -40,7 +40,7 @@ bool Dados::setDado2 (int n) {
   else {
     d2_ = n;
     throws_d2_++;
-    average_d2_ += d2_;
+    addition_d2_ += d2_;
     return true;
   }
 }
@@ -50,8 +50,8 @@ void Dados::lanzamiento () {
   d2_ = (rand() % 6) + 1;
   throws_d1_++;
   throws_d2_++;
-  average_d1_ += d1_;
-  average_d2_ += d2_;
+  addition_d1_ += d1_;
+  addition_d2_ += d2_;
 }
 
 int Dados::getSuma () {
@@ -81,14 +81,14 @@ float Dados::getMedia1 () {
   if (throws_d1_ == 0) {
     return 0;
   }
-  average_d1_ /= throws_d1_;
-  return average_d1_;
+  addition_d1_ /= throws_d1_;
+  return addition_d1_;
 }
 
 float Dados::getMedia2 () {
   if (throws_d2_ == 0) {
     return 0;
   }
-  average_d2_ /= throws_d2_;
-  return average_d2_;
+  addition_d2_ /= throws_d2_;
+  return addition_d2_;
 }

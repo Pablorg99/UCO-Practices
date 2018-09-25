@@ -15,8 +15,8 @@ class Dados {
     int throws_d1_;
     int throws_d2_;
     //Used for getMedia1/2
-    float average_d1_;
-    float average_d2_;
+    float addition_d1_;
+    float addition_d2_;
   public:
     //Constructor: initiate seed and set d1_ and d2_ to '1'
     Dados();
