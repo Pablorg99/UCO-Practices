@@ -11,6 +11,7 @@ call all the methods of the class.
 int main() {
   using std::cout;
   using std::cin;
+  using std::endl;
   Dados d;
   int aux;  //used to save values introduced by keyboard
 
