@@ -113,7 +113,7 @@ TEST(Dados, media) {
   d.setDado2(5);
   EXPECT_NEAR(2.5, d.getMedia1(), 0);
   EXPECT_NEAR(4.5, d.getMedia2(), 0);
-    for (int i = 0; i < 1000; i++) {
+  for (int i = 0; i < 1000; i++) {
     d.lanzamiento();
   }
   EXPECT_NEAR(3.5, d.getMedia1(), 0.2);
