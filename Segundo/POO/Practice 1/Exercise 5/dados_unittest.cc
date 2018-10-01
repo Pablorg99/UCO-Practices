@@ -47,7 +47,7 @@ TEST(Dados, Suma) {
   EXPECT_EQ(d.getDado1() + d.getDado2(), d.getSuma());
 }
 
-//Tets operación diferenci
+//Tets operación diferencia
 ;TEST(Dados, Resta) {
   Dados d;
 
