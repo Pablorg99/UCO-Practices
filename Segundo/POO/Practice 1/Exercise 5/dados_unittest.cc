@@ -30,6 +30,7 @@ TEST(Dados, Constructor) {
 // Test operación lanzamiento
 TEST(Dados, Lanzamiento) {
   Dados d;
+
   for (int i=0; i<100; i++){
   d.lanzamiento();
   EXPECT_GT(d.getDado1(), 0);
@@ -48,7 +49,7 @@ TEST(Dados, Suma) {
 }
 
 //Test operación diferencia
-;TEST(Dados, Resta) {
+TEST(Dados, Resta) {
   Dados d;
 
   d.setDado1(4);
@@ -103,6 +104,7 @@ TEST(Dados, Lanzamientos) {
 //Tes para la media
 TEST(Dados, media) {
   Dados d;
+
   EXPECT_NEAR(0, d.getMedia1(), 0);
   EXPECT_NEAR(0, d.getMedia2(), 0);
   d.setDado1(2);
@@ -124,11 +126,12 @@ TEST(Dados, media) {
 
 TEST (Dados, 5_ultimos) {
   Dados d;
-  Dados v1[5], v2[5]
+  int v1[5], v2[5];
+
   EXPECT_EQ (1, d.getDado1());
   EXPECT_EQ (1, d.getDado2());
-  getUltimos1(v1);
-  getUltimos2(v2);
+  d.getUltimos1(v1);
+  d.getUltimos2(v2);
   EXPECT_EQ(1, v1[0]);
   EXPECT_EQ(1, v2[0]);
   EXPECT_EQ(0, v1[3]);
@@ -144,8 +147,8 @@ TEST (Dados, 5_ultimos) {
   d.setDado2(4);
   d.setDado2(3);
   d.setDado2(2);
-  getUltimos1(v1);
-  getUltimos2(v2);
+  d.getUltimos1(v1);
+  d.getUltimos2(v2);
   EXPECT_EQ(1, v1[0]);
   EXPECT_EQ(4, v1[1]);
   EXPECT_EQ(2, v1[2]);

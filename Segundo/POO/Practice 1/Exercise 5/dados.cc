@@ -26,7 +26,7 @@ Dados::Dados () {
 bool Dados::setDado1 (int n) {
   if (n < 1 || n > 6) return false;
   else {
-    for (int i = 4; i > 0; i++) {
+    for (int i = 4; i > 0; i--) {
       d1_[i] = d1_[i - 1];
     }
     d1_[0] = n;
@@ -39,7 +39,7 @@ bool Dados::setDado1 (int n) {
 bool Dados::setDado2 (int n) {
   if (n < 1 || n > 6) return false;
   else {
-    for (int i = 4; i > 0; i++) {
+    for (int i = 4; i > 0; i--) {
       d1_[i] = d1_[i - 1];
     }
     d1_[0] = n;
@@ -50,7 +50,7 @@ bool Dados::setDado2 (int n) {
 }
 
 void Dados::lanzamiento () {
-  for (int i = 4; i > 0; i++) {
+  for (int i = 4; i > 0; i--) {
     d1_[i] = d1_[i - 1];
     d2_[i] = d2_[i - 1];
   }
@@ -88,13 +88,13 @@ float Dados::getMedia2 () {
   return addition_d2_;
 }
 
-void Dados::getUltimos1 (int &vector) {
-  for (int i = 0; i < 5; i++) {
+void Dados::getUltimos1 (int (&vector) [5]) {
+  for (int i = 0; i < 4; i++) {
     vector[i] = d1_[i];
   }
 }
 
-void Dados::getUltimos2 (int &vector) {
+void Dados::getUltimos2 (int (&vector) [5]) {
   for (int i = 0; i < 4; i++) {
     vector[i] = d2_[i];
   }

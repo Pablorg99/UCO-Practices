@@ -41,8 +41,8 @@ class Dados {
     float getMedia1();
     float getMedia2();
     //saves in array the last 5 values from the dices
-    void getUltimos1 (int &vector);
-    void getUltimos2 (int &vector);
+    void getUltimos1 (int (&vector) [5]);
+    void getUltimos2 (int (&vector) [5]);
 };
 
 #endif
