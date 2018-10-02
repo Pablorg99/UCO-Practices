@@ -9,8 +9,14 @@ In this file is the method's body from the class 'Dados'
 
 Dados::Dados () {
   srand(time(NULL));
-  d1_ = {1, 0, 0, 0, 0};
-  d2_ = {1, 0, 0, 0, 0};
+  //Don't necessary provide array size with an initializer list
+  //C++ will counter the number of elements and make the array that size
+  d1_[0] = 1;
+  d2_[0] = 1;
+  for (size_t i = 1; i < 4; i++) {
+    d1_[i] = 0;
+    d2_[i] = 0;
+  }
   throws_d1_ = 0;
   throws_d2_ = 0;
   addition_d1_ = 0;
@@ -25,7 +31,7 @@ bool Dados::setDado1 (int n) {
     }
     d1_[0] = n;
     throws_d1_++;
-    addition_d1_ += d1_;
+    addition_d1_ += d1_[0];
     return true;
   }
 }
@@ -38,7 +44,7 @@ bool Dados::setDado2 (int n) {
     }
     d1_[0] = n;
     throws_d2_++;
-    addition_d2_ += d2_;
+    addition_d2_ += d2_[0];
     return true;
   }
 }
@@ -52,8 +58,8 @@ void Dados::lanzamiento () {
   d2_[0] = (rand() % 6) + 1;
   throws_d1_++;
   throws_d2_++;
-  addition_d1_ += d1_;
-  addition_d2_ += d2_;
+  addition_d1_ += d1_[0];
+  addition_d2_ += d2_[0];
 }
 
 int Dados::getDiferencia () const {
@@ -66,7 +72,7 @@ int Dados::getDiferencia () const {
 }
 
 
-float Dados::getMedia1 () const {
+float Dados::getMedia1 () {
   if (throws_d1_ == 0) {
     return 0;
   }
@@ -74,7 +80,7 @@ float Dados::getMedia1 () const {
   return addition_d1_;
 }
 
-float Dados::getMedia2 () const {
+float Dados::getMedia2 () {
   if (throws_d2_ == 0) {
     return 0;
   }
@@ -82,13 +88,14 @@ float Dados::getMedia2 () const {
   return addition_d2_;
 }
 
-void getUltimos1 (int &vector) {
+void Dados::getUltimos1 (int &vector) {
   for (int i = 0; i < 5; i++) {
-    vector = d1_;
+    vector[i] = d1_[i];
   }
+}
 
-void getUltimos1 (int &vector) {
-  for (int i = 0; i < 5; i++) {
-    vector = d2_;
+void Dados::getUltimos2 (int &vector) {
+  for (int i = 0; i < 4; i++) {
+    vector[i] = d2_[i];
   }
 }

@@ -27,7 +27,7 @@ TEST(Dados, Constructor) {
 
 }
 
-// Tests operación lanzamiento
+// Test operación lanzamiento
 TEST(Dados, Lanzamiento) {
   Dados d;
   for (int i=0; i<100; i++){
@@ -40,14 +40,14 @@ TEST(Dados, Lanzamiento) {
 
 }
 
-// Tests operación suma
+// Test operación suma
 TEST(Dados, Suma) {
   Dados d;
 
   EXPECT_EQ(d.getDado1() + d.getDado2(), d.getSuma());
 }
 
-//Tets operación diferencia
+//Test operación diferencia
 ;TEST(Dados, Resta) {
   Dados d;
 
@@ -62,7 +62,7 @@ TEST(Dados, Suma) {
   EXPECT_EQ(0, d.getDiferencia());
 }
 
-// Tests modificadores
+// Test modificadores
 TEST(Dados, Modificadores) {
   Dados d;
 
@@ -77,7 +77,7 @@ TEST(Dados, Modificadores) {
   EXPECT_EQ(5, d.getSuma());
 }
 
-//Tests get Lanzamientos
+//Test get Lanzamientos
 TEST(Dados, Lanzamientos) {
   Dados d;
 
@@ -100,7 +100,7 @@ TEST(Dados, Lanzamientos) {
   EXPECT_EQ(2, d.getLanzamientos2());
 }
 
-//Tests para la media
+//Tes para la media
 TEST(Dados, media) {
   Dados d;
   EXPECT_NEAR(0, d.getMedia1(), 0);
@@ -118,4 +118,42 @@ TEST(Dados, media) {
   }
   EXPECT_NEAR(3.5, d.getMedia1(), 0.2);
   EXPECT_NEAR(3.5, d.getMedia2(), 0.2);
+}
+
+//Test para getUltimos
+
+TEST (Dados, 5_ultimos) {
+  Dados d;
+  Dados v1[5], v2[5]
+  EXPECT_EQ (1, d.getDado1());
+  EXPECT_EQ (1, d.getDado2());
+  getUltimos1(v1);
+  getUltimos2(v2);
+  EXPECT_EQ(1, v1[0]);
+  EXPECT_EQ(1, v2[0]);
+  EXPECT_EQ(0, v1[3]);
+  EXPECT_EQ(0, v2[2]);
+  //set (from last to first 1, 4, 2, 5, 3) to dice 1
+  d.setDado1(3);
+  d.setDado1(5);
+  d.setDado1(2);
+  d.setDado1(4);
+  d.setDado1(1);
+  //set (from last to first 3, 2, 4, 6) to dice 2
+  d.setDado2(6);
+  d.setDado2(4);
+  d.setDado2(3);
+  d.setDado2(2);
+  getUltimos1(v1);
+  getUltimos2(v2);
+  EXPECT_EQ(1, v1[0]);
+  EXPECT_EQ(4, v1[1]);
+  EXPECT_EQ(2, v1[2]);
+  EXPECT_EQ(5, v1[3]);
+  EXPECT_EQ(3, v1[4]);
+  EXPECT_EQ(3, v2[0]);
+  EXPECT_EQ(2, v2[1]);
+  EXPECT_EQ(4, v2[2]);
+  EXPECT_EQ(6, v2[3]);
+  EXPECT_EQ(1, v2[4]);
 }

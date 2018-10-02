@@ -22,8 +22,8 @@ class Dados {
     //Constructor: initiate seed and set d1_ and d2_ to '1'
     Dados();
     //returns data in d1_/d2_
-    int getDado1() const {return d1_;}
-    int getDado2() const {return d2_;}
+    int getDado1() const {return d1_[0];}
+    int getDado2() const {return d2_[0];}
     //returns "false" if 'n' is not from 1 to 6
     //returns "true" if 'n' is correct and save it in d1_[0]/d2_[0]
     bool setDado1(int n);
@@ -38,11 +38,11 @@ class Dados {
     int getLanzamientos1() const {return throws_d1_;}
     int getLanzamientos2() const {return throws_d2_;}
     //returns average of d1/d2 throws
-    float getMedia1() const;
-    float getMedia2() const;
+    float getMedia1();
+    float getMedia2();
     //saves in array the last 5 values from the dices
-    void getUltimos1 (int &lasts5_d1_);
-    void getUltimos2 (int &lasts5_d2_);
+    void getUltimos1 (int &vector);
+    void getUltimos2 (int &vector);
 };
 
 #endif
