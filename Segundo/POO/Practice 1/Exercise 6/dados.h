@@ -22,6 +22,7 @@ class Dados {
     //Constructor: initiate seed and set d1_ and d2_ to '1'
     Dados();
     //returns data in d1_/d2_
+    //Inline functions --> faster execution of programm
     int getDado1() const {return d1_[0];}
     int getDado2() const {return d2_[0];}
     //returns "false" if 'n' is not from 1 to 6
@@ -30,17 +31,17 @@ class Dados {
     bool setDado2(int n);
     //assign pseudorandom numbers to d1_ and d2_
     void lanzamiento();
-    //returns d1_ + d2_
+    //returns d1_[0] + d2_[0]
     int getSuma() const {return getDado1() + getDado2();}
-    //returns | d1_ - d2_ |
+    //returns | d1_[0] - d2_[0] |
     int getDiferencia() const;
-    //returns number of executions of lanzamiento() or setDado1/2
+    //returns number of executions of lanzamiento() OR setDado1/2
     int getLanzamientos1() const {return throws_d1_;}
     int getLanzamientos2() const {return throws_d2_;}
-    //returns average of d1/d2 throws
+    //returns average of d1/d2 values during the program execution
     float getMedia1();
     float getMedia2();
-    //saves in array the last 5 values from the dices
+    //saves in the array passed by reference the last 5 values stored on dices
     void getUltimos1 (int (&vector) [5]);
     void getUltimos2 (int (&vector) [5]);
 };

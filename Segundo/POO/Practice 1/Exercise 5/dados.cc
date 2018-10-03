@@ -9,10 +9,10 @@ In this file is the method's body from the class 'Dados'
 
 Dados::Dados () {
   srand(time(NULL));
-  //Don't necessary provide array size with an initializer list
-  //C++ will counter the number of elements and make the array that size
+  //Intialize to 1 because the exercise ask for it
   d1_[0] = 1;
   d2_[0] = 1;
+  //Rest of them to 0 to locate errors easily
   for (int i = 1; i < 5; i++) {
     d1_[i] = 0;
     d2_[i] = 0;
@@ -25,12 +25,15 @@ Dados::Dados () {
 
 bool Dados::setDado1 (int n) {
   if (n < 1 || n > 6) return false;
+  //Rote all values to next position and save the new value on d[0]
   else {
     for (int i = 4; i > 0; i--) {
       d1_[i] = d1_[i - 1];
     }
     d1_[0] = n;
     throws_d1_++;
+    //Better to use another method than calling private values (f.e: d1_[0])
+    //That cause less problems when changing names of variables
     addition_d1_ += getDado1();
     return true;
   }
@@ -50,6 +53,7 @@ bool Dados::setDado2 (int n) {
 }
 
 void Dados::lanzamiento () {
+  //Same process that on setDado1/2
   for (int i = 4; i > 0; i--) {
     d1_[i] = d1_[i - 1];
     d2_[i] = d2_[i - 1];
@@ -65,6 +69,7 @@ void Dados::lanzamiento () {
 int Dados::getDiferencia () const {
   int diferencia;
   diferencia = getDado1() - getDado2();
+  //If subtraction negative, change sign
   if (diferencia < 0) {
     diferencia = -1 * diferencia;
   }
