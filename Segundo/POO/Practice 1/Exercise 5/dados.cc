@@ -13,7 +13,7 @@ Dados::Dados () {
   //C++ will counter the number of elements and make the array that size
   d1_[0] = 1;
   d2_[0] = 1;
-  for (size_t i = 1; i < 4; i++) {
+  for (int i = 1; i < 5; i++) {
     d1_[i] = 0;
     d2_[i] = 0;
   }
@@ -31,7 +31,7 @@ bool Dados::setDado1 (int n) {
     }
     d1_[0] = n;
     throws_d1_++;
-    addition_d1_ += d1_[0];
+    addition_d1_ += getDado1();
     return true;
   }
 }
@@ -40,11 +40,11 @@ bool Dados::setDado2 (int n) {
   if (n < 1 || n > 6) return false;
   else {
     for (int i = 4; i > 0; i--) {
-      d1_[i] = d1_[i - 1];
+      d2_[i] = d2_[i - 1];
     }
-    d1_[0] = n;
+    d2_[0] = n;
     throws_d2_++;
-    addition_d2_ += d2_[0];
+    addition_d2_ += getDado2();
     return true;
   }
 }
@@ -58,8 +58,8 @@ void Dados::lanzamiento () {
   d2_[0] = (rand() % 6) + 1;
   throws_d1_++;
   throws_d2_++;
-  addition_d1_ += d1_[0];
-  addition_d2_ += d2_[0];
+  addition_d1_ += getDado1();
+  addition_d2_ += getDado2();
 }
 
 int Dados::getDiferencia () const {
@@ -89,13 +89,13 @@ float Dados::getMedia2 () {
 }
 
 void Dados::getUltimos1 (int (&vector) [5]) {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 5; i++) {
     vector[i] = d1_[i];
   }
 }
 
 void Dados::getUltimos2 (int (&vector) [5]) {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 5; i++) {
     vector[i] = d2_[i];
   }
 }

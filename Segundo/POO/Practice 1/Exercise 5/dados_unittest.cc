@@ -48,21 +48,6 @@ TEST(Dados, Suma) {
   EXPECT_EQ(d.getDado1() + d.getDado2(), d.getSuma());
 }
 
-//Test operación diferencia
-TEST(Dados, Resta) {
-  Dados d;
-
-  d.setDado1(4);
-  d.setDado2(2);
-  EXPECT_EQ(2, d.getDiferencia());
-  d.setDado1(2);
-  d.setDado2(5);
-  EXPECT_EQ(3, d.getDiferencia());
-  d.setDado1(2);
-  d.setDado2(2);
-  EXPECT_EQ(0, d.getDiferencia());
-}
-
 // Test modificadores
 TEST(Dados, Modificadores) {
   Dados d;
@@ -76,6 +61,21 @@ TEST(Dados, Modificadores) {
   d.setDado2(2);
   EXPECT_EQ(2, d.getDado2());
   EXPECT_EQ(5, d.getSuma());
+}
+
+//Test operación diferencia
+TEST(Dados, Resta) {
+  Dados d;
+
+  d.setDado1(4);
+  d.setDado2(2);
+  EXPECT_EQ(2, d.getDiferencia());
+  d.setDado1(2);
+  d.setDado2(5);
+  EXPECT_EQ(3, d.getDiferencia());
+  d.setDado1(2);
+  d.setDado2(2);
+  EXPECT_EQ(0, d.getDiferencia());
 }
 
 //Test get Lanzamientos
@@ -134,15 +134,17 @@ TEST (Dados, 5_ultimos) {
   d.getUltimos2(v2);
   EXPECT_EQ(1, v1[0]);
   EXPECT_EQ(1, v2[0]);
-  EXPECT_EQ(0, v1[3]);
-  EXPECT_EQ(0, v2[2]);
+  for (int i = 4; i > 0; i--) {
+    EXPECT_EQ(0, v1[i]);
+    EXPECT_EQ(0, v2[i]);
+  }
   //set (from last to first 1, 4, 2, 5, 3) to dice 1
   d.setDado1(3);
   d.setDado1(5);
   d.setDado1(2);
   d.setDado1(4);
   d.setDado1(1);
-  //set (from last to first 3, 2, 4, 6) to dice 2
+  //set (from last to first 2, 3, 4, 6) to dice 2
   d.setDado2(6);
   d.setDado2(4);
   d.setDado2(3);
@@ -154,8 +156,8 @@ TEST (Dados, 5_ultimos) {
   EXPECT_EQ(2, v1[2]);
   EXPECT_EQ(5, v1[3]);
   EXPECT_EQ(3, v1[4]);
-  EXPECT_EQ(3, v2[0]);
-  EXPECT_EQ(2, v2[1]);
+  EXPECT_EQ(2, v2[0]);
+  EXPECT_EQ(3, v2[1]);
   EXPECT_EQ(4, v2[2]);
   EXPECT_EQ(6, v2[3]);
   EXPECT_EQ(1, v2[4]);
