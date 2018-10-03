@@ -1,4 +1,4 @@
-//FILE PROVIDED BY UNIVERSITY (MODLE)
+//FILE PROVIDED BY UNIVERSITY (MOODLE)
 
 #include <sys/ipc.h>
 #include <sys/shm.h>

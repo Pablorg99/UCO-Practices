@@ -16,7 +16,7 @@ and print the PID of the process that has finished and its status.
 //printf()
 #include <stdio.h>
 
-int main() {
+int main () {
 
   //Status store the value returned from exit() in wait() (see parent waiting)
   int status;
@@ -37,7 +37,7 @@ int main() {
       exit(0);
     }
 
-    //Parent process wait for children
+    //Parent process wait for children ones to finish
     for (int i = 0; i < 3; i++) {
       pid_t pid = wait(&status);
       printf("Child with PID = %d finished with status: %d\n", pid, WEXITSTATUS(status));
