@@ -72,6 +72,7 @@ int main () {
   int shared_memory_id, status; //status stores value returned by exit()
   int *array;
   key_t key;
+  struct shmid_ds buf; //used as paremeter in shmctl()
 
   //Assignment of shared shmemory
 
@@ -120,5 +121,11 @@ int main () {
       printf("Child with PID = %d finished with status: %d\n", pid, WEXITSTATUS(status));
     }
 
-return 0;
+  //Dettachment between pointer and shared memory space
+  shmdt(array);
+
+  //Mark the memory space to be destroyed
+  shmctl(shared_memory_id, IPC_RMID, &buf);
+
+  return 0;
 }
