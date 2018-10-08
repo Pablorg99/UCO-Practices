@@ -14,7 +14,7 @@
 
 # Points to the root of Google Test, relative to where this file is.
 # Remember to tweak this if you move this file.
-GTEST_DIR = /home/jaromero/juan/programacion/c++/googletest/gtest-1.7.0
+GTEST_DIR = ../GoogleTest-Master/googletest
 
 # Where to find user code.
 # USER_DIR = ../samples
@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = persona_unittest crupier_unittest jugador_unittest
+TESTS = persona_unittest.outcrupier_unittest jugador_unittest
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -38,7 +38,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 # House-keeping build targets.
 
-all : $(TESTS)
+all : persona_unittest.out
 
 clean :
 	rm -f $(TESTS) gtest.a gtest_main.a *.o
@@ -73,22 +73,21 @@ gtest_main.a : gtest-all.o gtest_main.o
 
 persona.o : persona.cc persona.h
 
-crupier.o: crupier.cc crupier.h persona.cc persona.h
+#crupier.o: crupier.cc crupier.h persona.cc persona.h
 
-jugador.o: jugador.cc jugador.h persona.cc persona.h
+#jugador.o: jugador.cc jugador.h persona.cc persona.h
 
 persona_unittest.o : persona_unittest.cc persona.h persona.cc
 
-crupier_unittest.o : crupier_unittest.cc crupier.cc crupier.h persona.cc persona.h
+#crupier_unittest.o : crupier_unittest.cc crupier.cc crupier.h persona.cc persona.h
 
-jugador_unittest.o : jugador_unittest.cc jugador.cc jugador.h
+#jugador_unittest.o : jugador_unittest.cc jugador.cc jugador.h
 
-persona_unittest : persona.o persona_unittest.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
-	
-crupier_unittest : crupier.o persona.o crupier_unittest.o gtest_main.a
+persona_unittest.out: persona.o persona_unittest.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
-jugador_unittest : jugador.o persona.o jugador_unittest.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+#crupier_unittest : crupier.o persona.o crupier_unittest.o gtest_main.a
+	#$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
+#jugador_unittest : jugador.o persona.o jugador_unittest.o gtest_main.a
+	#$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
