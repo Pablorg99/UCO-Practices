@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------------
+*vector/*------------------------------------------------------------------------------
 Practice 1 Exercise 3
 dados.cc
 In this file is the method's body from the class 'Dados'
@@ -53,17 +53,8 @@ bool Dados::setDado2 (int n) {
 }
 
 void Dados::lanzamiento () {
-  //Same process that on setDado1/2
-  for (int i = 4; i > 0; i--) {
-    d1_[i] = d1_[i - 1];
-    d2_[i] = d2_[i - 1];
-  }
-  d1_[0] = (rand() % 6) + 1;
-  d2_[0] = (rand() % 6) + 1;
-  throws_d1_++;
-  throws_d2_++;
-  addition_d1_ += getDado1();
-  addition_d2_ += getDado2();
+  setDado1 ((rand() % 6) + 1);
+  setDado2 ((rand() % 6) + 1);
 }
 
 int Dados::getDiferencia () const {
@@ -93,13 +84,13 @@ float Dados::getMedia2 () {
   return addition_d2_;
 }
 
-void Dados::getUltimos1 (int (&vector) [5]) {
+void Dados::getUltimos1 (int *vector) const {
   for (int i = 0; i < 5; i++) {
     vector[i] = d1_[i];
   }
 }
 
-void Dados::getUltimos2 (int (&vector) [5]) {
+void Dados::getUltimos2 (int *vector) const {
   for (int i = 0; i < 5; i++) {
     vector[i] = d2_[i];
   }
