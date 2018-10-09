@@ -18,7 +18,7 @@ class Persona {
   public:
     //Constructor
     Persona (string dni, string name = "", string surnames = "",
-    int edad = 0, string address = "", string locality = "",
+    int age = 0, string address = "", string locality = "",
     string province = "", string country = "");
     //Getter methods
     string getDNI() const {return dni_;}

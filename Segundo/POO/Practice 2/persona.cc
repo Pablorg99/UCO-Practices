@@ -2,9 +2,8 @@
 #include "persona.h"
 using std::string;
 
-Persona::Persona (string dni, string name, string surnames,
-int age, string address, string locality,
-string province, string country) {
+Persona::Persona (string dni, string name, string surnames, int age,
+string address, string locality, string province, string country) {
   dni_ = dni;
   name_ = name;
   surnames_ = surnames;
