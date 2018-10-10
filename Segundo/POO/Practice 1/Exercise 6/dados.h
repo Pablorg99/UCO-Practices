@@ -42,6 +42,8 @@ class Dados {
     float getMedia1();
     float getMedia2();
     //saves in the array passed by reference the last 5 values stored on dices
+    //with this declaration, getUltimos1/2 only accepts arrays of integers with
+    //size equal to 5
     void getUltimos1 (int (&vector) [5]) const;
     void getUltimos2 (int (&vector) [5]) const;
 };
