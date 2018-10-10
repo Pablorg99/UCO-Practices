@@ -1,4 +1,4 @@
-*vector/*------------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
 Practice 1 Exercise 3
 dados.cc
 In this file is the method's body from the class 'Dados'
@@ -84,13 +84,13 @@ float Dados::getMedia2 () {
   return addition_d2_;
 }
 
-void Dados::getUltimos1 (int *vector) const {
+void Dados::getUltimos1 (int (&vector)[5]) const {
   for (int i = 0; i < 5; i++) {
     vector[i] = d1_[i];
   }
 }
 
-void Dados::getUltimos2 (int *vector) const {
+void Dados::getUltimos2 (int (&vector)[5]) const {
   for (int i = 0; i < 5; i++) {
     vector[i] = d2_[i];
   }
