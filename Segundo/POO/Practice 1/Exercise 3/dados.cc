@@ -30,6 +30,6 @@ bool Dados::setDado2 (int n) {
 }
 
 void Dados::lanzamiento () {
-  d1_ = (rand() % 6) + 1;
-  d2_ = (rand() % 6) + 1;
+  setDado1((rand() % 6) + 1);
+  setDado2((rand() % 6) + 1);
 }
