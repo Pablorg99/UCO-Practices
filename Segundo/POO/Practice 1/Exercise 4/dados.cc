@@ -31,7 +31,11 @@ bool Dados::setDado2 (int n) {
 
 void Dados::lanzamiento () {
   setDado1((rand() % 6) + 1);
+<<<<<<< HEAD
   setDado2((rand() % 6) + 1);
+=======
+  setDado1((rand() % 6) + 1);
+>>>>>>> dda26a309a10cd2c4308ba1a41ae0497e265b85a
 }
 
 int Dados::getDiferencia () const {
