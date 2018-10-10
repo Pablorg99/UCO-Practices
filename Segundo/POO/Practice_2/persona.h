@@ -1,3 +1,10 @@
+/*----------------------------------------------------------------------------------
+Practice 2 Class Persona
+persona.h
+This is the header file for the class 'Persona' which is going to have some inherited
+classes (Crupier, Jugador)
+----------------------------------------------------------------------------------*/
+
 #ifndef PERSONA_H
 #define PERSONA_H
 
@@ -17,9 +24,9 @@ class Persona {
     string country_;
   public:
     //Constructor
-    Persona (string dni, string name = "", string surnames = "",
-    int age = 0, string address = "", string locality = "",
-    string province = "", string country = "");
+    Persona (const string &dni, const string &name = "", const string &surnames = "",
+    const int age = 0, const string &address = "", const string &locality = "",
+    const string &province = "", const string &country = "");
     //Getter methods
     string getDNI() const {return dni_;}
     string getNombre() const {return name_;}

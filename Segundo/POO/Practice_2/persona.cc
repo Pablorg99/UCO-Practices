@@ -1,9 +1,17 @@
+/*----------------------------------------------------------------------------------
+Practice 2 Class Persona
+persona.cc
+This is the file where are the implementation of some methods (the ones that are
+not inline) from the class 'Persona'
+----------------------------------------------------------------------------------*/
+
 #include <string>
 #include "persona.h"
 using std::string;
 
-Persona::Persona (string dni, string name, string surnames, int age,
-string address, string locality, string province, string country) {
+Persona::Persona (const string &dni, const string &name, const string &surnames,
+const int age, const string &address, const string &locality,
+const string &province, const string &country) {
   dni_ = dni;
   name_ = name;
   surnames_ = surnames;

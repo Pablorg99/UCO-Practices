@@ -1,17 +1,17 @@
-#include <iostream>
-#include <string>
+/*----------------------------------------------------------------------------------
+Practice 2 Class Crupier
+crupier.h
+This is the file where is implemented the constructor of the class Crupier. The
+constructor calls to the one of Persona class to get the parameters
+----------------------------------------------------------------------------------*/
+
 #include "crupier.h"
+#include <string>
 using std::string;
 
-Crupier::Crupier (const string &dni, const string &id, const string &name, string surnames, int age,
-string address, string locality,string province, string country) : Persona (dni,
-name, surnames, age, address, locality, province) {
+Crupier::Crupier(const string &dni, const string &id, const string &name,
+const string &surnames, const int age, const string &address,
+const string &locality, const string &province, const string &country)
+: Persona (dni, name, surnames, age, address, locality, province, country) {
   id_ = id;
-}
-
-int main() {
-  Crupier c("3332", "44X");
-  std::cout << "DNI = " << c.getDNI() << '\n';
-  std::cout << "Codigo = " << c.getCodigo() << '\n';
-  return 0;
 }
