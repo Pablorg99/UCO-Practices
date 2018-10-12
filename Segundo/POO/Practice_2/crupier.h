@@ -20,7 +20,7 @@ class Crupier : public Persona {
     const string &surnames = "", const int age = 0, const string &address = "",
     const string &locality = "", const string &province = "", const string &country = "");
     string getCodigo() const {return id_;}
-    void setCodigo(string id) {id_ = id;}
+    void setCodigo(string &id) {id_ = id;}
 };
 
 #endif
