@@ -21,6 +21,7 @@ SELECT v.nombrecompleto, p.comunidad FROM votantes v, localidades l, provincias 
 -- Ejercicio 6
 SELECT p.idpartido "Id Partido", COUNT(cd.idrecogida) "Conteo" FROM partidos p, consultas_datos cd
     WHERE cd.partido = p.idpartido GROUP BY p.idpartido;
+-- La cadena de caracteres escrita en "" al lado de cada columna de SELECT, es el nombre a mostrar al imprimir la tabla.
 -- GROUP BY agrupa resultados obtenidos de funciones específicas de SQL por el atributo indicado. De esta manera no da error.
 
 -- Ejercicio 7 = Ejercicio 6
