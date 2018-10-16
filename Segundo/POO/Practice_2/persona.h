@@ -17,7 +17,7 @@ class Persona {
     string dni_;
     string name_;
     string surnames_;
-    int age_;const
+    int age_;
     string address_;
     string locality_;
     string province_;
@@ -43,7 +43,7 @@ class Persona {
     void setNombre(const string &name) {name_ = name;}
     void setApellidos(const string &surnames) {surnames_ = surnames;}
     bool setEdad(const int age);
-    void setDireccion(string address) {address_ = address;}
+    void setDireccion(const string &address) {address_ = address;}
     void setLocalidad(const string &locality) {locality_ = locality;}
     void setProvincia(const string &province) {province_ = province;}
     void setPais(const string &country) {country_ = country;}
