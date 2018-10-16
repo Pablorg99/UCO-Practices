@@ -17,7 +17,7 @@ class Persona {
     string dni_;
     string name_;
     string surnames_;
-    int age_;
+    int age_;const
     string address_;
     string locality_;
     string province_;
@@ -39,14 +39,14 @@ class Persona {
     //concatenates name and surnames with format "surnames, name"
     string getApellidosyNombre() const;
     //Setter methods
-    void setDNI(string &dni) {dni_ = dni;}
-    void setNombre(string &name) {name_ = name;}
-    void setApellidos(string &surnames) {surnames_ = surnames;}
-    bool setEdad(int age);
-    void setDireccion(string &address) {address_ = address;}
-    void setLocalidad(string &locality) {locality_ = locality;}
-    void setProvincia(string &province) {province_ = province;}
-    void setPais(string &country) {country_ = country;}
+    void setDNI(const string &dni) {dni_ = dni;}
+    void setNombre(const string &name) {name_ = name;}
+    void setApellidos(const string &surnames) {surnames_ = surnames;}
+    bool setEdad(const int age);
+    void setDireccion(string address) {address_ = address;}
+    void setLocalidad(const string &locality) {locality_ = locality;}
+    void setProvincia(const string &province) {province_ = province;}
+    void setPais(const string &country) {country_ = country;}
     //Other methods
     bool mayor() const;
 };

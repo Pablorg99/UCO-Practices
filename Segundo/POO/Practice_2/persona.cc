@@ -12,14 +12,14 @@ using std::string;
 Persona::Persona (const string &dni, const string &name, const string &surnames,
 const int age, const string &address, const string &locality,
 const string &province, const string &country) {
-  dni_ = dni;
-  name_ = name;
-  surnames_ = surnames;
-  age_ = age;
-  address_ = address;
-  locality_ = locality;
-  province_ = province;
-  country_ = country;
+  setDNI(dni);
+  setNombre(name);
+  setApellidos(surnames);
+  setEdad(age);
+  setDireccion(address);
+  setLocalidad(locality);
+  setProvincia(province);
+  setPais(country);
 }
 
 string Persona::getApellidosyNombre() const {
