@@ -11,18 +11,25 @@ Header file for class 'Jugador', inherited from class 'Persona'
 #include <string>
 using std::string;
 
+class Apuesta {
+  public:
+    int type;
+    string value;
+    int money;
+};
+
 class Jugador : public Persona{
   private:
     int money_;
     string id_;
-    list <int> bets_;
+    list <Apuesta> bets_;
   public:
     Jugador(const string &dni, const string &id, const string &name = "", const
     string &surnames = "", const int age = 0, const string &address = "", const
     string &locality = "", const string &province = "", const string &country = "");
     string getCodigo() const {return id_;}
     int getDinero() const {return money_;}
-    list getApuestas() const {return bets_;}
+    list <Apuesta> getApuestas() const {return bets_;}
     void setCodigo(string &id) {id_ = id;}
     void setDinero(int money) {money_ = money;}
     void setApuestas();

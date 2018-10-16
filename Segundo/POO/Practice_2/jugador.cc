@@ -14,3 +14,7 @@ locality, province, country) {
   id_ = id;
   money_ = 1000;
 }
+
+void setApuestas () {
+  
+}
