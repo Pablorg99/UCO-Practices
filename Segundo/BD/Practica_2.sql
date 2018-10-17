@@ -44,3 +44,6 @@ SELECT p.nombrecompleto, COUNT(cd.idrecogida) "Conteo" FROM partidos p, consulta
     HAVING COUNT(cd.idrecogida) > 10;
 
 -- Ejercicio 10
+SELECT p.nombrecompleto, COUNT(cd.idrecogida) "Conteo" FROM partidos p, consultas_datos cd
+    WHERE cd.partido = p.idpartido AND cd.respuesta = 'Si' AND cd.certidumbre > 0.8
+    GROUP BY p.nombrecompleto;
