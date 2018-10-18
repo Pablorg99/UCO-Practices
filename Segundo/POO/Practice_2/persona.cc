@@ -22,12 +22,6 @@ const string &province, const string &country) {
   setPais(country);
 }
 
-string Persona::getApellidosyNombre() const {
-  string full_name;
-  full_name = surnames_ + ", " + name_;
-  return full_name;
-}
-
 bool Persona::setEdad(int age) {
   if (age < 0 || age > 140) return false;
   else {
@@ -37,6 +31,6 @@ bool Persona::setEdad(int age) {
 }
 
 bool Persona::mayor() const {
-  if (age_ >= 18) return true;
+  if (getEdad() >= 18) return true;
   else return false;
 }

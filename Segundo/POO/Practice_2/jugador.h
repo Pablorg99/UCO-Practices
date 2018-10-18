@@ -24,13 +24,16 @@ class Jugador : public Persona{
     string id_;
     list <Apuesta> bets_;
   public:
+    //Constructor
     Jugador(const string &dni, const string &id, const string &name = "", const
     string &surnames = "", const int age = 0, const string &address = "", const
     string &locality = "", const string &province = "", const string &country = "");
     string getCodigo() const {return id_;}
+    //Getter methods
     int getDinero() const {return money_;}
     list <Apuesta> getApuestas() const {return bets_;}
-    void setCodigo(string &id) {id_ = id;}
+    //Setter methods-
+    void setCodigo(const string &id) {id_ = id;}
     void setDinero(int money) {money_ = money;}
     void setApuestas();
 };
