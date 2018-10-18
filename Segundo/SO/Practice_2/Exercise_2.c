@@ -1,5 +1,10 @@
-//FILE PROVIDED BY UNIVERSITY (MOODLE)
-
+/*------------------------------------------------------------------------------
+Practice 2 Exercise 2 OS
+Pablo Rodríguez Guillén
+Exercise_2.c
+Modification to threads_UCO.c to have 4 threads running with Lamport's Algorithm
+implementation for counting correctly
+------------------------------------------------------------------------------*/
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -8,48 +13,49 @@
 double counter = 0;
 
 #define ITER	1000
-#define NHILOS	3
+#define NTHREADS	4
 
 int main()
 {
-  pthread_t hilos[NHILOS];
-  int status, i, v[NHILOS];
+  pthread_t threads[NTHREADS];
+  int status, i, thread_index[NTHREADS];
+
   extern double counter;
   void *adder(void *);
   double *r_value;
 
-  // Create NHILOS threads
-  for (i = 0; i < NHILOS; i++) {
-  	v[i] = i;
-  	if ((status = pthread_create(&hilos[i], NULL, adder, (void *) &v[i])))
+  // Create NTHREADS threads
+  for (i = 0; i < NTHREADS; i++) {
+  	thread_index[i] = i;
+  	if ((status = pthread_create(&threads[i], NULL, adder, (void *) &thread_index[i])))
     exit(status);
   }
 
   // Wait threads
-  for (i = 0; i < NHILOS; i++) {
-  	pthread_join(hilos[i], (void **) &r_value);
-  	printf("Value returned by %lu thread: %lf\n", hilos[i], *r_value);
+  for (i = 0; i < NTHREADS; i++) {
+  	pthread_join(threads[i], (void **) &r_value);
+  	printf("Value returned by %lu thread: %lf\n", threads[i], *r_value);
   }
 
   // Final result
-  fprintf(stdout, "%f\n", counter);
+  fprintf(stdout, "Final counter = %lf\n", counter);
 
   return 0;
 }
 
-void *adder(void *p)
+void *adder(void *arg)
 {
-  double l, *to_return;
+  double thread_counter, *to_return;
   extern double counter;
-  int *id, i;
+  int *index, i;
 
-  id = (int *) p;
+    index = (int *) arg;
 
   for (i = 0; i < ITER; i++) {
-  	l = counter;
-  	fprintf(stdout, "Hilo %d: %f\n", *id, counter);
-  	l++;
-  	counter = l;
+  	thread_counter = counter;
+  	fprintf(stdout, "Thread %d: %f\n", *index, counter);
+  	thread_counter++;
+  	counter = thread_counter;
   }
 
   to_return = malloc(sizeof(double));
