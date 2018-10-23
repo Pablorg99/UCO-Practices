@@ -9,8 +9,6 @@ Persona
 #define CRUPIER_H
 
 #include "persona.h"
-#include <string>
-using std::string;
 
 class Crupier : public Persona {
   private:

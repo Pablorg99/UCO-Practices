@@ -37,7 +37,7 @@ class Persona {
     string getProvincia() const {return province_;}
     string getPais() const {return country_;}
     //concatenates name and surnames with format "surnames, name"
-    string Persona::getApellidosyNombre() const {return getApellidos() + ", " + getNombre();}
+    string getApellidosyNombre() const {return getApellidos() + ", " + getNombre();}
     //Setter methods
     void setDNI(const string &dni) {dni_ = dni;}
     void setNombre(const string &name) {name_ = name;}

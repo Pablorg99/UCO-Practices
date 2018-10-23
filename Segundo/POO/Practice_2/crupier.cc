@@ -6,8 +6,6 @@ constructor calls to the one of Persona class to get the parameters
 ----------------------------------------------------------------------------------*/
 
 #include "crupier.h"
-#include <string>
-using std::string;
 
 Crupier::Crupier(const string &dni, const string &id, const string &name,
 const string &surnames, const int age, const string &address,
