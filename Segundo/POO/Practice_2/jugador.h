@@ -8,14 +8,13 @@ Header file for class 'Jugador', inherited from class 'Persona'
 
 #include "persona.h"
 #include <list>
-#include <string>
-using std::string;
+using std::list;
 
 class Apuesta {
   public:
-    int type;
-    string value;
-    int money;
+    int tipo;
+    string valor;
+    int cantidad;
 };
 
 class Jugador : public Persona{
@@ -34,7 +33,7 @@ class Jugador : public Persona{
     list <Apuesta> getApuestas() const {return bets_;}
     //Setter methods-
     void setCodigo(const string &id) {id_ = id;}
-    void setDinero(int money) {money_ = money;}
+    void setDinero(const int money) {money_ = money;}
     void setApuestas();
 };
 
