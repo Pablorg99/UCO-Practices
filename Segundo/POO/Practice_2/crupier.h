@@ -12,13 +12,17 @@ Persona
 
 class Crupier : public Persona {
   private:
-    string id_;
+    string identifier_; //alphanumeric code to identify the crupier
   public:
-    Crupier(const string &dni, const string &id, const string &name = "",
+    //Constructor
+    //'DNI' and 'identifier' are necessary for the declaration of a 'Crupier' object
+    Crupier(const string &dni, const string &identifier, const string &name = "",
     const string &surnames = "", const int age = 0, const string &address = "",
     const string &locality = "", const string &province = "", const string &country = "");
-    string getCodigo() const {return id_;}
-    void setCodigo(string &id) {id_ = id;}
+    //Getters
+    string getCodigo() const {return identifier_;}
+    //Setters
+    void setCodigo(const string &identifier) {identifier_ = identifier;}
 };
 
 #endif

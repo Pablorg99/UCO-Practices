@@ -7,9 +7,10 @@ constructor calls to the one of Persona class to get the parameters
 
 #include "crupier.h"
 
-Crupier::Crupier(const string &dni, const string &id, const string &name,
+//Base initializers with parameters from class 'Persona'
+Crupier::Crupier(const string &dni, const string &identifier, const string &name,
 const string &surnames, const int age, const string &address,
 const string &locality, const string &province, const string &country)
 : Persona (dni, name, surnames, age, address, locality, province, country) {
-  id_ = id;
+  setCodigo(identifier);
 }

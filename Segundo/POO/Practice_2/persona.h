@@ -24,6 +24,7 @@ class Persona {
     string country_;
   public:
     //Constructor
+    //DNI necessary for declaration of a 'Persona' object
     Persona (const string &dni, const string &name = "", const string &surnames = "",
     const int age = 0, const string &address = "", const string &locality = "",
     const string &province = "", const string &country = "");
@@ -42,12 +43,14 @@ class Persona {
     void setDNI(const string &dni) {dni_ = dni;}
     void setNombre(const string &name) {name_ = name;}
     void setApellidos(const string &surnames) {surnames_ = surnames;}
+    //returns true and set value fo 'age_' if 'age' is between 0 and 140
     bool setEdad(const int age);
     void setDireccion(const string &address) {address_ = address;}
     void setLocalidad(const string &locality) {locality_ = locality;}
     void setProvincia(const string &province) {province_ = province;}
     void setPais(const string &country) {country_ = country;}
     //Other methods
+    //returns true if object persona is over 18 years old, otherwise returns false
     bool mayor() const;
 };
 
