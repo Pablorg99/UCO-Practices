@@ -10,10 +10,12 @@ implementation for counting correctly
 #include <unistd.h>
 #include <stdlib.h>
 
-double counter = 0;
-
 #define ITER	1000
 #define NTHREADS	4
+
+double counter = 0;
+int picking[NTHREADS];
+int number[NTHREADS];
 
 int main()
 {
@@ -21,8 +23,16 @@ int main()
   int status, i, thread_index[NTHREADS];
 
   extern double counter;
+  extern int picking[NTHREADS];
+  extern int number[NTHREADS];
   void *adder(void *);
   double *r_value;
+
+  //Initialisation of Lamport's Algorithm's arrays
+  for(int i = 0; i < NTHREADS; i++) {
+    picking[i] = 0;
+    number[i] = 0;
+  }
 
   // Create NTHREADS threads
   for (i = 0; i < NTHREADS; i++) {
@@ -47,15 +57,28 @@ void *adder(void *arg)
 {
   double thread_counter, *to_return;
   extern double counter;
-  int *index, i;
+  extern int picking[NTHREADS];
+  extern int number[NTHREADS];
+  int *index = (int *) arg;
+  int j = 0;
 
-    index = (int *) arg;
+  for (int i = 0; i < ITER; i++) {
+    
+    picking[*index] = 1;
+    number[*index] = j++;
+    picking[*index] = 0;
+    
+    for(j = 0; j < NTHREADS; j++) {
+      while(picking[j]);
+      while(number[j] != 0 && (number[j] < number[*index]) || (j < *index)); 
+    }
 
-  for (i = 0; i < ITER; i++) {
-  	thread_counter = counter;
-  	fprintf(stdout, "Thread %d: %f\n", *index, counter);
-  	thread_counter++;
-  	counter = thread_counter;
+    thread_counter = counter;
+    fprintf(stdout, "Thread %d: %f\n", *index, counter);
+    thread_counter++;
+    counter = thread_counter;
+
+    number[*index] = 0;
   }
 
   to_return = malloc(sizeof(double));
