@@ -53,31 +53,46 @@ int main()
   return 0;
 }
 
+int higher_array(int *number) {
+  int higher = 0;
+  for(int i = 0; i < NTHREADS; i++) {
+    if (number[i] > higher) {
+      higher = number[i];
+    }    
+  }
+  return higher;  
+}
+
 void *adder(void *arg)
 {
   double thread_counter, *to_return;
+  int *index = (int *) arg;
+  
   extern double counter;
   extern int picking[NTHREADS];
   extern int number[NTHREADS];
-  int *index = (int *) arg;
-  int j = 0;
 
   for (int i = 0; i < ITER; i++) {
-    
+    //When a thread is picking a number, its picking is 1 (true)
     picking[*index] = 1;
-    number[*index] = j++;
+    //That thread is the new one, so he gets the highest number (higher + 1)
+    number[*index] = higher_array(number) + 1;
+    //The thread is not picking number so its picking is set to 0
     picking[*index] = 0;
-    
-    for(j = 0; j < NTHREADS; j++) {
+    //This loop check if the thread number 'j' is picking
+    //If not, it checks if its number is higher than the process' number that is running at that moment
+    for(int j = 0; j < NTHREADS; j++) {
       while(picking[j]);
-      while(number[j] != 0 && (number[j] < number[*index]) || (j < *index)); 
+      while((number[j] != 0) && ((number[j] < number[*index]) || ((number[j] == number[*index]) && ((j < *index))))); 
     }
-
+    //Critical section beginning
     thread_counter = counter;
     fprintf(stdout, "Thread %d: %f\n", *index, counter);
     thread_counter++;
     counter = thread_counter;
-
+    //Critical section end
+    //The process that goes out the critical section is set to 0
+    //If this process has not done 1k iterations, it picks another number
     number[*index] = 0;
   }
 
