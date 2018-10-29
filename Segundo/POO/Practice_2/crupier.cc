@@ -14,3 +14,9 @@ const string &locality, const string &province, const string &country)
 : Persona (dni, name, surnames, age, address, locality, province, country) {
   setCodigo(identifier);
 }
+/*
+Crupier::Crupier(const Crupier &c) : Persona (c.getDNI(), c.getNombre(), c.getApellidos(),
+c.getEdad(), c.getDireccion(), c.getLocalidad(), c.getProvincia(), c.getPais()) {
+    setCodigo(c.getCodigo());
+}
+*/

@@ -19,7 +19,18 @@ const string &province, const string &country) {
   setProvincia(province);
   setPais(country);
 }
-
+/*
+Persona::Persona(const Persona &p) {
+  setDNI(p.getDNI());
+  setNombre(p.getNombre());
+  setApellidos(p.getApellidos());
+  setEdad(p.getEdad());
+  setDireccion(p.getDireccion());
+  setLocalidad(p.getLocalidad());
+  setProvincia(p.getProvincia());
+  setPais(p.getPais());
+}
+*/
 bool Persona::setEdad(int age) {
   if (age < 0 || age > 140) return false;
   else {

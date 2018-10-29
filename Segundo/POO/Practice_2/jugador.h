@@ -35,6 +35,8 @@ class Jugador : public Persona{
     //Setter methods
     void setCodigo(const string &id) {identifier_ = id;}
     void setDinero(const int money) {money_ = money;}
+    //Clear list 'bets_' and create a new one with all the bets written on a file
+    //named "DNI.txt"  where DNI is dni_ of that player.
     void setApuestas();
 };
 
