@@ -18,6 +18,8 @@ class Ruleta {
         int ball_;
         list <Jugador> players_;
         Crupier crupier_;
+        //returns true if dni from player is in the list 'player_', if not
+        bool playerInList_(Jugador player);
     public:
         //Constructor
         Ruleta(const Crupier &crupier);

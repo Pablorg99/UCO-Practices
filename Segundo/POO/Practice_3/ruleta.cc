@@ -1,5 +1,7 @@
 #include "ruleta.h"
 #include <fstream>
+using std::ifstream;
+using std::ofstream;
 
 Ruleta::Ruleta(const Crupier &crupier) crupier_(crupier) {
     setBanca(1000000);
@@ -23,19 +25,30 @@ bool Ruleta::setBola(const int number) {
 }
 
 bool Ruleta::addJugador(Jugador player) {
-    list <Jugador> :: iterator it;
-    
-    for(it = players_.begin(); it != players_.end(); it++) {        
-        if ((*it).getDNI() == player.getDNI()) {
-            return false;
-        }
-    }   
-    //If DNI from player not find in list:
-    players_.push_back(player);
-    createDNItxt(player);
-    return true;
+
+    if(playerInList_(player)) return false;
+       
+    else {
+        players_.push_back(player);
+        string name = player.getDNI() + ".txt";
+        //If DNI.txt does not exists, create it
+        //DNI is the dni from the player passed as parameter
+        if(!ifstream(name)) ofstream(name);
+        return true;
+    }
 }
 
-void createDNItxt(Jugador player) {
-    std::ifstream file(player.getDNI() + '.txt');
+int Ruleta::deleteJugador(Jugador player) {
+    
+}
+
+bool Ruleta::playerInList_(Jugador player) {
+    list <Jugador> :: iterator it;
+    //go all over the list checking if dni from the player
+    //passed as parameter is in the list players_
+    for(it = players_.begin(); it != players_.end(); it++) 
+    {        
+        if ((*it).getDNI() == player.getDNI()) return true;
+    }
+    return false;
 }
