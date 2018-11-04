@@ -36,5 +36,6 @@ void Jugador::setApuestas () {
     bet.cantidad = stoi(value);
     //save in the list the values of bet
     bets_.push_back(bet);
-  }  
+  }
+  file.close();
 }
