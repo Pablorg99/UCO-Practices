@@ -3,7 +3,7 @@
 using std::ifstream;
 using std::ofstream;
 
-Ruleta::Ruleta(const Crupier &crupier) crupier_(crupier) {
+Ruleta::Ruleta(const Crupier &crupier) : crupier_(crupier) {
     setBanca(1000000);
     setBola(-1);
 }
