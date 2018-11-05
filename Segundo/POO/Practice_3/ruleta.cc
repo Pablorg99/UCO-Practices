@@ -4,6 +4,7 @@ using std::ifstream;
 using std::ofstream;
 
 Ruleta::Ruleta(const Crupier &crupier) : crupier_(crupier) {
+    srand(time(NULL));
     setBanca(1000000);
     setBola(-1);
 }
@@ -124,4 +125,3 @@ void Ruleta::leeJugadores() {
     }
     pfile.close();
 }
-

@@ -35,12 +35,17 @@ class Ruleta {
         //returns true and set in ball_ if number is between 0 and 36, if not returns false
         bool setBola(const int number);
         void setCrupier(const Crupier &crupier) {crupier_ = crupier;}
-        //Other methods
+        //Methods for modifying "players_" list
         bool addJugador(const Jugador &player);
         int deleteJugador(string DNI);
         int deleteJugador(const Jugador &player);
+        //Methods for "jugadores.txt" file with all data from list "players_"
         void escribeJugadores();
         void leeJugadores();
+        //Methods related with the roulette itself
+        //Roll the roulette and set ball_ to the number obtained (0-36)
+        void girarRuleta() {setBola(rand() % 37);}
+        void getPremios();
 };
 
 #endif
