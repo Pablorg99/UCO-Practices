@@ -18,8 +18,9 @@ class Ruleta {
         int ball_;
         list <Jugador> players_;
         Crupier crupier_;
-        //returns true if dni from player is in the list 'player_', if not
-        bool playerInList_(Jugador player);
+        //returns true if string passed as parameter is the DNI of any player of the list "players_"
+        //if any of the players have this DNI, it returns false
+        bool DNIplayerInList_(string);
     public:
         //Constructor
         Ruleta(const Crupier &crupier);
@@ -35,9 +36,11 @@ class Ruleta {
         bool setBola(const int number);
         void setCrupier(const Crupier &crupier) {crupier_ = crupier;}
         //Other methods
-        bool addJugador(Jugador player);
-        int deleteJugador(Jugador player);
+        bool addJugador(const Jugador &player);
+        int deleteJugador(string DNI);
+        int deleteJugador(const Jugador &player);
         void escribeJugadores();
+        void leeJugadores();
 };
 
 #endif
