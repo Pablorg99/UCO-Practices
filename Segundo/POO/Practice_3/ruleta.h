@@ -37,14 +37,14 @@ class Ruleta {
         void setCrupier(const Crupier &crupier) {crupier_ = crupier;}
         //Methods for modifying "players_" list
         bool addJugador(const Jugador &player);
-        int deleteJugador(string DNI);
+        int deleteJugador(const string &DNI);
         int deleteJugador(const Jugador &player);
         //Methods for "jugadores.txt" file with all data from list "players_"
         void escribeJugadores();
         void leeJugadores();
         //Methods related with the roulette itself
         //Roll the roulette and set ball_ to the number obtained (0-36)
-        void girarRuleta() {setBola(rand() % 37);}
+        void giraRuleta() {setBola(rand() % 37);}
         void getPremios();
 };
 

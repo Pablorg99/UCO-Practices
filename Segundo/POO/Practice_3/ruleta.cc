@@ -3,10 +3,9 @@
 using std::ifstream;
 using std::ofstream;
 
-Ruleta::Ruleta(const Crupier &crupier) : crupier_(crupier) {
+Ruleta::Ruleta(const Crupier &crupier) : ball_(-1), crupier_(crupier) {
     srand(time(NULL));
     setBanca(1000000);
-    setBola(-1);
 }
 
 bool Ruleta::setBanca(const int money) {
@@ -43,49 +42,55 @@ bool Ruleta::addJugador(const Jugador &player) {
         players_.push_back(player);
         string name = player.getDNI() + ".txt";
         //DNI is the dni from the player passed as parameter
-        //If DNI.txt does not exists, create it
-        if(!ifstream(name)) ofstream(name);
+        //If DNI.txt does not exists, create it (without any content)
+        if(!ifstream(name)) ofstream file(name);
         return true;
     }
 }
 
-int Ruleta::deleteJugador(string DNI) {
-    if (players_.empty()) return -2;
+int Ruleta::deleteJugador(const Jugador &player) {
+    if (players_.empty()) return -1;
+    else if (DNIplayerInList_(player.getDNI())) { 
+        list <Jugador> :: iterator it;
+        //Iterates until find player with same DNI than passed one, and remove it.
+        for(it = players_.begin(); it != players_.end(); it++) {
+            //I do "it = list.erase" to  update iterator because I keep using "it" while in for loop
+            //Not doing this, will cause segmentation fault
+            if ((player.getDNI()) == (it->getDNI())) it = players_.erase(it);
+        }
+        return 1;
+    }
+    else return -2;
+}
+
+int Ruleta::deleteJugador(const string &DNI) {
+    if (players_.empty()) return -1;
     else if (DNIplayerInList_(DNI)) {
         //DNI passed, is the DNI of a player of "players_"
         list <Jugador> :: iterator it;
         //Iterates until find this player, and remove it.
         for(it = players_.begin(); it != players_.end(); it++) {
-            if (it -> getDNI() == DNI) players_.erase(it);
+            //"it = erase" same reason previous function
+            if (it -> getDNI() == DNI) it = players_.erase(it);
         }
         return 1;
     }
-    else return -1;
-}
-
-
-int Ruleta::deleteJugador(const Jugador &player) {
-    if (players_.empty()) return -2;
-    else if (DNIplayerInList_(player.getDNI())) {
-        players_.remove(player);
-        return 1;
-    }
-    else return -1;
+    else return -2;
 }
 
 void Ruleta::escribeJugadores() {
-    ofstream pfile("jugadores.txt");
+    ofstream psfile("jugadores.txt");
     list <Jugador> :: iterator it;
     
     for(it = players_.begin(); it != players_.end() ; it++) {
-        pfile << it->getDNI() << ',' << it->getCodigo() << ',' <<
+        psfile << it->getDNI() << ',' << it->getCodigo() << ',' <<
         it->getNombre() << ',' << it->getApellidos()  << ',' <<
         it->getEdad() << ',' << it->getDireccion() << ',' << 
         it->getLocalidad() << ',' << it->getProvincia() << ','
         << it->getPais() << ',' << it->getDinero() << std::endl;
     }
     
-    pfile.close();
+    psfile.close();
 }
 
 void Ruleta::leeJugadores() {
@@ -96,32 +101,37 @@ void Ruleta::leeJugadores() {
     Jugador player("DNI", "Identifier");
     string value;
     //open file
-    ifstream pfile("jugadores.txt");
+    ifstream psfile("jugadores.txt");
     //iterates until there is no any ',' left (getline returns false)
     //in each iteration save in object "player" parameters saved in file
     //(if a parameter is not in the file, it will store in "player" as "")
-    while(getline(pfile, value, ',')) {
+    while(getline(psfile, value, ',')) {
         player.setDNI(value);
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
         player.setCodigo(value);
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
         player.setNombre(value);
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
         player.setApellidos(value);
-        getline(pfile, value, ',');
-        player.setEdad(stoi(value));
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
+        player.setEdad(atoi(value.c_str()));
+        getline(psfile, value, ',');
         player.setDireccion(value);
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
         player.setLocalidad(value);
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
         player.setProvincia(value);
-        getline(pfile, value, ',');
+        getline(psfile, value, ',');
         player.setPais(value);
-        getline(pfile, value, ',');
-        player.setDinero(stoi(value));
+        getline(psfile, value, '\n');
+        player.setDinero(atoi(value.c_str()));
         //push to the list values in object player
         players_.push_back(player);
     }
-    pfile.close();
+    psfile.close();
 }
+
+void Ruleta::getPremios() {
+
+}
+
