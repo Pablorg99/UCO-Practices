@@ -1,5 +1,3 @@
-//FILE PROVIDED BY UNIVERSITY (MOODLE)
-
 // jugador_unittest.cc: Juan A. Romero
 // A sample program demonstrating using Google C++ testing framework.
 //
