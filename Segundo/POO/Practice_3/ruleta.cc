@@ -3,6 +3,34 @@
 using std::ifstream;
 using std::ofstream;
 
+//Private methods 
+string Ruleta::getColor_() {
+    if(getBola() == 0) return "0";
+    else {
+        int red[18] = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
+        for(int i = 0; i < 18; i++) {
+            if(getBola() == red[i]) return "rojo";
+        }
+        return "negro";
+    }
+}
+
+string Ruleta::getParImpar_() {
+    if(getBola() == 0) return "0";
+    else {
+        if((getBola() % 2) == 0) return "par";
+        else return "impar";
+    }
+}
+
+string Ruleta::getAltoBajo_() {
+    if(getBola() == 0) return "0";
+    else {
+        if(getBola() < 18) return "bajo";
+        else return "alto";
+    }
+}
+
 Ruleta::Ruleta(const Crupier &crupier) : ball_(-1), crupier_(crupier) {
     srand(time(NULL));
     setBanca(1000000);
@@ -16,8 +44,17 @@ bool Ruleta::setBanca(const int money) {
     else return false;
 }
 
-//Private method 
-bool Ruleta::DNIplayerInList_(string DNI) {
+bool Ruleta::setBola(const int number) {    
+    if (number >= 0 && number <= 36) {
+        ball_ = number;
+        return true;
+    }
+    else return false;
+}
+
+
+//Extra method 
+bool Ruleta::DNIplayerInList(string DNI) {
     list <Jugador> :: iterator it;
     Jugador player(DNI, "identifier");
     //go all over the list checking if dni from the player
@@ -28,16 +65,8 @@ bool Ruleta::DNIplayerInList_(string DNI) {
     return false;
 }
 
-bool Ruleta::setBola(const int number) {    
-    if (number >= 0 && number <= 36) {
-        ball_ = number;
-        return true;
-    }
-    else return false;
-}
-
 bool Ruleta::addJugador(const Jugador &player) {
-    if(DNIplayerInList_(player.getDNI())) return false;
+    if(DNIplayerInList(player.getDNI())) return false;
     else {
         players_.push_back(player);
         string name = player.getDNI() + ".txt";
@@ -50,7 +79,7 @@ bool Ruleta::addJugador(const Jugador &player) {
 
 int Ruleta::deleteJugador(const Jugador &player) {
     if (players_.empty()) return -1;
-    else if (DNIplayerInList_(player.getDNI())) { 
+    else if (DNIplayerInList(player.getDNI())) { 
         list <Jugador> :: iterator it;
         //Iterates until find player with same DNI than passed one, and remove it.
         for(it = players_.begin(); it != players_.end(); it++) {
@@ -65,7 +94,7 @@ int Ruleta::deleteJugador(const Jugador &player) {
 
 int Ruleta::deleteJugador(const string &DNI) {
     if (players_.empty()) return -1;
-    else if (DNIplayerInList_(DNI)) {
+    else if (DNIplayerInList(DNI)) {
         //DNI passed, is the DNI of a player of "players_"
         list <Jugador> :: iterator it;
         //Iterates until find this player, and remove it.
@@ -137,33 +166,60 @@ void Ruleta::getPremios() {
     //Auxiliar variables used in each player iteration
     list <Apuesta> bets;
     list <Apuesta> :: iterator bet;
-
+    
     for(player = players_.begin(); player != players_.end(); player++) {
-        
-        //Get list bets_ from the player (iterator) in the auxiliar list "bets"
+        //Update bets_ (list of object player) with the bets on the player file (DNI.txt)
         player->setApuestas();
+        //Copy bets_ in the auxiliar list bets to work with it
         bets = player->getApuestas();
-        
+        //Each line from DNI.txt (each bet) is one element of the list
         for(bet = bets.begin(); bet != bets.end(); bet++) {
-            
-            switch (bet->tipo)
-            {
-                case 1:
-                    if(bet->cantidad == getBola()) {
-                        
+
+            switch (bet->tipo) {
+
+                case 1: //Apuesta sencilla
+                    if(stoi(bet->valor) == getBola()) {
+                        int profit = 35 * (bet->cantidad);
+                        player->setDinero(player->getDinero() + profit);
+                        setBanca(getBanca() - profit);
+                    }
+                    else {
+                        player->setDinero(player->getDinero() - bet->cantidad);
+                        setBanca(getBanca() + bet->cantidad);
                     }
                     break;
 
-                case 2:
-
+                case 2: //Apuesta rojo/negro
+                    if(bet->valor == getColor_()) {
+                        player->setDinero(player->getDinero() + bet->cantidad);
+                        setBanca(getBanca() - bet->cantidad);
+                    }
+                    else {
+                        player->setDinero(player->getDinero() - bet->cantidad);
+                        setBanca(getBanca() + bet->cantidad);
+                    }
                     break;
 
-                case 3:
-
+                case 3: //Apuesta par/impar
+                    if(bet->valor == getParImpar_()) {
+                        player->setDinero(player->getDinero() + bet->cantidad);
+                        setBanca(getBanca() - bet->cantidad);
+                    }
+                    else {
+                        player->setDinero(player->getDinero() - bet->cantidad);
+                        setBanca(getBanca() + bet->cantidad);
+                    }
                     break;
 
-                case 4:
-
+                case 4: //Apuesta alto/bajo
+                    if(bet->valor == getAltoBajo_()) {
+                        player->setDinero(player->getDinero() + bet->cantidad);
+                        setBanca(getBanca() - bet->cantidad);
+                    }
+                    else {
+                        player->setDinero(player->getDinero() - bet->cantidad);
+                        setBanca(getBanca() + bet->cantidad);
+                    }
                     break;
             }
         }
