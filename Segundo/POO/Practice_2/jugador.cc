@@ -32,7 +32,7 @@ void Jugador::setApuestas () {
     bet.tipo = stoi(value);
     getline(file, value, ',');
     bet.valor = value;
-    getline(file, value);
+    getline(file, value, '\n');
     bet.cantidad = stoi(value);
     //save in the list the values of bet
     bets_.push_back(bet);
