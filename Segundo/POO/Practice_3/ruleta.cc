@@ -133,5 +133,40 @@ void Ruleta::leeJugadores() {
 
 void Ruleta::getPremios() {
 
+    list <Jugador> :: iterator player;
+    //Auxiliar variables used in each player iteration
+    list <Apuesta> bets;
+    list <Apuesta> :: iterator bet;
+
+    for(player = players_.begin(); player != players_.end(); player++) {
+        
+        //Get list bets_ from the player (iterator) in the auxiliar list "bets"
+        player->setApuestas();
+        bets = player->getApuestas();
+        
+        for(bet = bets.begin(); bet != bets.end(); bet++) {
+            
+            switch (bet->tipo)
+            {
+                case 1:
+                    if(bet->cantidad == getBola()) {
+                        
+                    }
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+            }
+        }
+    }
 }
 
