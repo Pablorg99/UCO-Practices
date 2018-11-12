@@ -114,7 +114,7 @@ void Ruleta::leeJugadores() {
         getline(psfile, value, ',');
         player.setApellidos(value);
         getline(psfile, value, ',');
-        player.setEdad(atoi(value.c_str()));
+        player.setEdad(stoi(value));
         getline(psfile, value, ',');
         player.setDireccion(value);
         getline(psfile, value, ',');
@@ -124,7 +124,7 @@ void Ruleta::leeJugadores() {
         getline(psfile, value, ',');
         player.setPais(value);
         getline(psfile, value, '\n');
-        player.setDinero(atoi(value.c_str()));
+        player.setDinero(stoi(value));
         //push to the list values in object player
         players_.push_back(player);
     }
