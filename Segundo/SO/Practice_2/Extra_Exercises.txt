@@ -1,9 +1,0 @@
-EJERCICIOS ADICIONALES PRÁCTICA 2
-
-1. Realice la multiplicación en paralelo de una matriz de 3x3 por un vector de 3x1. Para ello cree tres hebras que se repartan las filas de la matriz y del vector. Cada hijo debe imprimir la fila que le ha tocado y el resultado final de la multiplicación la cual además envía al padre. El padre debe esperar por la terminación de cada hijo y mostrar el vector resultante. 
-
-2. Como se comentó en la práctica 1, los procesos a diferencia de los hilos, no comparten el mismo
-espacio de memoria, por lo que si queremos que accedan a las mismas variables en memoria, estos
-deben compartirla. Realice un programa que expanda N procesos hijos. Cada hijo debe compartir
-una variable denominada contador, que debe estar inicializada a cero. Esta variable debe ser
-incrementada por cada hilo 100 veces. Imprima la variable una vez finalicen los hilos y analice el resultado obtenido. Un resultado previsible para 3 procesos sería 300, ¿ha sido así?
