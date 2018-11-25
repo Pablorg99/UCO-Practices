@@ -12,6 +12,8 @@ las sumas de los números que producen para comprobar si las sumas coinciden con
 las de los consumidores. Hay un único hilo productor y un único hilo consumidor.
 ----------------------------------------------------------------------------------*/
 
+#define TAMBUFFER 100
+
 //Buffer where producer sets data and consumer read and extract data
 int buffer[TAMBUFFER];
 //General semaphore for consumer, counts number of free spaces in buffer
@@ -21,7 +23,6 @@ sem_t c_full;
 //Binary semaphore for mutual exclusion between consumer and producer
 pthread_mutex_t binary;
 
-#define TAMBUFFER 100
 
 #include <pthread.h>
 #include <stdlib.h>
