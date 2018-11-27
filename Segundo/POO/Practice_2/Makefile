@@ -46,7 +46,7 @@ clean :
 	rm -f gtest.a gtest_main.a *.o
 
 clean_outs:
-	rm -f $(TESTS)
+	rm -f *.out *.a *.o *.txt
 
 
 # Builds gtest.a and gtest_main.a.
