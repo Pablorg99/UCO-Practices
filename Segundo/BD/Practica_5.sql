@@ -60,3 +60,52 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE(votante.dni || ' ha participado ' || votante.veces || 'veces');
     END LOOP;    
 END;
+
+-- Ejercicio 5 (Bonito)
+CREATE TABLE votantesAntiguos AS SELECT * FROM votantes WHERE fechanacimiento < '01/01/1980';
+ALTER TABLE votantesAntiguos ADD Sueldo NUMBER(6);
+UPDATE votantesAntiguos SET sueldo = 1500 WHERE situacionlaboral = 'Activo';
+UPDATE votantesAntiguos SET sueldo = 0 WHERE situacionlaboral <> 'Activo';
+SET SERVEROUTPUT ON;
+DECLARE
+    CURSOR c_old_votantes IS SELECT * FROM votantesAntiguos;
+    n_votantes NUMBER;
+BEGIN
+    SELECT COUNT(dni) INTO n_votantes FROM votantesAntiguos;
+    FOR votante IN c_old_votantes LOOP
+        IF votante.situacionlaboral = 'Activo' THEN votante.sueldo := 1500;
+        ELSE votante.sueldo := 0;
+        END IF;
+        DBMS_OUTPUT.put_line(votante.nombrecompleto || ' insertado');
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Se ha insertado un total de ' || n_votantes || ' votantes');
+END;
+
+-- Ejercicio 5 (Monito)
+create table votantes
+	(dni number(8) primary key,
+	nombreCompleto varchar2(64),
+	estudiosSuperiores varchar2(16) not null,
+	situacionLaboral varchar2(16) not null,
+	email varchar2(32) not null,
+	localidad number(3) not null,
+	fechaNacimiento date not null,
+	telefono number(14),
+    sueldo number(5),
+	constraint ck_estudios CHECK (estudiosSuperiores in ('Ninguno','Basicos','Superiores','Doctorado')),
+	constraint ck_laboral CHECK (situacionLaboral in ('Estudiante','Jubilado','Parado','Activo')),
+	constraint fk_localidad_vot foreign key (localidad) references localidades(idLocalidad));UPDATE votantesAntiguos SET sueldo = 0 WHERE situacionlaboral <> 'Activo';
+DECLARE
+    CURSOR c_old_votantes IS SELECT * FROM votantes WHERE fechanacimiento < '01/01/1980';
+    sueldo NUMBER;
+    n_votantes NUMBER;
+BEGIN
+    FOR votante IN c_old_votantes LOOP
+        IF votante.situacionlaboral
+        INSERT INTO votantesAntiguos
+            VALUES(votante.dni, votante.nombrecompleto, votante.estudios
+        
+        DBMS_OUTPUT.put_line(votante.nombrecompleto || ' insertado');
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Se ha insertado un total de ' || n_votantes || ' votantes');
+END;
