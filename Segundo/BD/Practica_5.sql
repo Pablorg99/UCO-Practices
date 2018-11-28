@@ -48,3 +48,15 @@ BEGIN
 END;
 
 -- Ejercicio 4
+SET SERVEROUTPUT ON;
+DECLARE
+    CURSOR v_cursor IS SELECT v.dni, COUNT(c.votante) as veces FROM votantes v, consultas c
+                            WHERE v.dni = c.votante
+                            HAVING COUNT(c.votante) > ((SELECT COUNT(idconsulta) FROM consultas) / (SELECT COUNT(dni) FROM votantes))
+                            GROUP BY v.dni
+                            ORDER BY COUNT(c.votante) DESC;
+BEGIN
+    FOR votante IN v_cursor LOOP
+        DBMS_OUTPUT.PUT_LINE(votante.dni || ' ha participado ' || votante.veces || 'veces');
+    END LOOP;    
+END;
