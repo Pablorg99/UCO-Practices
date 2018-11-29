@@ -11,6 +11,7 @@ Para comprobar la corrección de la solución programada los productores realiza
 las sumas de los números que producen para comprobar si las sumas coinciden con
 las de los consumidores. Hay un único hilo productor y un único hilo consumidor.
 ----------------------------------------------------------------------------------*/
+
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,15 +19,15 @@ las de los consumidores. Hay un único hilo productor y un único hilo consumido
 
 #define TAMBUFFER 10
 
-//Buffer where producer sets data and consumer read and extract data
+//Buffer where producer sets data and consumer reads and extract data
 int buffer[TAMBUFFER];
 //Variables where addition of consumer and producer are stored
 /*These are not necessary with only 1 producer and 1 consumer, but are necessary
 for the next part of the exercise*/
 int producer_addition = 0, consumer_addition = 0;
-//General semaphore for consumer, counts number of free spaces in buffer
+//General semaphore that counts number of free spaces in buffer
 sem_t empty;
-//General semaphore for producer, counts number of ocupied spaces in buffer
+//General semaphore that counts number of ocupied spaces in buffer
 sem_t full;
 //Binary semaphore for mutual exclusion between consumer and producer
 sem_t mutex;
@@ -41,9 +42,9 @@ int main () {
     extern sem_t empty, full, mutex;
     srand(time(NULL));
     //Initialisation of semaphores
-    if((sem_init(&mutex, 0, 1)) == -1) perror("Error: Failed to initialise sem mutex ");
-    if((sem_init(&full, 0, 0)) == -1) perror("Error: Failed to initialise sem c_full ");
-    if((sem_init(&empty, 0, TAMBUFFER)) == -1) perror("Error: Failed to initialise sem p_empty ");
+    if((sem_init(&mutex, 0, 1)) == -1) perror("Error: Failed to initialise sem mutex\n");
+    if((sem_init(&full, 0, 0)) == -1) perror("Error: Failed to initialise sem c_full\n");
+    if((sem_init(&empty, 0, TAMBUFFER)) == -1) perror("Error: Failed to initialise sem p_empty\n");
 
 
     //Threads variables
@@ -57,22 +58,24 @@ int main () {
 
     //Create consumer
     if((thread_status = pthread_create(&consumer, NULL, Consumer, NULL))) {
-        fprintf(stderr, "Failed to create consumer thread");
+        fprintf(stderr, "Failed to create consumer thread\n");
         exit(thread_status);
     }
     //Create producer
     if((thread_status = pthread_create(&producer, NULL, Producer, NULL))) {
-        fprintf(stderr, "Failed to create producer thread");
+        fprintf(stderr, "Failed to create producer thread\n");
+        exit(thread_status);
     }
 
     //Waiting consumer
-    if(pthread_join(consumer, (void **) &consumer_return)) fprintf(stderr, "Error in pthread_join");
+    if(pthread_join(consumer, (void *) &consumer_return)) fprintf(stderr, "Error in pthread_join\n");
     //Just check that pthread_join is getting what pthread_exit returns
     if(*consumer_return == consumer_addition) {
         printf("Consumer addition has been: %d\n", *consumer_return);
     }
 
-    if(pthread_join(producer, (void **) &producer_return)) fprintf(stderr, "Error in pthread_join");
+    //Waiting producer
+    if(pthread_join(producer, (void *) &producer_return)) fprintf(stderr, "Error in pthread_join\n");
     //Just check that pthread_join is getting what pthread_exit returns
     if(*producer_return == producer_addition) {
         printf("Producer addition has been: %d\n", *producer_return);
@@ -88,6 +91,8 @@ void * Producer()
     int number;
     int *to_return;
 
+    /*To check that the implementation is working properly 'i' must 
+    be >> TAMBUFFER to fill and empy the buffer multiple times*/
     for(int i = 0; i < 100; i++) {
         number = ((rand() % 1000) + 1);
         sem_wait(&empty);
@@ -110,6 +115,8 @@ void * Consumer()
     extern sem_t mutex, full, empty;
     int *to_return;
 
+    /*To check that the implementation is working properly 'i' must 
+    be >> TAMBUFFER to fill and empy the buffer multiple times*/
     for(int i = 0; i < 100; i++) {
         sem_wait(&full);
         sem_wait(&mutex);
