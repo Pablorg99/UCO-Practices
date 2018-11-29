@@ -11,81 +11,115 @@ Para comprobar la corrección de la solución programada los productores realiza
 las sumas de los números que producen para comprobar si las sumas coinciden con
 las de los consumidores. Hay un único hilo productor y un único hilo consumidor.
 ----------------------------------------------------------------------------------*/
-
-#define TAMBUFFER 100
-
-//Buffer where producer sets data and consumer read and extract data
-int buffer[TAMBUFFER];
-//General semaphore for consumer, counts number of free spaces in buffer
-sem_t p_empty;
-//General semaphore for producer, counts number of ocupied spaces in buffer
-sem_t c_full;
-//Binary semaphore for mutual exclusion between consumer and producer
-pthread_mutex_t binary;
-
-
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <semaphore.h>
 
+#define TAMBUFFER 10
+
+//Buffer where producer sets data and consumer read and extract data
+int buffer[TAMBUFFER];
+//Variables where addition of consumer and producer are stored
+/*These are not necessary with only 1 producer and 1 consumer, but are necessary
+for the next part of the exercise*/
+int producer_addition = 0, consumer_addition = 0;
+//General semaphore for consumer, counts number of free spaces in buffer
+sem_t empty;
+//General semaphore for producer, counts number of ocupied spaces in buffer
+sem_t full;
+//Binary semaphore for mutual exclusion between consumer and producer
+sem_t mutex;
+
+//Function headers
+void * Producer();
+void * Consumer();
+
 int main () {
 
     //Global variables
-    extern int buffer[TAMBUFFER];
-    extern sem_t c_empty, full;
-    extern pthread_mutex_t mutex;
-    //Initialisation of these variables
-    if(pthread_mutex_init(&mutex, NULL)) frptinf(stderr, "Failed to initialise sem mutex");
-    if((sem_init(&c_full, 0, 0)) == -1) frptinf(stderr, "Failed to initialise sem c_full");
-    if((sem_init(&p_empty, 0, TAMBUFFER)) == -1) frptinf(stderr, "Failed to initialise sem p_empty");
+    extern sem_t empty, full, mutex;
+    srand(time(NULL));
+    //Initialisation of semaphores
+    if((sem_init(&mutex, 0, 1)) == -1) perror("Error: Failed to initialise sem mutex ");
+    if((sem_init(&full, 0, 0)) == -1) perror("Error: Failed to initialise sem c_full ");
+    if((sem_init(&empty, 0, TAMBUFFER)) == -1) perror("Error: Failed to initialise sem p_empty ");
+
 
     //Threads variables
     pthread_t consumer;
     pthread_t producer;
     int thread_status;
 
+    //Local additions (checks global producer and consumer additions)
+    int *consumer_return = 0;
+    int *producer_return = 0;
+
     //Create consumer
-    if(thread_status = pthread_create(&consumer, NULL, &Consumer, NULL) {
+    if((thread_status = pthread_create(&consumer, NULL, Consumer, NULL))) {
         fprintf(stderr, "Failed to create consumer thread");
         exit(thread_status);
     }
     //Create producer
-    if(thread_status = pthread_create(&producer, NULL, &Producer, NULL) {
+    if((thread_status = pthread_create(&producer, NULL, Producer, NULL))) {
         fprintf(stderr, "Failed to create producer thread");
     }
 
-}
-
-
-
-// Proceso o hilo productor
-void Productor()
-{
-    extern semaforo mutex, full, empty;
-    T dato;
-    while (TRUE) {
-        ProducirDato(dato);
-        wait(empty);
-        wait(mutex);
-        EntrarDato(dato);
-        signal(mutex);
-        signal(full);
+    //Waiting consumer
+    if(pthread_join(consumer, (void **) &consumer_return)) fprintf(stderr, "Error in pthread_join");
+    //Just check that pthread_join is getting what pthread_exit returns
+    if(*consumer_return == consumer_addition) {
+        printf("Consumer addition has been: %d\n", *consumer_return);
     }
-}
 
-// Proceso o hilo consumidor
-void Consumer()
-{
-    extern semaforo mutex, full, empty;
-    T dato;
-    while (TRUE) {
-        wait(full);
-        wait(mutex);
-        SacarDato(dato);
-        signal(mutex);
-        signal(empty);
-        ConsumirDato(dato);
+    if(pthread_join(producer, (void **) &producer_return)) fprintf(stderr, "Error in pthread_join");
+    //Just check that pthread_join is getting what pthread_exit returns
+    if(*producer_return == producer_addition) {
+        printf("Producer addition has been: %d\n", *producer_return);
     }
+    
 }
 
+//Producer thread
+void * Producer()
+{
+    extern int buffer[TAMBUFFER], producer_addition;
+    extern sem_t mutex, full, empty;
+    int number;
+    int *to_return;
+
+    for(int i = 0; i < 100; i++) {
+        number = ((rand() % 1000) + 1);
+        sem_wait(&empty);
+        sem_wait(&mutex);
+        buffer[i % TAMBUFFER] = number;
+        producer_addition += buffer[i % TAMBUFFER];
+        sem_post(&mutex);
+        sem_post(&full);
+    }
+    //Return process
+    to_return = malloc(sizeof(int));
+    *to_return = producer_addition;
+    pthread_exit((void *)to_return);
+}
+
+//Consumer thread
+void * Consumer()
+{
+    extern int buffer[TAMBUFFER], consumer_addition;
+    extern sem_t mutex, full, empty;
+    int *to_return;
+
+    for(int i = 0; i < 100; i++) {
+        sem_wait(&full);
+        sem_wait(&mutex);
+        consumer_addition += buffer[i % TAMBUFFER];
+        buffer[i % TAMBUFFER] = 0;
+        sem_post(&mutex);
+        sem_post(&empty);
+    }
+    //Return process
+    to_return = malloc(sizeof(int));
+    *to_return = consumer_addition;
+    pthread_exit((void *)to_return);
+}
