@@ -62,7 +62,7 @@ int main ()
     int *return_value = 0;
 
     //Create consumers
-    for(int i = 0; i < PRODUCERS; i++) {
+    for(int i = 0; i < CONSUMERS; i++) {
         if((thread_status = pthread_create(&consumer[i], NULL, Consumer, NULL))) {
             fprintf(stderr, "Failed to create consumer thread");
             exit(thread_status);
@@ -79,12 +79,12 @@ int main ()
     //Wait consumers
     for(int i = 0; i < CONSUMERS; i++) {
         if((thread_status = pthread_join(consumer[i], (void *) &return_value))) fprintf(stderr, "Error %d in pthread_join\n", thread_status);
-        printf("Thread %lu has finished with value %d\n", consumer[i], *return_value);
+        printf("Consumer thread %lu has finished with value %d\n", consumer[i], *return_value);
     }
     //Wait producers
     for(int i = 0; i < PRODUCERS; i++) {
         if((thread_status = pthread_join(producer[i], (void *) &return_value))) fprintf(stderr, "Error %d in pthread_join\n", thread_status);
-        printf("Thread %lu has finished with value %d\n", producer[i], *return_value);
+        printf("Producer thread %lu has finished with value %d\n", producer[i], *return_value);
     }
 
     //Final results
