@@ -20,10 +20,10 @@ class Contador {
         //Contador c = Contador d is not necessary to do, because is the default = operator
         //Unary Operators
         //NEED TO FIX (check_?)
-        inline Contador operator++(void) {++value_; return *this;}
-        inline Contador operator++(int) {++value_; return *this;}
-        inline Contador operator--(void) {--value_; return *this;}
-        inline Contador operator--(int) {--value_; return *this;}
+        inline Contador operator++(void);
+        inline Contador operator++(int);
+        inline Contador operator--(void);
+        inline Contador operator--(int);
 };
 
 #endif

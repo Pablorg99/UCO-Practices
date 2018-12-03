@@ -19,3 +19,20 @@ Contador Contador::operator=(int integer) {
     else value_ = integer;
     return *this;
 }
+
+Contador Contador::operator++(void) {
+	if((value_ + 1) > max) return *this; 
+	else {
+		++value_;
+		return *this;
+	}
+}
+Contador Contador::operator++(int) {
+	++value_; return *this;
+}
+Contador Contador::operator--(void) {
+	--value_; return *this;
+}
+Contador Contador::operator--(int) {
+	--value_; return *this;
+}
