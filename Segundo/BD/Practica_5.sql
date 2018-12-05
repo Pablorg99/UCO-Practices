@@ -109,3 +109,5 @@ BEGIN
     END LOOP;
     DBMS_OUTPUT.PUT_LINE('Se ha insertado un total de ' || n_votantes || ' votantes');
 END;
+
+-- Ejercicio 6
