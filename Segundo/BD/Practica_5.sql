@@ -82,32 +82,41 @@ BEGIN
 END;
 
 -- Ejercicio 5 (Monito)
-create table votantes
-	(dni number(8) primary key,
-	nombreCompleto varchar2(64),
-	estudiosSuperiores varchar2(16) not null,
-	situacionLaboral varchar2(16) not null,
-	email varchar2(32) not null,
-	localidad number(3) not null,
-	fechaNacimiento date not null,
-	telefono number(14),
-    sueldo number(5),
-	constraint ck_estudios CHECK (estudiosSuperiores in ('Ninguno','Basicos','Superiores','Doctorado')),
-	constraint ck_laboral CHECK (situacionLaboral in ('Estudiante','Jubilado','Parado','Activo')),
-	constraint fk_localidad_vot foreign key (localidad) references localidades(idLocalidad));UPDATE votantesAntiguos SET sueldo = 0 WHERE situacionlaboral <> 'Activo';
+DROP TABLE votantesAntiguos;
+CREATE TABLE votantesAntiguos AS (SELECT * FROM votantes WHERE dni = NULL);
+ALTER TABLE votantesAntiguos ADD Sueldo NUMBER;
+SET SERVEROUTPUT ON;
 DECLARE
     CURSOR c_old_votantes IS SELECT * FROM votantes WHERE fechanacimiento < '01/01/1980';
     sueldo NUMBER;
-    n_votantes NUMBER;
+    n_votantes NUMBER := 0;
 BEGIN
     FOR votante IN c_old_votantes LOOP
-        IF votante.situacionlaboral
+        sueldo := 0;
+        IF votante.situacionlaboral = 'Activo' THEN sueldo := 1500;
+        END IF;
         INSERT INTO votantesAntiguos
-            VALUES(votante.dni, votante.nombrecompleto, votante.estudios
-        
+            VALUES(votante.dni, votante.nombrecompleto, votante.estudiossuperiores, votante.situacionlaboral, votante.email, votante.localidad, votante.fechanacimiento, votante.telefono, sueldo);
         DBMS_OUTPUT.put_line(votante.nombrecompleto || ' insertado');
+        n_votantes := n_votantes + 1; 
     END LOOP;
     DBMS_OUTPUT.PUT_LINE('Se ha insertado un total de ' || n_votantes || ' votantes');
 END;
 
--- Ejercicio 6
+-- Ejercicio 6 
+SET SERVEROUTPUT ON;
+DECLARE
+    CURSOR c_old_votantes IS SELECT * FROM votantesAntiguos;
+    sueldo NUMBER;
+BEGIN
+    FOR votante IN c_old_votantes LOOP
+        IF votante.situacionlaboral = 'Jubilado' THEN sueldo := 1000;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Ninguno' THEN sueldo := votante.sueldo + 100;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Basicos' THEN sueldo := votante.sueldo + 200;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Superiores' THEN sueldo := votante.sueldo + 300;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperi         END IF;
+        UPDATE votantesAntiguos
+        SET Sueldo = sueldo;
+        DBMS_OUTPUT.put_line(votante.nombrecompleto || ' pasa de cobrar ' || votante.sueldo || ' a cobrar ' ||  );
+    END LOOP;
+END;
