@@ -98,6 +98,7 @@ void * Producer()
         sem_post(&mutex);
         sem_post(&full);
     }
+	printf("Estoy fuera del bucle de producer\n");
     //Return process
     to_return = malloc(sizeof(int));
     *to_return = producer_addition;
@@ -105,7 +106,7 @@ void * Producer()
 }
 
 //Consumer thread
-void * Consumer(void *arg)
+void * Consumer(void * arg)
 {
     printf("Estoy en consumer\n");
     extern int buffer[TAMBUFFER];
