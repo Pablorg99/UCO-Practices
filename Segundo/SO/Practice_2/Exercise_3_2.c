@@ -27,11 +27,12 @@ formulación estándar del problema del productor consumidor.
 //Buffer where producer sets data and consumer reads and extract data
 int buffer[TAMBUFFER];
 //Variables where addition of consumers and producers are stored
-int producer_addition = 0, consumer_addition = 0;
+int consumer_addition = 0;
+int producer_addition = 0;
 //Indices for producers and consumers. In this second part, the iterator can not be
 //used as index anymore because it is not common for all producers/consumers threads
-int producer_index = 0;
 int consumer_index = 0;
+int producer_index = 0;
 //General semaphore that counts number of empty spaces in buffer
 sem_t empty;
 //General semaphore that counts number of ocupied spaces in buffer
@@ -40,8 +41,8 @@ sem_t full;
 sem_t mutex;
 
 //Function headers
-void * Producer();
 void * Consumer();
+void * Producer();
 int ConsumerDistribution();
 
 int main () 
