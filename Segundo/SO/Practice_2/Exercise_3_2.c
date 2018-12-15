@@ -20,8 +20,8 @@ formulación estándar del problema del productor consumidor.
 #include <pthread.h>
 
 #define PPP 50 //Products per producer
-#define PRODUCERS 5
-#define CONSUMERS 5
+#define PRODUCERS 13
+#define CONSUMERS 8
 #define TAMBUFFER 10
 
 //Buffer where producer sets data and consumer reads and extract data
@@ -42,6 +42,7 @@ sem_t mutex;
 //Function headers
 void * Producer();
 void * Consumer();
+int ConsumerDistribution();
 
 int main () 
 {
@@ -71,10 +72,8 @@ int main ()
         }
     }
     //Create producers
-	int producer_numbers[PRODUCERS];
     for(int i = 0; i < PRODUCERS; i++) {
-		producer_numbers[i] = i;
-        if((thread_status = pthread_create(&producer[i], NULL, Producer, (void *) &producer_numbers[i]))) {
+        if((thread_status = pthread_create(&producer[i], NULL, Producer, NULL))) {
             fprintf(stderr, "Failed to create producer thread");
             exit(thread_status);
         }
@@ -96,40 +95,12 @@ int main ()
     printf("Global consumers addition = %d\n", consumer_addition);
 }
 
-//Producer thread
-void * Producer(void * arg)
-{
-    extern int buffer[TAMBUFFER], producer_addition, producer_index;
-    extern sem_t mutex, full, empty;
-    int number;
-    int *to_return, *thread_index = (int *) arg;
-	printf("Productor %d\n", *thread_index);
-
-    /*To check that the implementation is working properly, iterations
-    must be >> TAMBUFFER to fill and empy the buffer multiple times*/
-    for(int i = 0; i < PPP; i++) {
-        number = ((rand() % 1000) + 1);
-        sem_wait(&empty);
-        sem_wait(&mutex);
-        producer_index++;
-        buffer[producer_index % TAMBUFFER] = number;
-        producer_addition += number;
-        sem_post(&mutex);
-        sem_post(&full);
-    }
-    //Return process
-    to_return = malloc(sizeof(int));
-    *to_return = producer_addition;
-    pthread_exit((void *)to_return);
-}
-
 //Consumer thread
 void * Consumer(void * arg)
 {
     extern int buffer[TAMBUFFER], consumer_addition, consumer_index;
     extern sem_t mutex, full, empty;
     int *to_return, *thread_index = (int *) arg;
-	printf("Consumidor %d\n", *thread_index);
 
     /*Consumers have to consume all products produced (producers * products per 
     producer). So each consumer have to consume: all products / number of consumers*/
@@ -149,9 +120,38 @@ void * Consumer(void * arg)
     pthread_exit((void *)to_return);
 }
 
+//Producer thread
+void * Producer(void * arg)
+{
+    extern int buffer[TAMBUFFER], producer_addition, producer_index;
+    extern sem_t mutex, full, empty;
+    int number;
+    int *to_return;
+
+    /*To check that the implementation is working properly, iterations
+    must be >> TAMBUFFER to fill and empy the buffer multiple times*/
+    for(int i = 0; i < PPP; i++) {
+        number = ((rand() % 1000) + 1);
+        sem_wait(&empty);
+        sem_wait(&mutex);
+        producer_index++;
+        buffer[producer_index % TAMBUFFER] = number;
+        producer_addition += number;
+        sem_post(&mutex);
+        sem_post(&full);
+    }
+    //Return process
+    to_return = malloc(sizeof(int));
+    *to_return = producer_addition;
+    pthread_exit((void *)to_return);
+}
+
+
 int ConsumerDistribution(int thread_number) {
 	int products_per_consumer;
-	products_per_consumer = PPP * PRODUCERS / CONSUMERS
-	if(thread_number == (CONSUMERS - 1) return;
+	products_per_consumer = PPP * PRODUCERS / CONSUMERS;
+	int excess_of_products = (PPP * PRODUCERS) % CONSUMERS;
+	if(thread_number == (CONSUMERS - 1)) return (products_per_consumer + excess_of_products);
+	else return products_per_consumer;
 
 }
