@@ -21,7 +21,7 @@ formulación estándar del problema del productor consumidor.
 
 #define PPP 50 //Products per producer
 #define PRODUCERS 13
-#define CONSUMERS 8
+#define CONSUMERS 11
 #define TAMBUFFER 10
 
 //Buffer where producer sets data and consumer reads and extract data
@@ -102,8 +102,7 @@ void * Consumer(void * arg)
     extern sem_t mutex, full, empty;
     int *to_return, *thread_index = (int *) arg;
 
-    /*Consumers have to consume all products produced (producers * products per 
-    producer). So each consumer have to consume: all products / number of consumers*/
+    //Number of iterations per consumer calculated in ConsumerDistribution()
     for(int i = 0; i < ConsumerDistribution(*thread_index); i++) {
         sem_wait(&full);
         sem_wait(&mutex);
@@ -146,12 +145,14 @@ void * Producer(void * arg)
     pthread_exit((void *)to_return);
 }
 
-
+/*The system has to consume all products (PPP * PRODUCERS), so each consumer has to consume
+PPP * PRODUCERS / CONSUMERS. However, if PRODUCERS and CONSUMERS are not divisible, the 
+last consumer has to consume the remainder of the division*/
 int ConsumerDistribution(int thread_number) {
 	int products_per_consumer;
 	products_per_consumer = PPP * PRODUCERS / CONSUMERS;
-	int excess_of_products = (PPP * PRODUCERS) % CONSUMERS;
-	if(thread_number == (CONSUMERS - 1)) return (products_per_consumer + excess_of_products);
+	int remainder_of_products = (PPP * PRODUCERS) % CONSUMERS;
+	if(thread_number == (CONSUMERS - 1)) return (products_per_consumer + remainder_of_products);
 	else return products_per_consumer;
 
 }
