@@ -8,11 +8,11 @@ Header file of the class Contador and its methods
 #define CONTADOR_H
 
 class Contador {
-    public:
+    private:
         int value_;
         int min_;
         int max_;
-    private:
+    public:
         //Constructor
         /*If there are logical errors like: value lower or higher than min or max
         or min higher than max, Contador is set with default values (0, 0, 1000)*/ 
@@ -36,6 +36,9 @@ class Contador {
 		functions of the class, I declare them as friend to be able to use the get() method*/
 		friend Contador operator+(int addition, Contador &counter);
 		friend Contador operator-(int substraction, Contador &counter);
+		//Other methods
+		//Undo the number of operations on the counter passed as argument
+		bool undo(int n_operations = 1) {return true;}
 };
 
 #endif

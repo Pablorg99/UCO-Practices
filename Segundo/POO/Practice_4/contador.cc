@@ -6,7 +6,7 @@ File with the implementation of the different methods of the class Contador.
 
 #include "contador.h"
 
-Contador::Contador(int value = 0, int min = 0, int max = 1000) {
+Contador::Contador(int value, int min, int max) {
     if(value < min || value > max || min > max) {
         value_ = 0;
         min_ = 0;
@@ -52,7 +52,7 @@ Contador Contador::operator--(int) {
 	Contador temp = *this;
 	if((this->get() - 1) < min_) return temp; 
 	else {
-		++value_;
+		--value_;
 		return temp;
 	}
 }
@@ -74,7 +74,7 @@ Contador operator+(int addition, Contador &counter) {
 	return counter;
 }
 Contador operator-(int substraction, Contador &counter) {
-	if((counter.get() - substraction) > counter.min_) counter.value_ = counter.min_;
-	else counter.value_ += substraction;
+	if((substraction - counter.get()) < counter.min_) counter.value_ = counter.min_;
+	else counter.value_ -= substraction;
 	return counter;
 }

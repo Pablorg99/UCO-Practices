@@ -14,7 +14,7 @@
 
 # Points to the root of Google Test, relative to where this file is.
 # Remember to tweak this if you move this file.
-GTEST_DIR = /home/jaromero/juan/programacion/c++/googletest/gtest-1.7.0
+GTEST_DIR = /home/pablorg99/MEGA/Universidad/UCO-Practices/Segundo/POO/GoogleTest-Master/googletest
 
 # Where to find user code.
 # USER_DIR = ../samples
@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = contador_unittest
+TESTS = contador_unittest.out
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -76,6 +76,6 @@ contador.o : contador.h contador.cc
 
 contador_unittest.o : contador_unittest.cc contador.cc contador.h
 
-contador_unittest : contador.o contador_unittest.o gtest_main.a
+contador_unittest.out : contador.o contador_unittest.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
