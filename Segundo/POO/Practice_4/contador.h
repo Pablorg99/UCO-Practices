@@ -7,11 +7,15 @@ Header file of the class Contador and its methods
 #ifndef CONTADOR_H
 #define CONTADOR_H
 
+#include <vector>
+using std::vector;
+
 class Contador {
     private:
         int value_;
         int min_;
         int max_;
+		vector <int> operations_;
     public:
         //Constructor
         /*If there are logical errors like: value lower or higher than min or max
@@ -37,8 +41,9 @@ class Contador {
 		friend Contador operator+(int addition, Contador &counter);
 		friend Contador operator-(int substraction, Contador &counter);
 		//Other methods
-		//Undo the number of operations on the counter passed as argument
-		bool undo(int n_operations = 1) {return true;}
+		/*Undo the number of operations on the counter passed as argument and returns
+		true. If the number of operations to undo is out of range, returns false*/
+		bool undo(int n_operations = 1);
 };
 
 #endif
