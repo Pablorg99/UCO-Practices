@@ -103,20 +103,25 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Se ha insertado un total de ' || n_votantes || ' votantes');
 END;
 
--- Ejercicio 6 
+-- Ejercicio 6
 SET SERVEROUTPUT ON;
 DECLARE
     CURSOR c_old_votantes IS SELECT * FROM votantesAntiguos;
-    sueldo NUMBER;
+    new_sueldo NUMBER;
 BEGIN
     FOR votante IN c_old_votantes LOOP
-        IF votante.situacionlaboral = 'Jubilado' THEN sueldo := 1000;
-        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Ninguno' THEN sueldo := votante.sueldo + 100;
-        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Basicos' THEN sueldo := votante.sueldo + 200;
-        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Superiores' THEN sueldo := votante.sueldo + 300;
-        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperi         END IF;
+    
+        IF votante.situacionlaboral = 'Jubilado' THEN new_sueldo := 1000;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Ninguno' THEN new_sueldo := votante.sueldo + 100;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Basicos' THEN new_sueldo := votante.sueldo + 200;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Superiores' THEN new_sueldo := votante.sueldo + 300;
+        ELSIF votante.situacionlaboral = 'Activo' AND votante.estudiossuperiores = 'Doctorado' THEN new_sueldo := votante.sueldo + 1000;         
+        END IF;
+    
+        DBMS_OUTPUT.put_line(votante.nombrecompleto || ' pasa de cobrar ' || votante.sueldo || ' a cobrar ' ||  new_sueldo);
         UPDATE votantesAntiguos
-        SET Sueldo = sueldo;
-        DBMS_OUTPUT.put_line(votante.nombrecompleto || ' pasa de cobrar ' || votante.sueldo || ' a cobrar ' ||  );
+            SET sueldo = new_sueldo
+            WHERE dni = votante.dni;
+            
     END LOOP;
 END;
