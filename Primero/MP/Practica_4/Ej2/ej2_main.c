@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
   char orden[30];
   strcpy(orden, argv[2]); //strcpy() para que no de warning
 
-  char file_path[30] = "Ficheros Moodle/";
+  char file_path[30] = "Ficheros_Moodle/";
   sprintf (file_path, "%s%s", file_path, file);
 
   vector = getArrayFromFile (file_path, &nFichas);
