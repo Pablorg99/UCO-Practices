@@ -20,7 +20,6 @@ int main () {
 
   //Status store the value returned from exit() in wait() (see parent waiting)
   int status;
-  key_t key;
 
     if (! fork()) {
       printf("PID Child 1 = %d\n", getpid());
