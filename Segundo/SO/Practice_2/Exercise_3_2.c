@@ -41,8 +41,8 @@ sem_t full;
 sem_t mutex;
 
 //Function headers
-void * Consumer();
-void * Producer();
+void * Consumer(void *);
+void * Producer(void *);
 int ConsumerDistribution();
 
 int main () 
