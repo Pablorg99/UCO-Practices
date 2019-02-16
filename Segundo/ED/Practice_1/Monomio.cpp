@@ -1,8 +1,7 @@
-//FILE PROVIDED BY UNIVERSITY
-
 /*! 
    \file  Monomio.cpp
    \brief Fichero que contiene el código de las funciones de la clase Monomio
+   \author Pablo Rodriguez Guillen
 */
 
 
@@ -11,9 +10,10 @@
 
 #include "Monomio.hpp"
 
-// Operadores de asignación
-
-// COMPLETAR
+ed::Monomio::Monomio(float coeficiente, int grado) {
+	setCoeficiente(coeficiente);
+	setGrado(grado);
+}
 
 ed::Monomio & ed::Monomio::operator=(ed::Monomio const &m)
 {
