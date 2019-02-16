@@ -15,42 +15,29 @@ ed::Monomio::Monomio(float coeficiente, int grado) {
 	setGrado(grado);
 }
 
+/*
 ed::Monomio & ed::Monomio::operator=(ed::Monomio const &m)
 {
-	// COMPLETAR
+	
+	// Se devuelve el objeto actual
+	return *this;
+}
+*/
 
-
+ed::Monomio ed::Monomio::operator=(float const numero_real) {
+	setGrado(0);
+	setCoeficiente(numero_real);
 	// Se devuelve el objeto actual
 	return *this;
 }
 
-
-ed::Monomio & ed::Monomio::operator=(double const &x)
-{
-	// COMPLETAR
-
-	// Se devuelve el objeto actual
+ed::Monomio ed::Monomio::operator+=(Monomio const &monomio) {
+	if(monomio.getGrado() == this->getGrado()) {
+		this->setCoeficiente(this->getCoeficiente() + monomio.getCoeficiente());
+	}
+	//Se devuelve el objeto actual
 	return *this;
 }
-
-
-
-//////////////////////////////////////////////////////////////
-
-// Operadores aritméticos y asignación
-
-// COMPLETAR
-
-ed::Monomio & ed::Monomio::operator+=(ed::Monomio const &m)
-{
-	// COMPLETAR
-
-
-	// Se devuelve el objeto actual
-	return *this;
-}
-
-
 
 // COMPLETAR EL RESTO DE OPERADORES
 

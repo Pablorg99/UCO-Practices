@@ -29,15 +29,15 @@ namespace ed
 			float coeficiente_; //!< Coeficiente del monomio
 			int grado_; //!< Grado del monomio
 		
-		//! \name Funciones o métodos públicos de la clase Monomio
+		//! \name Metodos publicos de la clase Monomio
 		public:
 			//! \name Constructores de la clase Monomio
 
 			/*!
 				\brief Constructor que crea un monomio a partir de un coeficiente y un grado
-				\warning Los parametros tienen valores por defecto
 				\param coeficiente: Coeficiente a establecer para el monomio
 				\param grado: Grado a establecer para el monomio
+				\warning Los parametros tienen valores por defecto
 				\pre El grado debe ser mayor o igual que 0
 				\post Se establecen valores para el coeficiente y el grado del monomio
 				\sa setCoeficiente(), setGrado()
@@ -79,46 +79,39 @@ namespace ed
 			*/
 			inline void setGrado(int new_grado) {(new_grado >= 0) ? grado_ = new_grado : grado_ = grado_;}
 
-		/////////////////////////////////////////////////
 
-		//! \name Operadores de la clase Monomio
+			//! \name Operadores de la clase Monomio
 
-		// Operadores de asignación
-
-			// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+			/*!
+				\breif 
+			*/
 			Monomio & operator=(Monomio const &m);
 
-			// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-			Monomio & operator=(double const &x);
+			/*!
+				\brief Establece el grado a 0 y el coeficiente al flotante al que se iguala el monomio
+				\param numero_real: Nuevo coeficiente del monomio
+				\return Monomio sometido a la operacion
+			*/
+			Monomio Monomio::operator=(float const numero_real);
 
+			/*!
+				\brief 
+			*/
+			Monomio Monomio::operator+=(Monomio const &monomio);
 
-		// Operadores aritméticos y asignación
+			//! \name Funciones lectura y escritura de la clase Monomio
+			/*!
 
-			// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-			Monomio & operator+=(Monomio const &m);
+			*/
 
+			/*!
 
-			// COMPLETAR EL RESTO DE OPERADORES
+			*/
+	
+			//! \name Funciones auxiliares de la clase Monomio
+			
+	}; // Fin de la definición de la clase Monomio
 
+} //  Fin de namespace ed.
 
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		//! \name Funciones lectura y escritura de la clase Monomio
-
-		// COMPLETAR
-
-
-		///////////////////////////////////////////////////////////////////////
-
-		//! \name Funciones auxiliares de la clase Monomio
-
-		// COMPLETAR
-
-
-
-	};  // Fin de la definición de la clase Monomio
-
-}  //  Fin de namespace ed.
-
-// _MONOMIO_HPP_
-#endif
+#endif // _MONOMIO_HPP_
