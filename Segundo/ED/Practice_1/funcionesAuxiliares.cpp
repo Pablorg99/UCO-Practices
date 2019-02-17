@@ -70,7 +70,7 @@ void ed::testMonomio()
 
 /*
 
-	float x;
+	double x;
 
 	// Constructor sin argumentos
 	ed::Monomio m1;
@@ -335,7 +335,7 @@ void ed::operadoresExternosMonomios()
 
 
 /*
-	float x;
+	double x;
 
 	// Constructor por defecto
 	ed::Monomio m1, m2, m3;
