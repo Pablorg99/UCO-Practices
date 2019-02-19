@@ -443,7 +443,7 @@ void ed::operadoresExternosMonomios()
 
 
 	// 
-	std::cout<< "Desigualdad: m1 == " << x << std::endl;
+	std::cout<< "Desigualdad: m1 != " << x << std::endl;
     std::cout << "m1 = " << m1 ;	
 
 	if (m1 != x)
@@ -454,7 +454,7 @@ void ed::operadoresExternosMonomios()
     std::cout << x << std::endl << std::endl;
 
 	//
-	std::cout<< "Desigualdad: " << x << " == m1" << std::endl;
+	std::cout<< "Desigualdad: " << x << " != m1" << std::endl;
     std::cout << x;    
 
 	if (x != m1)
