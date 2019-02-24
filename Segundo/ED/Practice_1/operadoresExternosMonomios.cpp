@@ -16,34 +16,42 @@
 namespace ed 
 {
 	// Operadores de igualdad
-	
-	// COMPLETAR
-
-	bool operator==(ed::Monomio const & m1, ed::Monomio const & m2)
-	{
-		// COMPLETAR Y MODIFICAR
-
-		// MODIFICAR: SE DEVUELVE UN VALOR ARBITRARIO PARA NO GENERAR AVISOS AL COMPILAR
+	bool operator==(ed::Monomio const & monomio_1, ed::Monomio const & monomio_2) {
+		if(monomio_1.getGrado() == monomio_2.getGrado() && ((abs(monomio_1.getCoeficiente() - monomio_2.getCoeficiente())) < COTA_ERROR))
+		{
 		return true;
+		}
+		else return false;
 	}
 
-	// COMPLETAR LOS OTROS OPERADORES DE IGUALDAD
+	bool operator==(ed::Monomio const & monomio, double numero_real) {
+		if(monomio.getGrado() == 0 && (abs(monomio.getCoeficiente() - numero_real) < COTA_ERROR)) return true;
+		else return false;
+	}
 
-
+	bool operator==(double numero_real, ed::Monomio const & monomio) {
+		if(monomio.getGrado() == 0 && (abs(monomio.getCoeficiente() - numero_real) < COTA_ERROR)) return true;
+		else return false;
+	}
 
 	// Operadores de desigualdad
-
-	// COMPLETAR
-	bool operator!=(ed::Monomio const & m1, ed::Monomio const & m2)
-	{
-		// COMPLETAR Y MODIFICAR
-
-		// MODIFICAR: SE DEVUELVE UN VALOR ARBITRARIO PARA NO GENERAR AVISOS AL COMPILAR
-		return true;
+	bool operator!=(ed::Monomio const & monomio_1, ed::Monomio const & monomio_2) {
+		if(monomio_1.getGrado() == monomio_2.getGrado() && ((abs(monomio_1.getCoeficiente() - monomio_2.getCoeficiente())) < COTA_ERROR))
+		{
+		return false;
+		}
+		else return true;
 	}
 
-	// COMPLETAR LOS OTROS OPERADORES DE DESIGUALDAD
+	bool operator!=(ed::Monomio const & monomio, double numero_real) {
+		if(monomio.getGrado() == 0 && (abs(monomio.getCoeficiente() - numero_real) < COTA_ERROR)) return false;
+		else return true;
+	}
 
+	bool operator!=(double numero_real, ed::Monomio const & monomio) {
+		if(monomio.getGrado() == 0 && (abs(monomio.getCoeficiente() - numero_real) < COTA_ERROR)) return false;
+		else return true;
+	}
 
 	////////////////////////////////////////////////////////////
 

@@ -76,52 +76,56 @@ namespace ed
 		\return true si el monomio no es de grado 0 o su coeficiente no es igual que el real pasado, false en caso contrario
 	*/
 	bool operator!=(double numero_real, ed::Monomio const & monomio);
-	///////////////////////////////////////////////////
 
 	//! \name Operadores unarios prefijos
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+	/*!
+		\brief
+	*/
+	ed::Monomio & operator+(ed::Monomio const & monomio);
 
-	ed::Monomio & operator+(ed::Monomio const & m);
-
-	// COMPLETAR EL OTRO OPERADOR UNARIO PREFIJO: resta
-
-
-	//////////////////////////////////////////////////////////
+	/*!
+		\brief
+	*/
+	ed::Monomio & operator-(ed::Monomio const & monomio);
 
 	//! \name Operador binario de la suma 
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-	 ed::Monomio & operator+ (ed::Monomio const &m1, ed::Monomio const &m2);
+	/*!
+		\brief
+	*/
+	ed::Monomio & operator+ (ed::Monomio const &monomio_1, ed::Monomio const &monomio_2);
 
-
-	//////////////////////////////////////////////////////////
 	//! \name Operador binario de la resta 
 
-	// COMPLETAR
+	/*!
+		\brief
+	*/
+	ed::Monomio & operator- (ed::Monomio const &monomio_1, ed::Monomio const &monomio_2);
 
-
-	///////////////////////////////////////////////////////////////////////////
 	//! \name Operadores binarios de la multiplicación 
 
-	// COMPLETAR
-
-	///////////////////////////////////////////////////////////////////////////
+	/*!
+		\brief
+	*/
 
 	//! \name Operadores binarios de la división 
 
-	// COMPLETAR
-
-
-	/////////////////////////////////////////////////////////////////////////////
+	/*!
+		\brief
+	*/
 
 	//! \name Sobrecarga de los operadores de entrada y salida 
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-	 istream &operator>>(istream &stream, ed::Monomio &m);
+	/*!
+		\brief
+	*/
+	istream &operator>>(istream &stream, ed::Monomio &monomio);
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-	 ostream &operator<<(ostream &stream, ed::Monomio const &m);
+	/*!
+		\brief
+	*/
+	ostream &operator<<(ostream &stream, ed::Monomio const &monomio);
 
 }  // Fin de namespace ed.
 
