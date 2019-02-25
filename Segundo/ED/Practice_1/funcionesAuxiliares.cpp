@@ -68,7 +68,6 @@ void ed::testMonomio()
 	std::cout << RESET;
 	std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Monomio " << std::endl << std::endl;
 
-/*
 
 	double x;
 
@@ -314,7 +313,6 @@ void ed::testMonomio()
 	std::cout << std::endl;
 	std::cout<< "m3(" << x << ") = " << m3.calcularValor(x) << std::endl << std::endl;
 
-*/
 
 	// Fin
 	return;
@@ -334,7 +332,6 @@ void ed::operadoresExternosMonomios()
 	std::cout << "Quitar el comentario de bloque cuando se haya codificado la clase Monomio y los operadores externos de dicha clase" << std::endl << std::endl;
 
 
-/*
 	double x;
 
 	// Constructor por defecto
@@ -565,7 +562,6 @@ void ed::operadoresExternosMonomios()
 
 
 	std::cout << std::endl;
-*/
 
 	return;
 }
