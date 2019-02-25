@@ -12,31 +12,33 @@ using std::cin;
 using std::endl;
 #include <string>
 using std::string;
-using std::to_string;
 
 #include "Monomio.hpp"
+using ed::Monomio;
 
 //Constructores
-
-ed::Monomio::Monomio(double coeficiente, int grado) {
+Monomio::Monomio(double coeficiente, int grado) {
 	setCoeficiente(coeficiente);
 	setGrado(grado);
+}
+
+Monomio::Monomio(Monomio const &monomio) {
+	setCoeficiente(monomio.getCoeficiente());
+	setGrado(monomio.getGrado());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
 
 //Operadores de asignación
 
-/*
-ed::Monomio & ed::Monomio::operator=(ed::Monomio const &m)
-{
-	
+Monomio & Monomio::operator=(Monomio const &monomio) {
+	setCoeficiente(monomio.getCoeficiente());
+	setGrado(monomio.getGrado());
 	// Se devuelve el objeto actual
 	return *this;
 }
-*/
 
-ed::Monomio ed::Monomio::operator=(double const numero_real) {
+Monomio & Monomio::operator=(double const numero_real) {
 	setGrado(0);
 	setCoeficiente(numero_real);
 	// Se devuelve el objeto actual
@@ -47,7 +49,7 @@ ed::Monomio ed::Monomio::operator=(double const numero_real) {
 
 //Operadores aritmeticos y de asignación entre monomios
 
-ed::Monomio ed::Monomio::operator+=(Monomio const &monomio) {
+Monomio & Monomio::operator+=(Monomio const &monomio) {
 	if(monomio.getGrado() == this->getGrado()) {
 		this->setCoeficiente(this->getCoeficiente() + monomio.getCoeficiente());
 	}
@@ -55,7 +57,7 @@ ed::Monomio ed::Monomio::operator+=(Monomio const &monomio) {
 	return *this;
 }
 
-ed::Monomio ed::Monomio::operator-=(Monomio const &monomio) {
+Monomio & Monomio::operator-=(Monomio const &monomio) {
 	if(monomio.getGrado() == this->getGrado()) {
 		this->setCoeficiente(this->getCoeficiente() - monomio.getCoeficiente());
 	}
@@ -63,14 +65,14 @@ ed::Monomio ed::Monomio::operator-=(Monomio const &monomio) {
 	return *this;
 }
 
-ed::Monomio ed::Monomio::operator*=(Monomio const &monomio) {
+Monomio & Monomio::operator*=(Monomio const &monomio) {
 	this->setCoeficiente(this->getCoeficiente() * monomio.getCoeficiente());
 	this->setGrado(this->getGrado() + monomio.getGrado());
 	//Se devuelve el objeto actual
 	return *this;
 }
 
-ed::Monomio ed::Monomio::operator/=(Monomio const &monomio) {
+Monomio & Monomio::operator/=(Monomio const &monomio) {
 	if((monomio.getGrado() <= this->getGrado()) && !((abs(monomio.getCoeficiente() - 0.0)) < COTA_ERROR)) {
 		this->setGrado(this->getGrado() - monomio.getGrado());
 		this->setCoeficiente(this->getCoeficiente() / monomio.getCoeficiente());
@@ -81,13 +83,13 @@ ed::Monomio ed::Monomio::operator/=(Monomio const &monomio) {
 
 //Operadores aritmeticos y de asignación con reales
 
-ed::Monomio ed::Monomio::operator*=(double numero_real) {
+Monomio & Monomio::operator*=(double numero_real) {
 	setCoeficiente(getCoeficiente() * numero_real);
 	//Se devuelve el objeto actual
 	return *this;
 }
 
-ed::Monomio ed::Monomio::operator/=(double numero_real) {
+Monomio & Monomio::operator/=(double numero_real) {
 	if(!((abs(numero_real - 0.0)) < COTA_ERROR)) {
 		setCoeficiente(getCoeficiente() / numero_real);
 	}
@@ -99,7 +101,7 @@ ed::Monomio ed::Monomio::operator/=(double numero_real) {
 
 // Funciones lectura y escritura de la clase Monomio
 
-void ed::Monomio::leerMonomio() {
+void Monomio::leerMonomio() {
 	double coeficiente_auxiliar;
 	int grado_auxiliar;
 
@@ -118,7 +120,7 @@ void ed::Monomio::leerMonomio() {
 	setGrado(grado_auxiliar);
 }
 
-void ed::Monomio::escribirMonomio() {
+void Monomio::escribirMonomio() {
 	string coeficiente;
 	string grado;
 
@@ -129,11 +131,11 @@ void ed::Monomio::escribirMonomio() {
 		//Formateo del coeficiente
 		if((abs(getCoeficiente() - (1.0)) < COTA_ERROR)) coeficiente = "";
 		else if((abs(getCoeficiente() - (-1.0)) < COTA_ERROR)) coeficiente = "-";
-		else coeficiente = to_string(getCoeficiente());
+		else coeficiente = //std::to_string(getCoeficiente());
 		//Formateo del grado	
 		if(getGrado() == 0) grado = "";
 		else if(getGrado() == 1) grado = "X";
-		else grado = "X^" + to_string(getGrado());
+		else grado = "X^" // + std::to_string(getGrado());
 
 		cout << "Monomio: " << coeficiente << grado << endl;
 	}
@@ -142,7 +144,7 @@ void ed::Monomio::escribirMonomio() {
 ///////////////////////////////////////////////////////////////////////////////////
 
 // Funciones auxiliares de la clase Monomio
-double ed::Monomio::calcularValor(double numero_real) {
+double Monomio::calcularValor(double numero_real) {
 	double resultado;
 
 	resultado = getCoeficiente() * pow(numero_real, getGrado());

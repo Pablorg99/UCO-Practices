@@ -37,12 +37,23 @@ namespace ed
 				\brief Constructor que crea un monomio a partir de un coeficiente y un grado
 				\param coeficiente: Coeficiente a establecer para el monomio
 				\param grado: Grado a establecer para el monomio
+				\note Funcion sobrecargada
 				\warning Los parametros tienen valores por defecto
 				\pre El grado debe ser mayor o igual que 0
 				\post Se establecen valores para el coeficiente y el grado del monomio
 				\sa setCoeficiente(), setGrado()
 			*/
 			Monomio(double coeficiente = 0.0, int grado = 0);
+
+			/*!
+				\brief Constructor de copia que copia campo a campo
+				\param monomio: Referencia constante al monomio pasado como argumento
+				\warning Los parametros tienen valores por defecto
+				\pre El grado debe ser mayor o igual que 0
+				\post Se establecen los mismos valores de coeficiente y grado al objeto que invoca el constructor
+				\sa setCoeficiente(), setGrado()
+			*/
+			Monomio(Monomio const &monomio);
 
 			//! \name Observadores: funciones de consulta de la clase Monomio
 
@@ -79,22 +90,26 @@ namespace ed
 				\pre El grado a establecer debe ser mayor o igual a 0
 				\post El nuevo grado se establece, si new_grado es negativo, se mantiene el grado anterior
 			*/
-			inline void setGrado(int new_grado) {(new_grado >= 0) ? grado_ = new_grado : grado_ = grado_;}
+			inline void setGrado(int new_grado) {new_grado >= 0 ? grado_ = new_grado : grado_ = grado_;}
 
 
 			//! \name Operadores de la clase Monomio
 
 			/*!
-				\breif 
+				\breif Implementacion del operador de asignacion por defecto
+				\param monomio: Referencia constante al objeto a la izquierda del operador
+				\note Funcion sobrecargada
+				\return Monomio que invoca el operador
 			*/
-			//Monomio & operator=(Monomio const &m);
+			Monomio & operator=(Monomio const &monomio);
 
 			/*!
 				\brief Establece el grado a 0 y el coeficiente al flotante al que se iguala el monomio
 				\param numero_real: Nuevo coeficiente del monomio
+				\note Funcion sobrecargada
 				\return Monomio sometido a la operacion
 			*/
-			Monomio Monomio::operator=(double const numero_real);
+			Monomio & operator=(double const numero_real);
 
 			/*!
 				\brief Implementacion del operador += para 2 monomios
@@ -103,7 +118,7 @@ namespace ed
 				\return Monomio resultante de la operacion
 				\post El monomio devuelto tiene como coeficiente la suma de los coeficientes de ambos monomios y el grado comun a ambos
 			*/
-			Monomio Monomio::operator+=(Monomio const &monomio);
+			Monomio & operator+=(Monomio const &monomio);
 
 			/*!
 				\brief Implementacion del operando -= para 2 monomios
@@ -112,7 +127,7 @@ namespace ed
 				\return Monomio resultante de la operacion
 				\post El coeficiente del monomio devuelto es la resta de ambos coeficientes. El grado es el comun a ambos
 			*/
-			Monomio Monomio::operator-=(Monomio const &monomio);
+			Monomio & operator-=(Monomio const &monomio);
 
 			/*!
 				\brief Implementacion del operador *= para 2 monomios
@@ -121,7 +136,7 @@ namespace ed
 				\post El coeficiente del monomio original se multiplica con el del pasado por referencia. 
 					  El grado resultante es la suma del grado de ambos.
 			*/
-			Monomio Monomio::operator*=(Monomio const &monomio);
+			Monomio & operator*=(Monomio const &monomio);
 
 			/*!
 				\brief Implementacion del operador /= para 2 monomios
@@ -133,7 +148,7 @@ namespace ed
 				\post El coeficiente del monomio original se divide entre el del pasado por referencia. 
 					  El grado resultante es la resta del grado de ambos. 
 			*/
-			Monomio Monomio::operator/=(Monomio const &monomio);
+			Monomio & operator/=(Monomio const &monomio);
 
 			/*!
 				\brief Implementacion del operador *= de un monomio con un real
@@ -142,7 +157,7 @@ namespace ed
 				\return monomio resultante de la operacion
 				\post El coeficiente del monomio se multiplica por el numero pasado mientras que el grado permanece invariado
 			*/
-			Monomio Monomio::operator*=(double numero_real);
+			Monomio & operator*=(double numero_real);
 
 			/*!
 				\brief Implementacion del operador /= de un monomio con un real
@@ -152,7 +167,7 @@ namespace ed
 				\return monomio resultante de la operacion
 				\post El coeficiente del monomio se divide entre el numero pasado mientras que el grado permanece invariado
 			*/
-			Monomio Monomio::operator/=(double numero_real);
+			Monomio & operator/=(double numero_real);
 
 			//! \name Funciones lectura y escritura de la clase Monomio
 
