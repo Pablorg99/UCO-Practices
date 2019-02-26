@@ -67,7 +67,7 @@ namespace ed
 	// Suma
 	Monomio & operator+(Monomio const &monomio_1, Monomio const &monomio_2) {
 		#ifndef NDEBUG
-			assert(monomio_1.getGrado() != monomio_2.getGrado());
+			assert(monomio_1.getGrado() == monomio_2.getGrado());
 		#endif
 		// Se crea un nuevo objeto
 		Monomio *new_monomio = new Monomio(monomio_1.getCoeficiente() + monomio_2.getCoeficiente(), monomio_1.getGrado());
@@ -78,7 +78,7 @@ namespace ed
 	// Resta
 	Monomio & operator-(Monomio const &monomio_1, Monomio const &monomio_2) {
 		#ifndef NDEBUG
-			assert(monomio_1.getGrado() != monomio_2.getGrado());
+			assert(monomio_1.getGrado() == monomio_2.getGrado());
 		#endif
 		// Se crea un nuevo objeto
 		Monomio *new_monomio = new Monomio(monomio_1.getCoeficiente() - monomio_2.getCoeficiente(), monomio_1.getGrado());
@@ -113,8 +113,8 @@ namespace ed
 	// División
 	Monomio & operator/(Monomio const &monomio_1, Monomio const &monomio_2) {
 		#ifndef NDEBUG
-			assert(monomio_1.getGrado() < monomio_2.getGrado());
-			assert(abs(monomio_2.getCoeficiente() - 0.0) < COTA_ERROR);
+			assert(monomio_1.getGrado() >= monomio_2.getGrado());
+			assert(abs(monomio_2.getCoeficiente() - 0.0) > COTA_ERROR);
 		#endif
 		int new_grado = monomio_1.getGrado() - monomio_2.getGrado();
 		double new_coeficiente = monomio_1.getCoeficiente() / monomio_2.getCoeficiente();
@@ -124,23 +124,23 @@ namespace ed
 		return *new_monomio;
 	}
 
-	Monomio & operator/(double numero_real, Monomio const &monomio) {
+	Monomio & operator/(Monomio const &monomio, double numero_real) {
 		#ifndef NDEBUG
-			assert(abs(monomio.getCoeficiente() - 0.0) < COTA_ERROR);
-			assert(monomio.getGrado() != 0);
+			assert(abs(numero_real - 0.0) > 0);
 		#endif
 		//Se crea un nuevo objeto
-		Monomio *new_monomio = new Monomio(numero_real / monomio.getCoeficiente(), monomio.getGrado());
+		Monomio *new_monomio = new Monomio(monomio.getCoeficiente() / numero_real, monomio.getGrado());
 		//Se devuelve el resultado
 		return *new_monomio;
 	}
 
-	Monomio & operator/(Monomio const &monomio, double numero_real) {
+	Monomio & operator/(double numero_real, Monomio const &monomio) {
 		#ifndef NDEBUG
-			assert(numero_real == 0);
+			assert(monomio.getGrado() == 0);
+			assert(abs(monomio.getCoeficiente() - 0.0) > COTA_ERROR);
 		#endif
 		//Se crea un nuevo objeto
-		Monomio *new_monomio = new Monomio(monomio.getCoeficiente() / numero_real, monomio.getGrado());
+		Monomio *new_monomio = new Monomio(numero_real / monomio.getCoeficiente(), monomio.getGrado());
 		//Se devuelve el resultado
 		return *new_monomio;
 	}
