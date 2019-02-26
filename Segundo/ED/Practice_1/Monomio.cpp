@@ -123,7 +123,9 @@ void Monomio::leerMonomio() {
 }
 
 void Monomio::escribirMonomio() {
-	//No se escribe X
+	//El monomio es 0
+	if(abs(getCoeficiente() - 0.0) < COTA_ERROR) cout << 0 << endl;
+	//No se tiene que escribir X
 	if(getGrado() == 0) cout << getCoeficiente() << endl;
 	//Se tiene que escribir X
 	else {
