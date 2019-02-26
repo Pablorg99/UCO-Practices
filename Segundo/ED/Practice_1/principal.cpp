@@ -3,8 +3,8 @@
 /*!
  \mainpage Implementación de un monomio
  \brief		\f$ coeficiente X^{grado}\f$
- \author   
- \date     
+ \author   Pablo Rodriguez Guillen
+ \date     26/02/2019
  \version  1.0
 */
 
