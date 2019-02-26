@@ -1,0 +1,12 @@
+#Editor Files
+.vscode
+#Testing Tools
+GoogleTest-Master
+#Libraries
+*.a
+#Compiled Objects
+*.o
+#Executables
+*.out
+#Documentation
+*html
