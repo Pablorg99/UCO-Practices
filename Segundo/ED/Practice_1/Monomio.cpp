@@ -115,9 +115,11 @@ void Monomio::leerMonomio() {
 		cout << "Introduzca un grado mayor o igual a 0: ";
 		cin >> grado_auxiliar;
 	}
-
+	//Se guardan los valores
 	setCoeficiente(coeficiente_auxiliar);
 	setGrado(grado_auxiliar);
+	//Se limpia el buffer
+	std::cin.ignore();
 }
 
 void Monomio::escribirMonomio() {

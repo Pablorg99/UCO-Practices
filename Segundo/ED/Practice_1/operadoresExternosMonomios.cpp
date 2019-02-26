@@ -152,6 +152,8 @@ namespace ed
 		monomio.setCoeficiente(atof(cadena_auxiliar.c_str()));
 		getline(stream, cadena_auxiliar); //El valor por defecto de separacion es \n
 		monomio.setGrado(atoi(cadena_auxiliar.c_str()));
+		//Se limpia el buffer
+		std::cin.ignore();
    		// Se devuelve el flujo de entrada
 		return stream;
 	}
