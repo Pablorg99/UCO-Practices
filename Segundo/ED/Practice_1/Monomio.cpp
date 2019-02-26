@@ -121,24 +121,18 @@ void Monomio::leerMonomio() {
 }
 
 void Monomio::escribirMonomio() {
-	string coeficiente;
-	string grado;
-
-	//Formateo excepcional
-	if((getGrado() == 0) && ((abs(getCoeficiente() - (1.0)) < COTA_ERROR))) cout << "Monomio: 1" << endl;
-	else if((getGrado() == 0) && ((abs(getCoeficiente() - (-1.0)) < COTA_ERROR))) cout << "Monomio: -1" << endl;
+	//No se escribe X
+	if(getGrado() == 0) cout << getCoeficiente() << endl;
+	//Se tiene que escribir X
 	else {
-		//Formateo del coeficiente
-		if((abs(getCoeficiente() - (1.0)) < COTA_ERROR)) coeficiente = "";
-		else if((abs(getCoeficiente() - (-1.0)) < COTA_ERROR)) coeficiente = "-";
-		else coeficiente = //std::to_string(getCoeficiente());
-		//Formateo del grado	
-		if(getGrado() == 0) grado = "";
-		else if(getGrado() == 1) grado = "X";
-		else grado = "X^" // + std::to_string(getGrado());
-
-		cout << "Monomio: " << coeficiente << grado << endl;
+		if(abs(getCoeficiente() - (1.0)) < COTA_ERROR) cout << "X";
+		else if(abs(getCoeficiente() - (-1.0)) < COTA_ERROR) cout << "-X";
+		else cout << getCoeficiente() << "X";
 	}
+	//Se tiene que escribir el grado
+	if(getGrado() > 1) cout << "^" << getGrado() << endl;
+	//Si no se tiene escribir, se añade el salto de linea necesarios
+	else cout << endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -151,4 +145,3 @@ double Monomio::calcularValor(double numero_real) {
 
 	return resultado;
 }
-
