@@ -1,0 +1,33 @@
+# Nombre del proyecto
+PROJECT_NAME           = "Práctica_1. "
+
+PROJECT_BRIEF          = "Polinomios y monomios de una variable."
+
+OUTPUT_LANGUAGE        = Spanish
+
+# The private atributes and functions are shown
+EXTRACT_PRIVATE        = YES
+
+# The C++ files are shown: "cpp" files
+SOURCE_BROWSER         = YES
+
+GENERATE_LATEX         = NO
+
+# If the value of the INPUT tag contains directories, you can use the
+# FILE_PATTERNS tag to specify one or more wildcard patterns (like *.cpp and
+# *.h) to filter out the source-files in the directories.
+#
+# Note that for custom extensions or not directly supported extensions you also
+# need to set EXTENSION_MAPPING for the extension otherwise the files are not
+# read by doxygen.
+#
+# If left blank the following patterns are tested:*.c, *.cc, *.cxx, *.cpp,
+# *.c++, *.java, *.ii, *.ixx, *.ipp, *.i++, *.inl, *.idl, *.ddl, *.odl, *.h,
+# *.hh, *.hxx, *.hpp, *.h++, *.cs, *.d, *.php, *.php4, *.php5, *.phtml, *.inc,
+# *.m, *.markdown, *.md, *.mm, *.dox, *.py, *.pyw, *.f90, *.f, *.for, *.tcl,
+# *.vhd, *.vhdl, *.ucf, *.qsf, *.as and *.js.
+FILE_PATTERNS          =  *.hpp *.cpp
+
+
+# Para generar fórmulas en LaTeX
+USE_MATHJAX = YES
