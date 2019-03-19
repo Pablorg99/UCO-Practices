@@ -1,5 +1,6 @@
 #Editor Files
 .vscode
+.idea
 #Testing Tools
 GoogleTest-Master
 #Libraries
