@@ -18,6 +18,7 @@
 
 void printUser(struct passwd *pw);
 void printGroup(struct group *gr);
+void showAllGroups(int sflaf);
 
 int main (int argc, char **argv)
 {
@@ -50,8 +51,8 @@ int main (int argc, char **argv)
     char *dvalue = NULL;
 	
 	int sflag = 0;
-    int aflag = 0;
-    int bflag = 0;
+    /*int aflag = 0;
+    int bflag = 0;*/
 
     /* getopt_long() will use this variable to save the option */
     int option_index = 0;
@@ -93,8 +94,9 @@ int main (int argc, char **argv)
 
         case 's':
             sflag = 1;
+            showAllGroups(sflag);
             break;
-
+/*
         case 'a':
             aflag = 1;
             break;
@@ -102,7 +104,7 @@ int main (int argc, char **argv)
         case 'b':
             bflag = 1;
             break;
-
+*/
         case '?':
             /* getopt_long() has his default error message to print */
             /* If you want to create your own ones, assign 0 to opterr */
@@ -136,6 +138,7 @@ void printUser(struct passwd *pw) {
 	printf("Home: %s\n", pw->pw_dir);
 	printf("Número de grupo principal: %d\n", pw->pw_gid);
 }
+
 void printGroup(struct group *gr) {
 	printf("Nombre: %s\n", gr->gr_name);
 	printf("Password: %s\n", gr->gr_passwd);
@@ -143,3 +146,17 @@ void printGroup(struct group *gr) {
 	printf("Member List: %s\n", *(gr->gr_mem)); 
 }
 
+void showAllGroups(int sflag) {
+    printf("%d\n", sflag);
+    FILE *etc_group;
+    char *group_name;
+    struct group *gr;
+    etc_group = fopen("/etc/group", "r");
+    while(!feof(etc_group)) {
+        fscanf(etc_group, "%s:%*[^\n]", group_name);
+        printf("%s\n", group_name);
+        gr = getgrnam(group_name);
+		printGroup(gr);
+    }
+    fclose(etc_group);
+}
