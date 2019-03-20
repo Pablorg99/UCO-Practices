@@ -15,10 +15,13 @@
 /* Libraries for structs passwd and group */
 #include <pwd.h>
 #include <grp.h>
+/* Librarie to use strtok */
+#include <string.h>
 
-void printUser(struct passwd *pw);
-void printGroup(struct group *gr);
-void showAllGroups(int sflaf);
+/*Function headers*/
+void printUser(struct passwd *passwd_struct);
+void printGroup(struct group *group_struct);
+void showAllGroups(struct group *group_struct);
 
 int main (int argc, char **argv)
 {
@@ -39,8 +42,8 @@ int main (int argc, char **argv)
 	};
 
 	/* Structs for passwd and group format */
-	struct passwd *pw;
-	struct group *gr;
+	struct passwd *passwd_struct;
+	struct group *group_struct;
 
     /* These variables will store the result of processing the command line */
     /* In char * will be stored the argument (passed from getopt_long with extern char * optarg) */
@@ -50,10 +53,6 @@ int main (int argc, char **argv)
     char *gvalue = NULL;
     char *dvalue = NULL;
 	
-	int sflag = 0;
-    /*int aflag = 0;
-    int bflag = 0;*/
-
     /* getopt_long() will use this variable to save the option */
     int option_index = 0;
 
@@ -70,41 +69,38 @@ int main (int argc, char **argv)
         {
         case 'u':
             uvalue = optarg;
-			pw = getpwnam(uvalue);
-			printUser(pw);
+			passwd_struct = getpwnam(uvalue);
+			printUser(passwd_struct);
             break;
 
         case 'i':
             ivalue = optarg;
-			pw = getpwuid(atoi(ivalue));
-			printUser(pw);
+			passwd_struct = getpwuid(atoi(ivalue));
+			printUser(passwd_struct);
             break;
 
         case 'g':
             gvalue = optarg;
-			gr = getgrnam(gvalue);
-			printGroup(gr);
+			group_struct = getgrnam(gvalue);
+			printGroup(group_struct);
             break;
 
 		case 'd':
             dvalue = optarg;
-			gr = getgrgid(atoi(dvalue));
-			printGroup(gr);
+			group_struct = getgrgid(atoi(dvalue));
+			printGroup(group_struct);
             break;
 
         case 's':
-            sflag = 1;
-            showAllGroups(sflag);
+            showAllGroups(group_struct);
             break;
-/*
+
         case 'a':
-            aflag = 1;
             break;
 
         case 'b':
-            bflag = 1;
             break;
-*/
+
         case '?':
             /* getopt_long() has his default error message to print */
             /* If you want to create your own ones, assign 0 to opterr */
@@ -115,48 +111,39 @@ int main (int argc, char **argv)
         }
         printf("optind: %d, optarg: %s, optopt: %c\n", optind, optarg, optopt);
     }
-
-    /* Imprimir el resto de argumentos de la línea de comandos que no son opciones con "-" */
-    if (optind < argc)
-    {
-        printf("Argumentos ARGV que no son opciones: ");
-        while (optind < argc)
-            printf("%s ", argv[optind++]);
-        putchar ('\n');
-    }
-    /* printf ("aflag = %d, bflag = %d, cvalue = %s, dvalue = %s, fvalue = %s\n",aflag, bflag, cvalue, dvalue, fvalue); */
-
-    exit (0);
+    return 0;
 }
 
 
-void printUser(struct passwd *pw) {
-	printf("Nombre: %s\n", pw->pw_gecos); //No es lo mismo el nombre de usuario asociado a un login que el propio login
-	printf("Login: %s\n", pw->pw_name);
-	printf("Password: %s\n", pw->pw_passwd);
-	printf("UID: %d\n", pw->pw_uid);
-	printf("Home: %s\n", pw->pw_dir);
-	printf("Número de grupo principal: %d\n", pw->pw_gid);
+void printUser(struct passwd *passwd_struct) {
+	printf("Nombre: %s\n", passwd_struct->pw_gecos);
+	printf("Login: %s\n", passwd_struct->pw_name);
+	printf("Password: %s\n", passwd_struct->pw_passwd);
+	printf("UID: %d\n", passwd_struct->pw_uid);
+	printf("Home: %s\n", passwd_struct->pw_dir);
+	printf("Número de grupo principal: %d\n", passwd_struct->pw_gid);
 }
 
-void printGroup(struct group *gr) {
-	printf("Nombre: %s\n", gr->gr_name);
-	printf("Password: %s\n", gr->gr_passwd);
-	printf("GID: %d\n", gr->gr_gid);
-	printf("Member List: %s\n", *(gr->gr_mem)); 
+void printGroup(struct group *group_struct) {
+	printf("Nombre: %s\n", group_struct->gr_name);
+	printf("Password: %s\n", group_struct->gr_passwd);
+	printf("GID: %d\n", group_struct->gr_gid);
+	printf("Member List: %s\n", *(group_struct->gr_mem)); 
 }
 
-void showAllGroups(int sflag) {
-    printf("%d\n", sflag);
-    FILE *etc_group;
-    char *group_name;
-    struct group *gr;
-    etc_group = fopen("/etc/group", "r");
-    while(!feof(etc_group)) {
-        fscanf(etc_group, "%s:%*[^\n]", group_name);
-        printf("%s\n", group_name);
-        gr = getgrnam(group_name);
-		printGroup(gr);
-    }
-    fclose(etc_group);
+void showAllGroups(struct group *group_struct) {
+	char line[50];
+	char *group_name;
+   	
+	FILE *etc_group;
+	etc_group = fopen("/etc/group", "r");
+	/* Read one line per iteration */
+	while((fgets(line, 50, etc_group)) != NULL) {
+		/* Save in group_name the line chars until ":" */
+		group_name = strtok(line, ":");
+		group_struct = getgrnam(group_name);
+		printGroup(group_struct);
+		printf("------------------------\n");
+	}
+	fclose(etc_group);
 }
