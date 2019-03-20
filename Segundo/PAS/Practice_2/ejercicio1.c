@@ -149,6 +149,7 @@ int main (int argc, char **argv)
         case '?':
             /* getopt_long() has his default error message to print */
             /* If you want to create your own ones, assign 0 to opterr */
+			showHelp();
             break;
 
         default:
