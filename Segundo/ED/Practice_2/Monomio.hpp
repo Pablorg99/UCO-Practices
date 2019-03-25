@@ -72,6 +72,8 @@ namespace ed
 				\sa getCoeficiente
 			*/
 			inline int getGrado() const {return grado_;}
+
+			bool esNulo() const;
 			
 			//! \name Funciones de modificación de la clase Monomio
 

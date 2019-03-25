@@ -27,6 +27,12 @@ Monomio::Monomio(Monomio const &monomio) {
 	setGrado(monomio.getGrado());
 }
 
+//Observadores
+bool Monomio::esNulo() const {
+	if(getGrado() == 0 && getCoeficiente() == 0) return true;
+	else return false;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 //Operadores de asignación
