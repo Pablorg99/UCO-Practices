@@ -92,33 +92,33 @@ class Polinomio: public ed::PolinomioInterfaz
 		 */
 		Monomio getMonomio(int grado_monomio) const;
 
-		//! \name Funciones de modificación de la clase Polinomio
-
 	 	////////////////////////////////////////////////////////////////
 
 		//! \name Operadores de la clase Polinomio
 
 		/**
-		 * @brief 
-		 * 
-		 * @param polinomio
+		 * @brief Copia el polinomio pasado como argumento (a la derecha del =) al polinomio actual
+		 * @pre El polinomio copiado debe ser distinto al actual
+		 * @note Función sobrecargada
+		 * @param polinomio: Referencia constante al polinomio pasado
 		 * @return Polinomio& 
 		 */
 		Polinomio & operator=(Polinomio const &polinomio);
 
 		/**
-		 * @brief 
-		 * 
-		 * @param monomio 
+		 * @brief Asigna al polinomio actual, únicamente el monomio de la derecha del igual
+		 * @note Función sobrecargada
+		 * @param monomio: Referencia constante al monomio pasado
 		 * @return Polinomio& 
 		 */
 		Polinomio & operator=(Monomio const &monomio);
 
 		/**
-		 * @brief 
-		 * 
+		 * @brief Copia en el polinomio actual, el numero pasado como argumento que es el situado a la derecha del =
+		 * @note Función sobrecargada
 		 * @param numero_real 
 		 * @return Polinomio& 
+		 * @post El polinomio solo contiene el número asignado como coeficiente y el grado es 0
 		 */
 		Polinomio & operator=(double const &numero_real);
 

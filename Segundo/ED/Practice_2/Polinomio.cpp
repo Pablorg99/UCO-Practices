@@ -24,6 +24,7 @@ Polinomio::Polinomio(const Polinomio &polinomio) {
 	_vectorMonomios = polinomio._vectorMonomios;
 }
 
+
 //Observadores
 
 bool Polinomio::esNulo() const {
@@ -48,41 +49,43 @@ Monomio Polinomio::getMonomio(int grado_monomio) const {
 	else return monomio_nulo;
 }
 
+/////////////////////////////////////////////////////////////
 
 // Operadores de asignación
 
-/////////////////////////////////////////////////////////////
+Polinomio & Polinomio::operator=(Polinomio const &polinomio) {
+	if(*this != polinomio) {
+		//Utilizo el operador = por defecto
+		*this = polinomio;
+		return *this;
+	}
+	else return *this;
+}
 
-Polinomio & Polinomio::operator=(Polinomio const &polinomio)
-{
-	// COMPLETAR
 
-	// Se devuelve el objeto actual
+Polinomio & Polinomio::operator=(Monomio const &monomio) {
+	//Crea un polinomio vacío al que solo asigno un monomio
+	Polinomio new_polinomio;
+	new_polinomio._vectorMonomios[0] = monomio;
+	//Igualo el polinomio actual al creado
+	*this = new_polinomio;
 	return *this;
 }
 
 
-Polinomio & Polinomio::operator=(Monomio const &monomio)
-{
-	// COMPLETAR
-
-	// Se devuelve el objeto actual
-	return *this;
-}
-
-
-Polinomio & Polinomio::operator=(double const &numero_real)
-{
-	// COMPLETAR
-
-	// Se devuelve el objeto actual
+Polinomio & Polinomio::operator=(double const &numero_real) {
+	//Creo un nuevo polinomio al que le asigno un monomio con coeficiente = numero_real y grado = 0
+	Polinomio new_polinomio;
+	new_polinomio._vectorMonomios[0].setGrado(0);
+	new_polinomio._vectorMonomios[0].setCoeficiente(numero_real);
+	//Igualo el polinomio actual al creado
+	*this = new_polinomio;
 	return *this;
 }
 
 //////////////////////////////////////////////////////////////
 
-Polinomio & Polinomio::operator+=(Polinomio const &polinomio)
-{
+Polinomio & Polinomio::operator+=(Polinomio const &polinomio) {
 	// COMPLETAR
 
 	// Se devuelve el objeto actual
