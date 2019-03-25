@@ -17,16 +17,37 @@ using ed::Polinomio;
 
 Polinomio::Polinomio() {
 	Monomio monomio(0, 0.0);
-	vector_monomios.push_back(monomio);
+	_vectorMonomios.push_back(monomio);
 }
 
 Polinomio::Polinomio(const Polinomio &polinomio) {
-	vector_monomios = polinomio.vector_monomios;
+	_vectorMonomios = polinomio._vectorMonomios;
 }
 
-bool esNulo() {
+//Observadores
 
+bool Polinomio::esNulo() const {
+	if(getNumeroMonomios() == 1 && _vectorMonomios[0].esNulo()) return true;
+	else return false;
 }
+
+bool Polinomio::existeMonomio(int grado_monomio) const {
+	for(int i = 0; i < getNumeroMonomios(); i++) {
+		if(_vectorMonomios[i].getGrado() == grado_monomio) return true;
+	}
+	return false;
+}
+
+Monomio Polinomio::getMonomio(int grado_monomio) const {
+	Monomio monomio_nulo;
+	if(existeMonomio(grado_monomio)) {
+		for(int i = 0; i < getNumeroMonomios(); i++) {
+			if(_vectorMonomios[i].getGrado() == grado_monomio) return _vectorMonomios[i];
+		}
+	}
+	else return monomio_nulo;
+}
+
 
 // Operadores de asignación
 

@@ -22,6 +22,7 @@ using std::vector;
 
 #include "PolinomioInterfaz.hpp"
 #include "Monomio.hpp"
+using ed::Monomio;
 
 
 // Se incluye la clase Polinomio dentro del espacio de nombre de la asigantura: ed
@@ -32,7 +33,7 @@ class Polinomio: public ed::PolinomioInterfaz
 {
 	//! \name Atributos privados de la clase Polinomio
 	private:
-		vector <Monomio> vector_monomios;
+		vector <Monomio> _vectorMonomios;
 
 	//! \name Funciones o métodos públicos de la clase Polinomio
 	public:
@@ -59,21 +60,21 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @return true si el polinomio es igual al monomio con las características especificadas
 		 * @return false si el polinomio no es igual al monomio mencionado
 		 */
-		bool esNulo();
+		bool esNulo() const;
 
 		/**
 		 * @brief Observador del grado del polinomio
 		 * @pre Los monomios están ordenados de mayor a menor grado
 		 * @return int: el mayor grado de los monomios que forman el polinomio
 		 */
-		int getGrado();
+		inline int getGrado() const {return _vectorMonomios[0].getGrado();}
 
 		/**
 		 * @brief Observador del numero de monomios del polinomio
 		 * @note Función inline
 		 * @return int: numero de elementos del vector "polinomio"
 		 */
-		inline int getNumeroMonomios() {return vector_monomios.size();}
+		inline int getNumeroMonomios() const {return _vectorMonomios.size();}
 
 		/**
 		 * @brief Comprueba si existe un monomio dentro del polinomio con un determinado grado
@@ -81,14 +82,15 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @return true si existe un monomio con el grado especificado
 		 * @return false si no hay ningun monomio con dicho grado en el vector
 		 */
-		bool existeMonomio(int grado_monomio);
+		bool existeMonomio(int grado_monomio) const;
 
 		/**
 		 * @brief Observador de un monomio concreto
+		 * @pre Existe el monomio de grado indicado
 		 * @param grado_monomio: grado del monomio a encontrar
 		 * @return Monomio: Objeto Monomio con el grado especificado
 		 */
-		Monomio getMonomio(int grado_monomio);
+		Monomio getMonomio(int grado_monomio) const;
 
 		//! \name Funciones de modificación de la clase Polinomio
 
