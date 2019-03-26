@@ -125,14 +125,101 @@ class Polinomio: public ed::PolinomioInterfaz
 		// Operadores aritméticos y asignación
 
 		/**
-		 * @brief 
-		 * 
+		 * @brief Suma el polinomio actual con el polinomio pasado (a la derecha del operador)
+		 * @note Función sobrecargada
 		 * @param polinomio 
 		 * @return Polinomio& 
 		 */
 		Polinomio & operator+=(Polinomio const &polinomio);
 
+		/**
+		 * @brief Suma el polinomio actual con el monomio pasado (a la derecha del operador)
+		 * @note Función sobrecargada
+		 * @param monomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator+=(Monomio const &monomio);
 
+		/**
+		 * @brief Suma el numero a la derecha del operador al polinomio actual como un monomio de grado
+		 * @note Función sobrecargada
+		 * @param numero_real 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator+=(double numero_real);
+
+		/**
+		 * @brief Resta al polinomio actual, el polinomio situado a la derecha del operador
+		 * @note Función sobrecargada
+		 * @param polinomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator-=(Polinomio const &polinomio);
+		
+		/**
+		 * @brief Resta al polinomio actual, el monomio situado a la derecha del operador
+		 * @note Función sobrecargada
+		 * @param monomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator-=(Monomio const &monomio);
+		
+		/**
+		 * @brief Resta al polinomio actual, un numero real que se entiende como un monomio de grado 0
+		 * @note Función sobrecargada
+		 * @param numero_real 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator-=(double numero_real);
+
+		/**
+		 * @brief Multiplica el polinomio actual por el polinomio situado a la derecha del operador
+		 * @note Función sobrecargada
+		 * @param polinomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator*=(Polinomio const &polinomio);
+		
+		/**
+		 * @brief Multiplica el polinomio actual por el monomio situado a la derecha del operador
+		 * @note Función sobrecargada
+		 * @param monomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator*=(Monomio const &monomio);
+		
+		/**
+		 * @brief Multiplica el polinomio actual por un numero real, que se entiende como un monomio de grado 0
+		 * @note Función sobrecargada
+		 * @param numero_real 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator*=(double numero_real);
+
+/**
+		 * @brief Multiplica el polinomio actual por el polinomio situado a la derecha del operador
+		 * @note Función sobrecargada
+		 * @param polinomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator/=(Polinomio const &polinomio);
+		
+		/**
+		 * @brief Multiplica el polinomio actual por el monomio situado a la derecha del operador
+		 * @note Función sobrecargada
+		 * @param monomio 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator/=(Monomio const &monomio);
+		
+		/**
+		 * @brief Multiplica el polinomio actual por un numero real, que se entiende como un monomio de grado 0
+		 * @note Función sobrecargada
+		 * @param numero_real 
+		 * @return Polinomio& 
+		 */
+		Polinomio & operator/=(double numero_real);
+		
 		///////////////////////////////////////////////////////////////////////
 
 		//! \name Funciones lectura y escritura de la clase Polinomio

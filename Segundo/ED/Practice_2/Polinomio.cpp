@@ -85,22 +85,80 @@ Polinomio & Polinomio::operator=(double const &numero_real) {
 
 //////////////////////////////////////////////////////////////
 
-Polinomio & Polinomio::operator+=(Polinomio const &polinomio) {
-	// COMPLETAR
+//Operadores aritméticos y de asignación
 
-	// Se devuelve el objeto actual
+//Suma
+
+Polinomio & Polinomio::operator+=(Polinomio const &polinomio) {
+	*this = *this + polinomio;
 	return *this;
 }
 
-// COMPLETAR EL RESTO DE OPERADORES
+Polinomio & Polinomio::operator+=(Monomio const &monomio) {
+	*this = *this + monomio
+	return *this;
+}
 
+Polinomio & Polinomio::operator+=(double numero_real) {
+	*this = *this + numero_real;
+	return *this;
+}
 
+//Resta 
+
+Polinomio & Polinomio::operator-=(Polinomio const &polinomio) {
+	*this = *this - polinomio;
+	return *this;
+}
+
+Polinomio & Polinomio::operator-=(Monomio const &monomio) {
+	*this = *this - monomio
+	return *this;
+}
+
+Polinomio & Polinomio::operator-=(double numero_real) {
+	*this = *this - numero_real;
+	return *this;
+}
+
+//Multiplicación
+
+Polinomio & Polinomio::operator*=(Polinomio const &polinomio) {
+	*this = *this * polinomio;
+	return *this;
+}
+
+Polinomio & Polinomio::operator*=(Monomio const &monomio) {
+	*this = *this * monomio
+	return *this;
+}
+
+Polinomio & Polinomio::operator*=(double numero_real) {
+	*this = *this + numero_real;
+	return *this;
+}
+
+//División
+
+Polinomio & Polinomio::operator/=(Polinomio const &polinomio) {
+	*this = *this / polinomio;
+	return *this;
+}
+
+Polinomio & Polinomio::operator/=(Monomio const &monomio) {
+	*this = *this / monomio
+	return *this;
+}
+
+Polinomio & Polinomio::operator/=(double numero_real) {
+	*this = *this / numero_real;
+	return *this;
+}
 
 ///////////////////////////////////////////////////////////////////////
 
 // Funciones lectura y escritura de la clase Polinomio
 
-// COMPLETAR
 
 
 ///////////////////////////////////////////////////////////////////////
