@@ -9,6 +9,9 @@
 
 // Ficheros de cabecera
 #include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
 
 #include "Polinomio.hpp"
 using ed::Polinomio;
@@ -47,6 +50,13 @@ Monomio Polinomio::getMonomio(int grado_monomio) const {
 		}
 	}
 	else return monomio_nulo;
+}
+
+bool Polinomio::estaOrdenado() const {
+	for(int i = 1; i < _vectorMonomios.size(); i++) {
+		if(_vectorMonomios[i-1].getGrado() < _vectorMonomios[i].getGrado()) return false;
+	}
+	return true;
 }
 
 /////////////////////////////////////////////////////////////
@@ -159,8 +169,23 @@ Polinomio & Polinomio::operator/=(double numero_real) {
 
 // Funciones lectura y escritura de la clase Polinomio
 
+void Polinomio::leerPolinomio() {
+	int numero_monomios;
+	cout << "Introduzca el número de monomios que ha de tener el polinomio: ";
+	cin >> numero_monomios;
+	for(int i = 0; i < numero_monomios; i++) {
+		_vectorMonomios[i].leerMonomio();
+	}
+	ordenarPolinomio();
+}
 
-
+void Polinomio::escribirPolinomio() {
+	for(int i = 0; i < _vectorMonomios.size(); i++)	{
+		cout << "----------" << endl;
+		_vectorMonomios[i].escribirMonomio();
+		cout << "----------" << endl;
+	}
+}
 ///////////////////////////////////////////////////////////////////////
 
 // Funciones auxiliares de la clase Polinomio

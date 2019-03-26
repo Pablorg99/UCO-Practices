@@ -92,6 +92,21 @@ class Polinomio: public ed::PolinomioInterfaz
 		 */
 		Monomio getMonomio(int grado_monomio) const;
 
+		/**
+		 * @brief Comprueba si el vector de monomios del polinomio que invoca este método esta ordenado por los grados de los monomios de mayor a menor
+		 * @return true Si está ordenado
+		 * @return false Si sucede lo contrario
+		 */
+		bool estaOrdenado() const;
+
+		//! \name Modificadores de la clase Polinomio
+
+		/**
+		 * @brief Utiliza el algoritmo de ordenación quicksort() para ordenar los monomios según su grado de mayor a menor
+		 * @post El polinomio queda ordenado
+		 */
+		void ordenaPolinomio();
+
 	 	////////////////////////////////////////////////////////////////
 
 		//! \name Operadores de la clase Polinomio
@@ -224,10 +239,22 @@ class Polinomio: public ed::PolinomioInterfaz
 
 		//! \name Funciones lectura y escritura de la clase Polinomio
 
+		/**
+		 * @brief Pregunta al usuario cuantos monomios desea introducir y se hace tantas llamadas a leerMonomio() como sean necesarias
+		 * @post Todos los monomios tienen grado positivo
+		 */
+		void leerPolinomio();
+
+		/**
+		 * @brief Imprime por pantalla todos los monomios del polinomio haciendo uso de escribirMonomio()
+		 * @note Formato de un monomio: Coeficiente X^grado || Coeficiente 1: X^grado || Coeficiente -1: -X^grado || Grado 0: Coeficiente || Grado 1: X (sin grado)
+		 */
+		void escribirPolinomio();
 
 		///////////////////////////////////////////////////////////////////////
 
 		//! \name Funciones auxiliares de la clase Polinomio
+
 
 
 }; // Fin de la definición de la clase Polinomio
