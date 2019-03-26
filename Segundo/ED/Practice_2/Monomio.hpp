@@ -177,8 +177,8 @@ namespace ed
 				\brief Pide al usuario que introduce los valores del monomio por teclado
 				\post El grado es mayor o igual que 0
 			*/
-			
 			void leerMonomio();
+
 			/*!
 				\brief Imprime el monomio por pantalla con un formato
 				\note Formato: Coeficiente X^grado || Coeficiente 1: X^grado || Coeficiente -1: -X^grado || Grado 0: Coeficiente || Grado 1: X (sin grado)
