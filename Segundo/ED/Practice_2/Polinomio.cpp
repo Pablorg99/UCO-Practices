@@ -177,16 +177,19 @@ void Polinomio::leerPolinomio() {
 	cout << "Introduzca el número de monomios que ha de tener el polinomio: ";
 	cin >> numero_monomios;
 	for(int i = 0; i < numero_monomios; i++) {
+		cout << "-----------------" << endl;
 		getPolinomio().at(i).leerMonomio();
+		cout << "-----------------" << endl;
 	}
 	ordenaPolinomio();
 }
 
 void Polinomio::escribirPolinomio() {
-	for(int i = 0; i < _vectorMonomios.size(); i++)	{
-		cout << "----------" << endl;
-		_vectorMonomios[i].escribirMonomio();
-		cout << "----------" << endl;
+	vector <Monomio>::iterator monomio;
+	for(monomio = getPolinomio().begin(); monomio != getPolinomio().end(); monomio++) {
+		cout << "-----------------" << endl;
+		monomio->escribirMonomio();
+		cout << "-----------------" << endl;
 	}
 }
 ///////////////////////////////////////////////////////////////////////

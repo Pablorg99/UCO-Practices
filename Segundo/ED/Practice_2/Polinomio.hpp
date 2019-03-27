@@ -258,6 +258,8 @@ class Polinomio: public ed::PolinomioInterfaz
 
 		//! \name Funciones auxiliares de la clase Polinomio
 
+		double calcularValor(double numero_real);
+
 
 
 }; // Fin de la definición de la clase Polinomio
