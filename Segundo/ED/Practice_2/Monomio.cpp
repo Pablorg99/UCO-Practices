@@ -29,7 +29,7 @@ Monomio::Monomio(Monomio const &monomio) {
 
 //Observadores
 bool Monomio::esNulo() const {
-	if(getGrado() == 0 && getCoeficiente() == 0) return true;
+	if(getGrado() == 0 && (abs(getCoeficiente() - 0.0) < COTA_ERROR)) return true;
 	else return false;
 }
 
