@@ -177,7 +177,7 @@ void Polinomio::leerPolinomio() {
 	cout << "Introduzca el número de monomios que ha de tener el polinomio: ";
 	cin >> numero_monomios;
 	for(int i = 0; i < numero_monomios; i++) {
-		_vectorMonomios[i].leerMonomio();
+		getPolinomio().at(i).leerMonomio();
 	}
 	ordenaPolinomio();
 }
@@ -193,4 +193,3 @@ void Polinomio::escribirPolinomio() {
 
 // Funciones auxiliares de la clase Polinomio
 
-// COMPLETAR
