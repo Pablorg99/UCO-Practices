@@ -62,6 +62,12 @@ bool Polinomio::estaOrdenado() const {
 	return true;
 }
 
+//Modificadores
+
+void ordenaPolinomio() {
+	
+}
+
 /////////////////////////////////////////////////////////////
 
 // Operadores de asignación
@@ -195,4 +201,13 @@ void Polinomio::escribirPolinomio() {
 ///////////////////////////////////////////////////////////////////////
 
 // Funciones auxiliares de la clase Polinomio
+
+double Polinomio::calcularValor(double numero_real) {
+	double resultado = 0.0;
+	vector <Monomio>::iterator monomio;
+	for(monomio = getPolinomio().begin(); monomio != getPolinomio().end(); monomio++) {
+		resultado += monomio->calcularValor(numero_real);
+	}
+	return resultado;
+}
 
