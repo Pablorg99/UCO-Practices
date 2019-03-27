@@ -24,8 +24,10 @@ Polinomio::Polinomio(const Polinomio &polinomio) {
 	vector_monomios = polinomio.vector_monomios;
 }
 
-bool esNulo() {
+//Observadores
 
+bool Polinomio::esNulo() {
+	if((getNumeroMonomios() == 1) && )
 }
 
 // Operadores de asignación
