@@ -55,6 +55,9 @@ class Polinomio: public ed::PolinomioInterfaz
 		Polinomio(const Polinomio &polinomio);
 
 		//! \name Observadores: funciones de consulta de la clase Polinomio
+
+		inline vector <Monomio> getPolinomio() const {return _vectorMonomios;}
+
 		/**
 		 * @brief Comprueba si el Polinomio es igual a un monomio con grado y coeficientes 0 y 0.0
 		 * @return true si el polinomio es igual al monomio con las características especificadas
@@ -67,14 +70,14 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @pre Los monomios están ordenados de mayor a menor grado
 		 * @return int: el mayor grado de los monomios que forman el polinomio
 		 */
-		inline int getGrado() const {return _vectorMonomios[0].getGrado();}
+		inline int getGrado() const {return getPolinomio().front().getGrado();}
 
 		/**
 		 * @brief Observador del numero de monomios del polinomio
 		 * @note Función inline
 		 * @return int: numero de elementos del vector "polinomio"
 		 */
-		inline int getNumeroMonomios() const {return _vectorMonomios.size();}
+		inline int getNumeroMonomios() const {return getPolinomio().size();}
 
 		/**
 		 * @brief Comprueba si existe un monomio dentro del polinomio con un determinado grado
