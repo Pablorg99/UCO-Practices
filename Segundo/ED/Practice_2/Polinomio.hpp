@@ -31,13 +31,63 @@ namespace ed {
 //!  Definición de la clase Polinomio que hereda de PolinomioInterfaz
 class Polinomio: public ed::PolinomioInterfaz
 {
-	//! \name Atributos privados de la clase Polinomio
 	private:
+		//! \name Atributos privados de la clase Polinomio
 		vector <Monomio> _vectorMonomios;
 		//! \name Funciones privadas de la clase Polinomio
-		void _quickSort(vector <Monomio> array, int low, int high);
-		void _partition(vector <Monomio> array, int low, int high);
+
+		/**
+		 * @brief Devuelve el atributo privado _vectorMonomios de la clase Polinomio
+		 * @note Permite que si la implementación del vector cambie, solo haya que modificar este observador privado
+		 * @return vector <Monomio> 
+		 */
+		inline vector <Monomio> _getVector() const {return _vectorMonomios;}
+
+		/**
+		 * @brief Comprueba si el vector de monomios del polinomio que invoca este método esta ordenado por los grados de los monomios de mayor a menor
+		 * @return true Si está ordenado
+		 * @return false Si sucede lo contrario
+		 */
+		bool _estaOrdenado() const;
+		
+		/**
+		 * @brief Utiliza el algoritmo de ordenación quicksort() para ordenar los monomios según su grado de mayor a menor
+		 * @post El polinomio queda ordenado
+		 */
+		void _ordenaPolinomio();
+
+		/**
+		 * @brief Modificador del vector de monomios que forma el polinomio
+		 * @param new_vector: Vector que sustituye
+		 * @post El polinomio insertado queda ordenado
+		 */
+		inline void _setVector(vector <Monomio> &new_vector) {_vectorMonomios = new_vector; _ordenaPolinomio();}
+		
+		//! \name Funciones para la implementación del algoritmo de ordenación QuickSort
+
+		/**
+		 * @brief Función principal de la implementación del algoritmo
+		 * @param array: Referencia al vector que va a ser ordenado
+		 * @param low: De este índice en adelante, el vector debe quedar ordenado
+		 * @param high: Las posiciones de este índice y los menores a él pero mayores a low deben estar ordenadas
+		 */
+		void _quickSort(vector <Monomio> &array, int low, int high);
+
+		/**
+		 * @brief Coge el último elemento del rango como pivote, lo coloca en su posición correcta y coloca los mayores a su izquierda y los menores a su derecha
+		 * @param array: Vector a ordenar
+		 * @param low: Índice del elemento que será el mayor del fragmento pasado
+		 * @param high: Índice del pivote que acabará siendo el del elemento menor
+		 */
+		void _partition(vector <Monomio> &array, int low, int high);
+
+		/**
+		 * @brief Intercambia las posiciones de los monomios pasados por referencia
+		 * @param monomio1 
+		 * @param monomio2 
+		 */
 		void _swap(Monomio &monomio1, Monomio &monomio2);
+	
 	//! \name Funciones o métodos públicos de la clase Polinomio
 	public:
 		//! \name Constructores de la clase Polinomio
@@ -59,8 +109,6 @@ class Polinomio: public ed::PolinomioInterfaz
 
 		//! \name Observadores: funciones de consulta de la clase Polinomio
 
-		inline vector <Monomio> getPolinomio() const {return _vectorMonomios;}
-
 		/**
 		 * @brief Comprueba si el Polinomio es igual a un monomio con grado y coeficientes 0 y 0.0
 		 * @return true si el polinomio es igual al monomio con las características especificadas
@@ -73,14 +121,14 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @pre Los monomios están ordenados de mayor a menor grado
 		 * @return int: el mayor grado de los monomios que forman el polinomio
 		 */
-		inline int getGrado() const {return getPolinomio().front().getGrado();}
+		inline int getGrado() const {return _getVector().front().getGrado();}
 
 		/**
 		 * @brief Observador del numero de monomios del polinomio
 		 * @note Función inline
 		 * @return int: numero de elementos del vector "polinomio"
 		 */
-		inline int getNumeroMonomios() const {return getPolinomio().size();}
+		inline int getNumeroMonomios() const {return _getVector().size();}
 
 		/**
 		 * @brief Comprueba si existe un monomio dentro del polinomio con un determinado grado
@@ -97,28 +145,6 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @return Monomio: Objeto Monomio con el grado especificado
 		 */
 		Monomio getMonomio(int grado_monomio) const;
-
-		/**
-		 * @brief Comprueba si el vector de monomios del polinomio que invoca este método esta ordenado por los grados de los monomios de mayor a menor
-		 * @return true Si está ordenado
-		 * @return false Si sucede lo contrario
-		 */
-		bool estaOrdenado() const;
-
-		//! \name Modificadores de la clase Polinomio
-
-		/**
-		 * @brief Utiliza el algoritmo de ordenación quicksort() para ordenar los monomios según su grado de mayor a menor
-		 * @post El polinomio queda ordenado
-		 */
-		void ordenaPolinomio();
-
-		/**
-		 * @brief Modificador del vector de monomios que forma el polinomio
-		 * @param new_vector 
-		 * @post El polinomio insertado está ordenado
-		 */
-		inline void setPolinomio(vector <Monomio> new_vector) {_vectorMonomios = new_vector; ordenaPolinomio();}
 
 	 	////////////////////////////////////////////////////////////////
 
@@ -224,7 +250,7 @@ class Polinomio: public ed::PolinomioInterfaz
 		 */
 		Polinomio & operator*=(double numero_real);
 
-/**
+		/**
 		 * @brief Multiplica el polinomio actual por el polinomio situado a la derecha del operador
 		 * @note Función sobrecargada
 		 * @param polinomio 
