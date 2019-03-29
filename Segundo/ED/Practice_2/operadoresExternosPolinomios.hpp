@@ -18,15 +18,16 @@ using std::ostream;
 namespace ed
 {
 
-////////////////////////////////////////////////////////////////////////////
-	// Funciones y operadores que no pertenecen a la clase Polinomio
-
-
-	////////////////////////////////////////////////////////////
 	//! \name Operadores de igualdad
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-	bool operator==(ed::Polinomio const & p1, ed::Polinomio const & p2);
+	/**
+	 * @brief Operador lógico de igualdad entre dos polinomios
+	 * @param polinomio1: Polinomio situado a la izquierda del operador
+	 * @param polinomio2
+	 * @return true Si los monomios de cada polinomio coinciden uno a uno en grado y coeficiente
+	 * @return false Si ocurre el caso contrario
+	 */
+	bool operator==(ed::Polinomio const & polinomio1, ed::Polinomio const & polinomio2);
 
 	// COMPLETAR LOS OTROS OPERADORES DE IGUALDAD
 
@@ -34,7 +35,7 @@ namespace ed
 	//! \name Operadores de desigualdad
 
 	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-	bool operator!=(ed::Polinomio const & p1, ed::Polinomio const & p2);
+	bool operator!=(ed::Polinomio const & polinomio1, ed::Polinomio const & polinomio2);
 
 	// COMPLETAR LOS OTROS OPERADORES DE DESIGUALDAD
 
@@ -53,7 +54,7 @@ namespace ed
 	//! \name Operadores binarios de la suma
 
 	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-		ed::Polinomio & operator+(ed::Polinomio const &p1,  ed::Polinomio const &p2);
+		ed::Polinomio & operator+(ed::Polinomio const &polinomio1,  ed::Polinomio const &polinomio2);
 
 		// COMPLETAR LOS OTROS OPERADORES DE SUMA
 

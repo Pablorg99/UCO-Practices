@@ -16,8 +16,7 @@
 namespace ed
 {
 
-bool operator==(ed::Polinomio const & p1, ed::Polinomio const & p2)
-{
+bool operator==(Polinomio const & p1, Polinomio const & p2) {
 	// COMPLETAR Y MODIFICAR
 
 	// MODIFICAR: SE DEVUELVE UN VALOR ARBITRARIO PARA NO GENERAR AVISOS AL COMPILAR
@@ -30,8 +29,7 @@ bool operator==(ed::Polinomio const & p1, ed::Polinomio const & p2)
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Operadores de desigualdad
-bool operator!=(ed::Polinomio const & p1, ed::Polinomio const & p2)
-{
+bool operator!=(Polinomio const & p1, Polinomio const & p2) {
 	// COMPLETAR Y MODIFICAR
 
 	// MODIFICAR: SE DEVUELVE UN VALOR ARBITRARIO PARA NO GENERAR AVISOS AL COMPILAR
@@ -45,11 +43,10 @@ bool operator!=(ed::Polinomio const & p1, ed::Polinomio const & p2)
 // Operadores unarios
 
 // COMPLETAR
-ed::Polinomio & operator+(ed::Polinomio const & p)
-{
+Polinomio & operator+(Polinomio const & p) {
 	// COMPLETAR Y MODIFICAR
 	// Se crea un nuevo objeto
-	ed::Polinomio *nuevo = new ed::Polinomio(p);
+	Polinomio *nuevo = new Polinomio(p);
 
 	// Se devuelve el resultado
 	return *nuevo;
@@ -62,11 +59,10 @@ ed::Polinomio & operator+(ed::Polinomio const & p)
 //////////////////////////////////////////////////////////////////////////////////////
 
 // Operadores binarios de la suma
-ed::Polinomio & operator+(ed::Polinomio const &p1,  ed::Polinomio const &p2)
-{
+Polinomio & operator+(Polinomio const &p1,  Polinomio const &p2) {
 	// COMPLETAR Y MODIFICAR
 	// Se crea un nuevo objeto
-	ed::Polinomio *nuevo = new ed::Polinomio;
+	Polinomio *nuevo = new Polinomio;
 
 	// Se devuelve el resultado
 	return *nuevo;
@@ -94,8 +90,7 @@ ed::Polinomio & operator+(ed::Polinomio const &p1,  ed::Polinomio const &p2)
 ////////////////////////////////////////////////////////////////////////////
 
 // Sobrecarga del operador de entrada
-istream &operator>>(istream &stream, Polinomio &p)
-{
+istream &operator>>(istream &stream, Polinomio &p) {
 	// COMPLETAR
 
 	// Se devuelve el flujo de entrada
@@ -105,8 +100,7 @@ istream &operator>>(istream &stream, Polinomio &p)
 
 
 // Sobrecarga del operador de salida
-ostream &operator<<(ostream &stream, Polinomio const &p)
-{
+ostream &operator<<(ostream &stream, Polinomio const &p) {
 	// COMPLETAR
 
 	// Se devuelve el flujo de salida
