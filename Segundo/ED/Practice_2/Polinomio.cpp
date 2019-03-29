@@ -27,7 +27,6 @@ Polinomio::Polinomio(const Polinomio &polinomio) {
 	_vectorMonomios = polinomio.getPolinomio();
 }
 
-
 //Observadores
 
 bool Polinomio::esNulo() const {
@@ -65,7 +64,14 @@ bool Polinomio::estaOrdenado() const {
 //Modificadores
 
 void Polinomio::ordenaPolinomio() {
-	vector <Monomio> array = getPolinomio();
+	if (estaOrdenado() == false) {
+		int low = 0;
+		int high = getPolinomio().size() - 1;
+		_quickSort(getPolinomio(), low, high);
+		#ifndef NDEBUG
+			assert(!estaOrdenado());
+		#endif
+	}
 }
 
 //Funciones privadas
@@ -77,20 +83,20 @@ void _swap(Monomio &monomio1, Monomio &monomio2) {
 	monomio2 = monomio_auxiliar;
 } 
 
-int _partition (vector <Monomio> array, int low, int high) { 
-    Monomio pivot = array[high];    // pivot 
+int _partition (vector <Monomio> &array, int low, int high) { 
+    int pivot = array[high].getGrado();    // pivot 
     int i = (low - 1);  // Index of smaller element 
   
-    for (int j = low; j <= high- 1; j++) { 
+    for (int j = low; j <= high - 1; j++) { 
         // If current element is smaller than or 
         // equal to pivot 
-        if (arr[j] <= pivot) 
+        if (array[j].getGrado() <= pivot) 
         { 
             i++;    // increment index of smaller element 
-            swap(&arr[i], &arr[j]); 
+            _swap(array[i], array[j]); 
         } 
     } 
-    swap(&arr[i + 1], &arr[high]); 
+    _swap(array[i + 1], array[high]); 
     return (i + 1); 
 } 
   
@@ -98,18 +104,18 @@ int _partition (vector <Monomio> array, int low, int high) {
  arr[] --> Array to be sorted, 
   low  --> Starting index, 
   high  --> Ending index */
-void quickSort(int arr[], int low, int high) 
+void _quickSort(vector <Monomio> &array, int low, int high) 
 { 
     if (low < high) 
     { 
         /* pi is partitioning index, arr[p] is now 
            at right place */
-        int pi = partition(arr, low, high); 
+        int pivot_index = _partition(array, low, high); 
   
         // Separately sort elements before 
         // partition and after partition 
-        quickSort(arr, low, pi - 1); 
-        quickSort(arr, pi + 1, high); 
+        _quickSort(array, low, pivot_index - 1); 
+        _quickSort(array, pivot_index + 1, high); 
     } 
 } 
 

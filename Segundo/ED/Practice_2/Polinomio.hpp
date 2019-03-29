@@ -116,8 +116,9 @@ class Polinomio: public ed::PolinomioInterfaz
 		/**
 		 * @brief Modificador del vector de monomios que forma el polinomio
 		 * @param new_vector 
+		 * @post El polinomio insertado está ordenado
 		 */
-		inline void setPolinomio(vector <Monomio> new_vector) {_vectorMonomios = new_vector;}
+		inline void setPolinomio(vector <Monomio> new_vector) {_vectorMonomios = new_vector; ordenaPolinomio();}
 
 	 	////////////////////////////////////////////////////////////////
 
