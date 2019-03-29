@@ -42,12 +42,13 @@ bool Polinomio::existeMonomio(int grado_monomio) const {
 	return false;
 }
 
-Monomio Polinomio::getMonomio(int grado_monomio) const {
+Monomio & Polinomio::getMonomio(int grado_monomio) const {
 	Monomio monomio_nulo;
+	Monomio monomio_correcto;
 	if(existeMonomio(grado_monomio)) {
 		vector <Monomio>::const_iterator monomio;
 		for(monomio = _getVector().begin(); monomio != _getVector().end(); monomio++) {
-			if(monomio->getGrado() == grado_monomio) return *monomio;
+			if(monomio->getGrado() == grado_monomio) return monomio_correcto = *monomio;
 		}
 	}
 	else return monomio_nulo;

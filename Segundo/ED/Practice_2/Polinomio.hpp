@@ -144,7 +144,7 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @param grado_monomio: grado del monomio a encontrar
 		 * @return Monomio: Objeto Monomio con el grado especificado
 		 */
-		Monomio getMonomio(int grado_monomio) const;
+		Monomio & getMonomio(int grado_monomio) const;
 
 	 	////////////////////////////////////////////////////////////////
 
@@ -295,8 +295,6 @@ class Polinomio: public ed::PolinomioInterfaz
 		//! \name Funciones auxiliares de la clase Polinomio
 
 		double calcularValor(double numero_real);
-
-
 
 }; // Fin de la definición de la clase Polinomio
 

@@ -48,7 +48,7 @@ class PolinomioInterfaz
 		 * @param n: Grado del monomio en cuestión
 		 * @return 0 si no se implementa la función en la clase derivada (Polinomio)
 		 */
-		virtual ed::Monomio & getMonomio(int n) = 0;
+		virtual Monomio & getMonomio(int n) const = 0;
 }; // Fin de la definición de la clase PolinomioInterfaz
 
 } // \brief Fin de namespace ed.
