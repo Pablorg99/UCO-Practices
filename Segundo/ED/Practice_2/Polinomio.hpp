@@ -34,7 +34,10 @@ class Polinomio: public ed::PolinomioInterfaz
 	//! \name Atributos privados de la clase Polinomio
 	private:
 		vector <Monomio> _vectorMonomios;
-
+		//! \name Funciones privadas de la clase Polinomio
+		void _quickSort(vector <Monomio> array, int low, int high);
+		void _partition(vector <Monomio> array, int low, int high);
+		void _swap(Monomio &monomio1, Monomio &monomio2);
 	//! \name Funciones o métodos públicos de la clase Polinomio
 	public:
 		//! \name Constructores de la clase Polinomio
@@ -109,6 +112,12 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @post El polinomio queda ordenado
 		 */
 		void ordenaPolinomio();
+
+		/**
+		 * @brief Modificador del vector de monomios que forma el polinomio
+		 * @param new_vector 
+		 */
+		inline void setPolinomio(vector <Monomio> new_vector) {_vectorMonomios = new_vector;}
 
 	 	////////////////////////////////////////////////////////////////
 
