@@ -17,74 +17,333 @@ using std::ostream;
 // Espacio de nombre de la asigantura: ed
 namespace ed
 {
-
 	//! \name Operadores de igualdad
 
 	/**
 	 * @brief Operador lógico de igualdad entre dos polinomios
+	 * @note Operador sobrecargado
 	 * @param polinomio1: Polinomio situado a la izquierda del operador
-	 * @param polinomio2
-	 * @return true Si los monomios de cada polinomio coinciden uno a uno en grado y coeficiente
-	 * @return false Si ocurre el caso contrario
+	 * @param polinomio2: Polinomio situado a la derecha del operador
+	 * @return true si los monomios de cada polinomio coinciden uno a uno en grado y coeficiente
+	 * @return false si ocurre el caso contrario
 	 */
-	bool operator==(ed::Polinomio const & polinomio1, ed::Polinomio const & polinomio2);
+	bool operator==(Polinomio const & polinomio1, Polinomio const & polinomio2);
 
-	// COMPLETAR LOS OTROS OPERADORES DE IGUALDAD
+	/**
+	 * @brief Operador de igualdad entre un polinomio y un monomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param monomio: Monomio situado a la derecha del operador
+	 * @return true si el polinomio tiene un único monomio cuyos valores coinciden con los del monomio pasado
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator==(Polinomio const &polinomio, Monomio const & monomio);
+
+	/**
+	 * @brief Operador de igualdad entre un polinomio y un monomio
+	 * @note Operador sobrecargado
+	 * @param monomio: Monomio situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return true si el polinomio tiene un único monomio cuyos valores coinciden con los del monomio pasado
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator==(Monomio const & monomio, Polinomio const &polinomio);
+
+	/**
+	 * @brief Operador de igualdad entre un polinomio y un numero real
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param numero_real: Número real situado a la derecha del operador
+	 * @return true si el polinomio está formado por un único monomio cuyo grado es 0 y coeficiente = numero_real
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator==(Polinomio const &polinomio, double numero_real);
+
+	/**
+	 * @brief Operador de igualdad entre un polinomio y un numero real
+	 * @note Operador sobrecargado
+	 * @param numero_real: Número real situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return true si el polinomio está formado por un único monomio cuyo grado es 0 y coeficiente = numero_real
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator==(double numero_real, Polinomio const &polinomio);
 
 	////////////////////////////////////////////////////////////////////////////////////
+
 	//! \name Operadores de desigualdad
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-	bool operator!=(ed::Polinomio const & polinomio1, ed::Polinomio const & polinomio2);
+	/**
+	 * @brief Operador de desigualdad entre dos polinomios
+	 * @note Operador sobrecargado
+	 * @param polinomio1: Polinomio situado a la izquierda del operador 
+	 * @param polinomio2: Polinomio situado a la derecha del operador
+	 * @return true si alguno de los monomios de un polinomio no coincide con el de otro del segundo polinomio
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator!=(Polinomio const & polinomio1, Polinomio const & polinomio2);
 
-	// COMPLETAR LOS OTROS OPERADORES DE DESIGUALDAD
+	/**
+	 * @brief Operador de desigualdad entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param monomio: Monomio situado a la derecha del operador
+	 * @return true si el polinomio tiene más de un monomio o el que tiene, cuenta con valores distintos a los del monomio pasado
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator!=(Polinomio const & polinomio, Monomio const & monomio);
+
+	/**
+	 * @brief Operador de desigualdad entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param monomio: Monomio situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return true si el polinomio tiene más de un monomio o el que tiene, cuenta con valores distintos a los del monomio pasado
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator!=(Monomio const & monomio, Polinomio const & polinomio);
+
+	/**
+	 * @brief Operador de desigualdad entre un número real y un monomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param numero_real: Número real situado a la derecha del operador
+	 * @return true si el polinomio tiene más de un monomio o el que tiene, cuenta con grado mayor que 0 o su coeficiente es distinto a numero_real
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator!=(Polinomio const & polinomio, double numero_real);
+	
+	/**
+	 * @brief Operador de desigualdad entre un número real y un monomio
+	 * @note Operador sobrecargado
+	 * @param numero_real: Número real situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return true si el polinomio tiene más de un monomio o el que tiene, cuenta con grado mayor que 0 o su coeficiente es distinto a numero_real
+	 * @return false si no ocurre el caso expuesto
+	 */
+	bool operator!=(double numero_real, Polinomio const & polinomio);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 	//! \name Operadores unarios
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-		ed::Polinomio & operator+(ed::Polinomio const & p);
+	/**
+	 * @brief Operador unario + para un polinomio
+	 * @param polinomio: Polinomio a la derecha del operador
+	 * @return Polinomio&: una copia del polinomio pasado
+	 */
+	Polinomio & operator+(Polinomio const & polinomio);
 
-	// COMPLETAR EL OTRO OPERADOR UNARIO PREFIJO: resta
-
+	/**
+	 * @brief Operador unario - para un polinomio
+	 * @param polinomio: Polinomio a la derecha del operador
+	 * @return Polinomio&: Copia del polinomio pasado con el coeficiente opuesto de todos sus monomios
+	 */
+	Polinomio & operator-(Polinomio const & polinomio);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 	//! \name Operadores binarios de la suma
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
-		ed::Polinomio & operator+(ed::Polinomio const &polinomio1,  ed::Polinomio const &polinomio2);
+	/**
+	 * @brief Operador binario de la suma entre dos polinomios
+	 * @note Operador sobrecargado
+	 * @param polinomio1: Polinomio situado a la izquierda del operador
+	 * @param polinomio2: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de la suma de los polinomios
+	 */
+	Polinomio & operator+(Polinomio const &polinomio1,  Polinomio const &polinomio2);
 
-		// COMPLETAR LOS OTROS OPERADORES DE SUMA
+	/**
+	 * @brief Operador binario de la suma entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param monomio: Monomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de sumar el monomio con el polinomio
+	 */
+	Polinomio & operator+(Polinomio const &polinomio, Monomio const & monomio);
 
+	/**
+	 * @brief Operador binario de la suma entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param monomio: Monomio situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de sumar el monomio con el polinomio
+	 */
+	Polinomio & operator+(Monomio const & monomio, Polinomio const &polinomio);
 
-		//////////////////////////////////////////////////////////
-		//! \name Operador binario de la resta
+	/**
+	 * @brief Operador binario de la suma entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio: Polinomio situado a la izquierda del operador
+	 * @param numero_real: Número real situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de sumar al polinomio un monomio con coeficiente = numero_real y grado = 0
+	 */
+	Polinomio & operator+(Polinomio const &polinomio, double numero_real);
 
-		// COMPLETAR
+	/**
+	 * @brief Operador binario de la suma entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param numero_real: Número real situado a la izquierda del operador
+	 * @param polinomio: Polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de sumar al polinomio un monomio con coeficiente = numero_real y grado = 0
+	 */
+	Polinomio & operator+(double numero_real, Polinomio const &polinomio);
 
+	//! \name Operadores binarios de la resta
 
-		///////////////////////////////////////////////////////////////////////////
-		//! \name Operadores binarios de la multiplicación
+	/**
+	 * @brief Operador binario de la resta entre dos polinomios
+	 * @note Operador sobrecargado
+	 * @param polinomio1: Polinomio situado a la izquierda del operador
+	 * @param polinomio2: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de la resta de los polinomios
+	 */
+	Polinomio & operator-(Polinomio const &polinomio1,  Polinomio const &polinomio2);
 
-		// COMPLETAR
+	/**
+	 * @brief Operador binario de la resta entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param monomio: Monomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de restar al polinomio el monomio
+	 */
+	Polinomio & operator-(Polinomio const &polinomio, Monomio const & monomio);
 
-		///////////////////////////////////////////////////////////////////////////
+	/**
+	 * @brief Operador binario de la resta entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param monomio: Monomio situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de restarle al monomio el polinomio
+	 */
+	Polinomio & operator-(Monomio const & monomio, Polinomio const &polinomio);
 
-		//! \name Operadores binarios de la división
+	/**
+	 * @brief Operador binario de la resta entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio: Polinomio situado a la izquierda del operador
+	 * @param numero_real: Número real situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de restarle al polinomio un monomio con coeficiente = numero_real y grado = 0
+	 */
+	Polinomio & operator-(Polinomio const &polinomio, double numero_real);
 
-		// COMPLETAR
+	/**
+	 * @brief Operador binario de la resta entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param numero_real: Número real situado a la izquierda del operador
+	 * @param polinomio: Polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de restar al monomio con coeficiente = numero_real y grado = 0 el polinomio
+	 */
+	Polinomio & operator-(double numero_real, Polinomio const &polinomio);
+
+	///////////////////////////////////////////////////////////////////////////
+
+	//! \name Operadores binarios de la multiplicación
+
+	/**
+	 * @brief Operador binario de la multiplicación entre dos polinomios
+	 * @note Operador sobrecargado
+	 * @param polinomio1: Polinomio situado a la izquierda del operador
+	 * @param polinomio2: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de la multiplicación de los polinomios
+	 */
+	Polinomio & operator*(Polinomio const &polinomio1,  Polinomio const &polinomio2);
+
+	/**
+	 * @brief Operador binario de la multiplicación entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param monomio: Monomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de multiplicar el monomio con el polinomio
+	 */
+	Polinomio & operator*(Polinomio const &polinomio, Monomio const & monomio);
+
+	/**
+	 * @brief Operador binario de la multiplicación entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param monomio: Monomio situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de multiplicar el monomio con el polinomio
+	 */
+	Polinomio & operator*(Monomio const & monomio, Polinomio const &polinomio);
+
+	/**
+	 * @brief Operador binario de la multiplicación entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio: Polinomio situado a la izquierda del operador
+	 * @param numero_real: Número real situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de multiplicar el polinomio con un monomio con coeficiente = numero_real y grado = 0
+	 */
+	Polinomio & operator*(Polinomio const &polinomio, double numero_real);
+
+	/**
+	 * @brief Operador binario de la multiplicación entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param numero_real: Número real situado a la izquierda del operador
+	 * @param polinomio: Polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de multiplicar el polinomio con un monomio con coeficiente = numero_real y grado = 0
+	 */
+	Polinomio & operator*(double numero_real, Polinomio const &polinomio);
+
+	///////////////////////////////////////////////////////////////////////////
+
+	//! \name Operadores binarios de la división
+
+	/**
+	 * @brief Operador binario de la división entre dos polinomios
+	 * @note Operador sobrecargado
+	 * @param polinomio1: Polinomio situado a la izquierda del operador
+	 * @param polinomio2: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de la división entre los polinomios
+	 */
+	Polinomio & operator/(Polinomio const &polinomio1,  Polinomio const &polinomio2);
+
+	/**
+	 * @brief Operador binario de la división entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio situado a la izquierda del operador
+	 * @param monomio: Monomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de dividir el polinomio entre el monomio
+	 */
+	Polinomio & operator/(Polinomio const &polinomio, Monomio const & monomio);
+
+	/**
+	 * @brief Operador binario de la división entre un monomio y un polinomio
+	 * @note Operador sobrecargado
+	 * @param monomio: Monomio situado a la izquierda del operador
+	 * @param polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de dividir el monomio entre el polinomio
+	 */
+	Polinomio & operator/(Monomio const & monomio, Polinomio const &polinomio);
+
+	/**
+	 * @brief Operador binario de la división entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param polinomio: Polinomio: Polinomio situado a la izquierda del operador
+	 * @param numero_real: Número real situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de dividir el polinomio entre un monomio con coeficiente = numero_real y grado = 0
+	 */
+	Polinomio & operator/(Polinomio const &polinomio, double numero_real);
+
+	/**
+	 * @brief Operador binario de la división entre un polinomio y un número real
+	 * @note Operador sobrecargado
+	 * @param numero_real: Número real situado a la izquierda del operador
+	 * @param polinomio: Polinomio: Polinomio situado a la derecha del operador
+	 * @return Polinomio&: Polinomio resultante de dividir el monomio con coeficiente = numero_real y grado = 0 entre el polinomio
+	 */
+	Polinomio & operator/(double numero_real, Polinomio const &polinomio);
 
 	/////////////////////////////////////////////////////////////////////////////
 
-   //! \name Sobrecarga de los operadores de flujo de la clase Polinomio.
+    //! \name Sobrecarga de los operadores de flujo de la clase Polinomio.
 
     // COMPLETAR LOS COMENTARIOS DE DOXYGEN
-    ostream &operator<<(ostream &stream, ed::Polinomio const &p);
+    ostream &operator<<(ostream &stream, Polinomio const &p);
 
     // COMPLETAR LOS COMENTARIOS DE DOXYGEN
-    istream &operator>>(istream &stream, ed::Polinomio &p);
+    istream &operator>>(istream &stream, Polinomio &p);
 
 }  // Fin de namespace ed.
 
