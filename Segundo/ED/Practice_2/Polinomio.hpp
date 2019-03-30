@@ -49,31 +49,6 @@ class Polinomio: public ed::PolinomioInterfaz
 		 */
 		void _ordenaPolinomio();
 
-		//! \name Funciones para la implementación del algoritmo de ordenación QuickSort
-
-		/**
-		 * @brief Función principal de la implementación del algoritmo
-		 * @param array: Referencia al vector que va a ser ordenado
-		 * @param low: De este índice en adelante, el vector debe quedar ordenado
-		 * @param high: Las posiciones de este índice y los menores a él pero mayores a low deben estar ordenadas
-		 */
-		void _quickSort(vector <Monomio> &array, int low, int high);
-
-		/**
-		 * @brief Coge el último elemento del rango como pivote, lo coloca en su posición correcta y coloca los mayores a su izquierda y los menores a su derecha
-		 * @param array: Vector a ordenar
-		 * @param low: Índice del elemento que será el mayor del fragmento pasado
-		 * @param high: Índice del pivote que acabará siendo el del elemento menor
-		 */
-		void _partition(vector <Monomio> &array, int low, int high);
-
-		/**
-		 * @brief Intercambia las posiciones de los monomios pasados por referencia
-		 * @param monomio1 
-		 * @param monomio2 
-		 */
-		void _swap(Monomio &monomio1, Monomio &monomio2);
-	
 	//! \name Funciones o métodos públicos de la clase Polinomio
 	public:
 		//! \name Constructores de la clase Polinomio
@@ -138,7 +113,7 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @param grado_monomio: grado del monomio a encontrar
 		 * @return Monomio: Objeto Monomio con el grado especificado
 		 */
-		Monomio & getMonomio(int grado_monomio) const;
+		Monomio getMonomio(int grado_monomio) const;
 
 		//! \name Modificadores de la clase Polinomio
 

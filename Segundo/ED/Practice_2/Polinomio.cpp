@@ -13,13 +13,17 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+#include <algorithm>
+using std::sort;
+
 #include "Polinomio.hpp"
 using ed::Polinomio;
 
-//Constructores
+#include "operadoresExternosPolinomios.hpp"
 
+//Constructores
 Polinomio::Polinomio() {
-	Monomio monomio(0, 0.0);
+	Monomio monomio(0.0, 0);
 	_vectorMonomios.push_back(monomio);
 }
 
@@ -42,17 +46,18 @@ bool Polinomio::existeMonomio(int grado_monomio) const {
 	return false;
 }
 
-Monomio & Polinomio::getMonomio(int grado_monomio) const {
-	Monomio monomio_nulo;
+Monomio Polinomio::getMonomio(int grado_monomio) const {
+	Monomio *monomio_nulo = new Monomio(0.0, 0);
 	Monomio monomio_correcto;
 	if(existeMonomio(grado_monomio)) {
-		vector <Monomio>::const_iterator monomio;
-		for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
-			if(monomio->getGrado() == grado_monomio) return monomio_correcto = *monomio;
+		for(int i = 0; i < getNumeroMonomios(); i++) {
+			if(_vectorMonomios[i].getGrado() == grado_monomio) return monomio_correcto = _vectorMonomios[i];
 		}
 	}
-	else return monomio_nulo;
+	return *monomio_nulo;
 }
+
+//Funciones privadas
 
 bool Polinomio::_estaOrdenado() const {
 	vector <Monomio>::const_iterator monomio;
@@ -62,56 +67,21 @@ bool Polinomio::_estaOrdenado() const {
 	return true;
 }
 
-//Modificadores
-
 void Polinomio::_ordenaPolinomio() {
 	if (_estaOrdenado() == false) {
-		int low = 0;
-		int high = getVector().size() - 1;
-		_quickSort(_vectorMonomios, low, high);
-		#ifndef NDEBUG
-			assert(!_estaOrdenado());
-		#endif
+		vector <Monomio> ordered_vector;
+		vector <Monomio>::iterator monomio_mayor = _vectorMonomios.begin();
+		vector <Monomio>::iterator monomio;
+		for(int i = 0; i < getNumeroMonomios(); i++) {
+			for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
+				if(monomio_mayor->getGrado() < monomio->getGrado()) monomio_mayor = monomio;
+			}
+			ordered_vector[i] = *monomio_mayor;
+			monomio_mayor = _vectorMonomios.erase(monomio_mayor);
+		}
+	setVector(ordered_vector);
 	}
 }
-
-//Funciones privadas
-
-void _swap(Monomio &monomio1, Monomio &monomio2) { 
-    Monomio monomio_auxiliar;
-    monomio_auxiliar = monomio1;
-	monomio1 = monomio2;
-	monomio2 = monomio_auxiliar;
-} 
-
-int _partition (vector <Monomio> &array, int low, int high) { 
-    // Valor del pivote
-	int pivot = array[high].getGrado();
-    // Indice del elemento mayor
-	int i = (low - 1);
-  
-    for (int j = low; j <= high - 1; j++) { 
-        // Si el elemento actual es menor o igual que el pivote 
-        if (array[j].getGrado() >= pivot) { 
-            // Incremento del índice del elemento mayor
-			i++;
-			//Se ingercambian los elementos
-            _swap(array[i], array[j]); 
-        } 
-    } 
-    _swap(array[i + 1], array[high]); 
-    return (i + 1); 
-} 
-  
-void _quickSort(vector <Monomio> &array, int low, int high) { 
-    if (low < high) { 
-        //Índice de la partición, array[partition_index] está en la posición correcta
-        int partition_index = _partition(array, low, high); 
-        //Ordena de forma separada los elementos anteriores y posteriores a la partición (pivote)
-        _quickSort(array, low, partition_index - 1); 
-        _quickSort(array, partition_index + 1, high); 
-    } 
-} 
 
 /////////////////////////////////////////////////////////////
 
@@ -131,7 +101,7 @@ Polinomio & Polinomio::operator=(Monomio const &monomio) {
 	//Vacía el polinomio de monomios
 	_vectorMonomios.clear();
 	//Añado el monomio al vector de monomios del polinomio y devuelvo el objeto
-	_vectorMonomios.assign(0, monomio);
+	_vectorMonomios.push_back(monomio);
 	return *this;
 }
 
@@ -141,7 +111,7 @@ Polinomio & Polinomio::operator=(double const &numero_real) {
 	Monomio monomio(0, numero_real);
 	//Limpio el vector del polinomio y le añado unicamente el monomio creado
 	_vectorMonomios.clear();
-	_vectorMonomios.assign(0, monomio);
+	_vectorMonomios.push_back(monomio);
 	//Devuelvo el objeto actual
 	return *this;
 }
@@ -226,21 +196,21 @@ void Polinomio::leerPolinomio() {
 	int numero_monomios;
 	cout << "Introduzca el número de monomios que ha de tener el polinomio: ";
 	cin >> numero_monomios;
+	Monomio monomio_nulo(0.0, 0);
+	_vectorMonomios.resize(numero_monomios, monomio_nulo);
 	for(int i = 0; i < numero_monomios; i++) {
-		cout << "-----------------" << endl;
-		getVector().at(i).leerMonomio();
-		cout << "-----------------" << endl;
+		cout << endl;
+		_vectorMonomios[i].leerMonomio();
 	}
 	_ordenaPolinomio();
 }
 
 void Polinomio::escribirPolinomio() {
-	vector <Monomio>::iterator monomio;
-	for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
-		cout << "-----------------" << endl;
-		monomio->escribirMonomio();
-		cout << "-----------------" << endl;
+	for(int i = 0; i < getNumeroMonomios(); i++) {
+		_vectorMonomios[i].escribirMonomio();
+		cout << " ";
 	}
+	cout << endl;
 }
 ///////////////////////////////////////////////////////////////////////
 
