@@ -1,7 +1,11 @@
-/*!
-	\file operadoresExternosPolinomios.hpp
-	\brief Ficheros con operadores de monomios y polinomios
-*/
+/**
+ * @file operadoresExternosPolinomios.hpp
+ * @author Pablo Rodríguez Guillén (i72rogup@uco.es)
+ * @brief Fichero de cabecera para los operadores externos de la clase polinomio
+ * @version 0.1
+ * @date 2019-31-03
+ * @copyright Copyright (c) 2019
+ */
 
 #ifndef _OperadoresPolinomios_HPP_
 #define _OperadoresPolinomios_HPP_
@@ -339,12 +343,20 @@ namespace ed
 
     //! \name Sobrecarga de los operadores de flujo de la clase Polinomio.
 
-    // COMPLETAR LOS COMENTARIOS DE DOXYGEN
-    ostream &operator<<(ostream &stream, Polinomio const &p);
+    /**
+     * @brief Sobrecarga del operador de flujo de entrada
+     * @param stream: Flujo de entrada
+     * @param polinomio: Polinomio que se escribe por el flujo de entrada
+     */
+    ostream &operator<<(ostream &stream, Polinomio const &polinomio);
 
-    // COMPLETAR LOS COMENTARIOS DE DOXYGEN
-    istream &operator>>(istream &stream, Polinomio &p);
+    /**
+     * @brief Sobrecarga del operador de flujo de salida
+     * @param stream: Flujo de salida
+     * @param polinomio: Polinomio que lee el flujo de salida
+     */
+	istream &operator>>(istream &stream, Polinomio &polinomio);
 
-}  // Fin de namespace ed.
+} // Fin de namespace ed.
 
 #endif // _OperadoresPolinomios_HPP_
