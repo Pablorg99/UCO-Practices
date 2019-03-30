@@ -3,7 +3,7 @@
  * @author Pablo Rodríguez Guillén (i72rogup@uco.es)
  * @brief Fichero de cabecera del TAD Polinomio
  * @version 0.1
- * @date 2019-03-05
+ * @date 2019-31-03
  * @copyright Copyright (c) 2019
  */
 
@@ -37,13 +37,6 @@ class Polinomio: public ed::PolinomioInterfaz
 		//! \name Funciones privadas de la clase Polinomio
 
 		/**
-		 * @brief Devuelve el atributo privado _vectorMonomios de la clase Polinomio
-		 * @note Permite que si la implementación del vector cambie, solo haya que modificar este observador privado
-		 * @return vector <Monomio> 
-		 */
-		inline vector <Monomio> _getVector() const {return _vectorMonomios;}
-
-		/**
 		 * @brief Comprueba si el vector de monomios del polinomio que invoca este método esta ordenado por los grados de los monomios de mayor a menor
 		 * @return true Si está ordenado
 		 * @return false Si sucede lo contrario
@@ -56,13 +49,6 @@ class Polinomio: public ed::PolinomioInterfaz
 		 */
 		void _ordenaPolinomio();
 
-		/**
-		 * @brief Modificador del vector de monomios que forma el polinomio
-		 * @param new_vector: Vector que sustituye
-		 * @post El polinomio insertado queda ordenado
-		 */
-		inline void _setVector(vector <Monomio> &new_vector) {_vectorMonomios = new_vector; _ordenaPolinomio();}
-		
 		//! \name Funciones para la implementación del algoritmo de ordenación QuickSort
 
 		/**
@@ -110,6 +96,14 @@ class Polinomio: public ed::PolinomioInterfaz
 		//! \name Observadores: funciones de consulta de la clase Polinomio
 
 		/**
+		 * @brief Devuelve el atributo privado _vectorMonomios de la clase Polinomio
+		 * @note Permite que si la implementación del vector cambie, solo haya que modificar este observador privado
+		 * @return vector <Monomio> 
+		 */
+
+		inline vector <Monomio> getVector() const {return _vectorMonomios;}
+
+		/**
 		 * @brief Comprueba si el Polinomio es igual a un monomio con grado y coeficientes 0 y 0.0
 		 * @return true si el polinomio es igual al monomio con las características especificadas
 		 * @return false si el polinomio no es igual al monomio mencionado
@@ -121,14 +115,14 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @pre Los monomios están ordenados de mayor a menor grado
 		 * @return int: el mayor grado de los monomios que forman el polinomio
 		 */
-		inline int getGrado() const {return _getVector().front().getGrado();}
+		inline int getGrado() const {return getVector().front().getGrado();}
 
 		/**
 		 * @brief Observador del numero de monomios del polinomio
 		 * @note Función inline
 		 * @return int: numero de elementos del vector "polinomio"
 		 */
-		inline int getNumeroMonomios() const {return _getVector().size();}
+		inline int getNumeroMonomios() const {return getVector().size();}
 
 		/**
 		 * @brief Comprueba si existe un monomio dentro del polinomio con un determinado grado
@@ -145,6 +139,15 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @return Monomio: Objeto Monomio con el grado especificado
 		 */
 		Monomio & getMonomio(int grado_monomio) const;
+
+		//! \name Modificadores de la clase Polinomio
+
+		/**
+		 * @brief Modificador del vector de monomios que forma el polinomio
+		 * @param new_vector: Vector que sustituye
+		 * @post El polinomio insertado queda ordenado
+		 */
+		inline void setVector(vector <Monomio> &new_vector) {_vectorMonomios = new_vector; _ordenaPolinomio();}
 
 	 	////////////////////////////////////////////////////////////////
 

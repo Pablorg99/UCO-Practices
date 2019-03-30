@@ -3,7 +3,7 @@
  * @author Pablo Rodríguez Guillén (i72rogup@uco.es)
  * @brief Fichero donde se implementa el TAD Polinomio
  * @version 0.1
- * @date 2019-03-05
+ * @date 2019-31-03
  * @copyright Copyright (c) 2019
  */
 
@@ -20,23 +20,23 @@ using ed::Polinomio;
 
 Polinomio::Polinomio() {
 	Monomio monomio(0, 0.0);
-	_getVector().push_back(monomio);
+	_vectorMonomios.push_back(monomio);
 }
 
 Polinomio::Polinomio(const Polinomio &polinomio) {
-	_vectorMonomios = polinomio._getVector();
+	_vectorMonomios = polinomio.getVector();
 }
 
 //Observadores
 
 bool Polinomio::esNulo() const {
-	if((getNumeroMonomios() == 1) && (_getVector().front().esNulo())) return true;
+	if((getNumeroMonomios() == 1) && (getVector().front().esNulo())) return true;
 	else return false;
 }
 
 bool Polinomio::existeMonomio(int grado_monomio) const {
 	vector <Monomio>::const_iterator monomio;
-	for(monomio = _getVector().begin(); monomio != _getVector().end(); monomio++) {
+	for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
 		if(monomio->getGrado() == grado_monomio) return true;
 	}
 	return false;
@@ -47,7 +47,7 @@ Monomio & Polinomio::getMonomio(int grado_monomio) const {
 	Monomio monomio_correcto;
 	if(existeMonomio(grado_monomio)) {
 		vector <Monomio>::const_iterator monomio;
-		for(monomio = _getVector().begin(); monomio != _getVector().end(); monomio++) {
+		for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
 			if(monomio->getGrado() == grado_monomio) return monomio_correcto = *monomio;
 		}
 	}
@@ -56,7 +56,7 @@ Monomio & Polinomio::getMonomio(int grado_monomio) const {
 
 bool Polinomio::_estaOrdenado() const {
 	vector <Monomio>::const_iterator monomio;
-	for(monomio = _getVector().begin(); monomio != _getVector().end(); monomio++) {
+	for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
 		if((monomio - 1)->getGrado() < monomio->getGrado()) return false;
 	}
 	return true;
@@ -67,7 +67,7 @@ bool Polinomio::_estaOrdenado() const {
 void Polinomio::_ordenaPolinomio() {
 	if (_estaOrdenado() == false) {
 		int low = 0;
-		int high = _getVector().size() - 1;
+		int high = getVector().size() - 1;
 		_quickSort(_vectorMonomios, low, high);
 		#ifndef NDEBUG
 			assert(!_estaOrdenado());
@@ -129,9 +129,9 @@ Polinomio & Polinomio::operator=(Polinomio const &polinomio) {
 
 Polinomio & Polinomio::operator=(Monomio const &monomio) {
 	//Vacía el polinomio de monomios
-	this->_getVector().clear();
+	_vectorMonomios.clear();
 	//Añado el monomio al vector de monomios del polinomio y devuelvo el objeto
-	this->_getVector().assign(0, monomio);
+	_vectorMonomios.assign(0, monomio);
 	return *this;
 }
 
@@ -140,8 +140,8 @@ Polinomio & Polinomio::operator=(double const &numero_real) {
 	//Creo un monomio con coeficiente = numero_real y grado = 0
 	Monomio monomio(0, numero_real);
 	//Limpio el vector del polinomio y le añado unicamente el monomio creado
-	this->_getVector().clear();
-	this->_getVector().assign(0, monomio);
+	_vectorMonomios.clear();
+	_vectorMonomios.assign(0, monomio);
 	//Devuelvo el objeto actual
 	return *this;
 }
@@ -228,7 +228,7 @@ void Polinomio::leerPolinomio() {
 	cin >> numero_monomios;
 	for(int i = 0; i < numero_monomios; i++) {
 		cout << "-----------------" << endl;
-		_getVector().at(i).leerMonomio();
+		getVector().at(i).leerMonomio();
 		cout << "-----------------" << endl;
 	}
 	_ordenaPolinomio();
@@ -236,7 +236,7 @@ void Polinomio::leerPolinomio() {
 
 void Polinomio::escribirPolinomio() {
 	vector <Monomio>::iterator monomio;
-	for(monomio = _getVector().begin(); monomio != _getVector().end(); monomio++) {
+	for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
 		cout << "-----------------" << endl;
 		monomio->escribirMonomio();
 		cout << "-----------------" << endl;
@@ -249,7 +249,7 @@ void Polinomio::escribirPolinomio() {
 double Polinomio::calcularValor(double numero_real) {
 	double resultado = 0.0;
 	vector <Monomio>::iterator monomio;
-	for(monomio = _getVector().begin(); monomio != _getVector().end(); monomio++) {
+	for(monomio = getVector().begin(); monomio != getVector().end(); monomio++) {
 		resultado += monomio->calcularValor(numero_real);
 	}
 	return resultado;
