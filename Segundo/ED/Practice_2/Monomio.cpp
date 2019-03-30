@@ -129,20 +129,21 @@ void Monomio::leerMonomio() {
 }
 
 void Monomio::escribirMonomio() {
-	//El monomio es 0
-	if(abs(getCoeficiente() - 0.0) < COTA_ERROR) cout << 0 << endl;
-	//No se tiene que escribir X
-	if(getGrado() == 0) cout << getCoeficiente() << endl;
-	//Se tiene que escribir X
-	else {
+	if(abs(getCoeficiente() - 0.0) < COTA_ERROR) cout << 0;
+	else if(getGrado() > 1){
+		if(abs(getCoeficiente() - (1.0)) < COTA_ERROR) cout << "X";
+		else if(abs(getCoeficiente() - (-1.0)) < COTA_ERROR) cout << "-X";
+		else cout << getCoeficiente() << "X";
+		cout << "^" << getGrado();
+	}
+	else if(getGrado() == 1) {
 		if(abs(getCoeficiente() - (1.0)) < COTA_ERROR) cout << "X";
 		else if(abs(getCoeficiente() - (-1.0)) < COTA_ERROR) cout << "-X";
 		else cout << getCoeficiente() << "X";
 	}
+	else cout << getCoeficiente();
 	//Se tiene que escribir el grado
-	if(getGrado() > 1) cout << "^" << getGrado() << endl;
 	//Si no se tiene escribir, se añade el salto de linea necesarios
-	else cout << endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
