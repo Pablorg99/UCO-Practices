@@ -25,14 +25,14 @@ INCLUDES = funcionesAuxiliares.hpp \
 # $<: primera dependencia
 #
 
-objetivo: $(NAME).exe
+objetivo: $(NAME).out
 
 #Opciones para NO depurar los asertos
 ndebug: CPPFLAGS += -DNDEBUG 
 ndebug: objetivo
 
 # Primer objetivo 
-$(NAME).exe: $(OBJECTS)
+$(NAME).out: $(OBJECTS)
 			@echo "Generando " $@
 			@g++ $^ -o $@
 #
