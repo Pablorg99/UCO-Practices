@@ -94,16 +94,11 @@ Polinomio & operator+(Polinomio const & polinomio) {
 }
 
 Polinomio & operator-(Polinomio const & polinomio) {
-	vector <Monomio> new_vector = polinomio.getVector();
-	int index = 0;
-	vector <Monomio>::const_iterator monomio;
-	for(monomio = polinomio.getVector().begin(); monomio != polinomio.getVector().end(); monomio++) {
-		new_vector.assign(index, -(*monomio));
-		index++;
+	Polinomio *return_polinomio = new Polinomio(polinomio);
+	for(int i = 0; i < polinomio.getNumeroMonomios(); i++) {
+		return_polinomio->getVector()[i] = -polinomio.getVector()[i];
 	}
-	Polinomio new_polinomio;
-	new_polinomio.setVector(new_vector);
-	Polinomio *return_polinomio = new Polinomio(new_polinomio);
+	return_polinomio->escribirPolinomio();
 	return *return_polinomio;
 }
 
@@ -280,6 +275,12 @@ ostream &operator<<(ostream &stream, Polinomio const &polinomio) {
 }
 
 istream &operator>>(istream &stream, Polinomio &polinomio) {
+	std::string cadena_auxiliar;
+	Monomio aux_monomio;
+	while(getline(stream, cadena_auxiliar)) {
+		stream >> aux_monomio;
+		polinomio.getVector().push_back(aux_monomio);
+	}
 	return stream;
 }
 

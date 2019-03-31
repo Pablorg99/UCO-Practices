@@ -150,7 +150,7 @@ namespace ed
 		string cadena_auxiliar;
 		getline(stream, cadena_auxiliar, ' ');
 		monomio.setCoeficiente(atof(cadena_auxiliar.c_str()));
-		getline(stream, cadena_auxiliar); //El valor por defecto de separacion es \n
+		getline(stream, cadena_auxiliar, ' '); //El valor por defecto de separacion es \n
 		monomio.setGrado(atoi(cadena_auxiliar.c_str()));
    		// Se devuelve el flujo de entrada
 		return stream;

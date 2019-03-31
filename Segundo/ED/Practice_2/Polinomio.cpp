@@ -20,6 +20,7 @@ using std::sort;
 #include "Polinomio.hpp"
 using ed::Polinomio;
 
+#include "operadoresExternosMonomios.hpp"
 #include "operadoresExternosPolinomios.hpp"
 
 //Constructores
@@ -124,68 +125,90 @@ Polinomio & Polinomio::operator=(double const &numero_real) {
 //Suma
 
 Polinomio & Polinomio::operator+=(Polinomio const &polinomio) {
-	*this = *this + polinomio;
+	//Se iteran los monomios del polinomio pasado
+	for(int i = 0; i < polinomio.getNumeroMonomios(); i++) {
+		//Si en el objeto actual existe un monomio con el mismo grado que el iterado
+		if(this->existeMonomio(polinomio.getVector()[i].getGrado())) {
+			//Se recorre el objeto actual y se modifica el monomio haciendo la suma correspondiente
+			for(int j = 0; j < this->getNumeroMonomios(); j++) {
+				if(this->getVector()[j].getGrado() == polinomio.getVector()[i].getGrado()) {
+					this->getVector()[j] = this->getVector()[j] + polinomio.getVector()[i];
+				}
+			}
+		}
+		//Si no existe el monomio de la iteración, se añade al polinomio actual
+		else this->getVector().push_back(polinomio.getVector()[i]);
+	}
+	this->_ordenaPolinomio();
 	return *this;
 }
 
 Polinomio & Polinomio::operator+=(Monomio const &monomio) {
-	*this = *this + monomio;
+	bool sumado = false;
+	for(int i = 0; i < this->getNumeroMonomios(); i++) {
+		if(this->getVector()[i].getGrado() == monomio.getGrado()) {
+			this->getVector()[i] = this->getVector()[i] + monomio;
+			sumado = true;
+		}
+	}
+	if(sumado == false) this->getVector().push_back(monomio);
+	this->_ordenaPolinomio();
 	return *this;
 }
 
 Polinomio & Polinomio::operator+=(double numero_real) {
-	*this = *this + numero_real;
-	return *this;
+	Monomio aux_monomio(numero_real, 0);
+	return *this+=aux_monomio;
 }
 
 //Resta 
 
 Polinomio & Polinomio::operator-=(Polinomio const &polinomio) {
-	*this = *this - polinomio;
-	return *this;
+	return *this+=(-polinomio);
 }
 
 Polinomio & Polinomio::operator-=(Monomio const &monomio) {
-	*this = *this - monomio;
-	return *this;
+	Monomio aux_monomio = -monomio;
+	return *this+=aux_monomio;
 }
 
 Polinomio & Polinomio::operator-=(double numero_real) {
-	*this = *this - numero_real;
-	return *this;
+	Monomio aux_monomio(-numero_real, 0);
+	return *this+=aux_monomio;
 }
 
 //Multiplicación
 
 Polinomio & Polinomio::operator*=(Polinomio const &polinomio) {
-	*this = *this * polinomio;
+	for(int i = 0; i < polinomio.getNumeroMonomios(); i++) {
+		*this *= polinomio.getVector()[i];
+	}
 	return *this;
 }
 
 Polinomio & Polinomio::operator*=(Monomio const &monomio) {
-	*this = *this * monomio;
+	for(int i = 0; i < getNumeroMonomios(); i++) {
+		getVector()[i] = getVector()[i] * monomio;
+	}
 	return *this;
 }
 
 Polinomio & Polinomio::operator*=(double numero_real) {
-	*this = *this + numero_real;
-	return *this;
+	Monomio aux_monomio(numero_real, 0);
+	return *this*=aux_monomio;
 }
 
 //División
 
 Polinomio & Polinomio::operator/=(Polinomio const &polinomio) {
-	*this = *this / polinomio;
 	return *this;
 }
 
 Polinomio & Polinomio::operator/=(Monomio const &monomio) {
-	*this = *this / monomio;
 	return *this;
 }
 
 Polinomio & Polinomio::operator/=(double numero_real) {
-	*this = *this / numero_real;
 	return *this;
 }
 
