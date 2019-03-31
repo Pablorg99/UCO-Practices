@@ -13,6 +13,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
+#include <cstdio>
 
 #include "operadoresExternosPolinomios.hpp"
 
@@ -113,31 +114,40 @@ Polinomio & operator-(Polinomio const & polinomio) {
 //Operador suma
 
 Polinomio & operator+(Polinomio const &polinomio1,  Polinomio const &polinomio2) {
-	Polinomio new_polinomio;
-	vector <Monomio>::const_iterator monomio1;
-	for(monomio1 = polinomio1.getVector().begin(); monomio1 != polinomio1.getVector().end(); monomio1++) {
-		new_polinomio = polinomio2 + *monomio1;
+	//Creo el nuevo objeto
+	Polinomio *new_polinomio = new Polinomio;
+	//Creo el nuevo vector con los mismos monomios que el polinomio 1
+	vector <Monomio> new_vector = polinomio1.getVector();
+	for(int i = 0; i < polinomio2.getNumeroMonomios(); i++) {
+		//Si existe un monomio en el polinomio 1 con el mismo grado que el monomio de esta itearaciñon del polinomio 2
+		if(polinomio1.existeMonomio(polinomio2.getVector()[i].getGrado())) {
+			//Recorre el polinomio 1 buscando ese monomio, y se suma al del polinomio 2
+			for(int j = 0; j < polinomio1.getNumeroMonomios(); j++) {
+				if(polinomio1.getVector()[j].getGrado() == polinomio2.getVector()[i].getGrado()) {
+					new_vector[j] = polinomio1.getVector()[j] + polinomio2.getVector()[i];
+				}
+			}
+		}
+		//Si no existe un monomio en el polinomio 1 con ese grado, el monomio del polinomio 2 de esta iteración se añade al nuevo polinomio
+		else new_vector.push_back(polinomio2.getVector()[i]);
 	}
-	Polinomio *return_polinomio = new Polinomio(new_polinomio);
-	return *return_polinomio;
+	new_polinomio->setVector(new_vector);
+	new_polinomio->escribirPolinomio();
+	return *new_polinomio;
 }
 
 Polinomio & operator+(Polinomio const &polinomio, Monomio const & monomio) {
+	Polinomio *return_polinomio = new Polinomio;
 	vector <Monomio> new_vector = polinomio.getVector();
-	int index = 0;
-	vector <Monomio>::const_iterator monomio_it;
 	bool sumado = false;
-	for(monomio_it = polinomio.getVector().begin(); monomio_it != polinomio.getVector().end(); monomio_it++) {
-		if(monomio_it->getGrado() == monomio.getGrado()) {
-			new_vector.assign(index, *monomio_it + monomio);
+	for(int index = 0; index < polinomio.getNumeroMonomios(); index++) {
+		if(polinomio.getVector()[index].getGrado() == monomio.getGrado()) {
+			new_vector[index] = polinomio.getVector()[index] + monomio;
 			sumado = true;
 		}
-		index++;
 	}
 	if(sumado == false) new_vector.push_back(monomio);
-	Polinomio new_polinomio;
-	new_polinomio.setVector(new_vector);
-	Polinomio *return_polinomio = new Polinomio(new_polinomio);
+	return_polinomio->setVector(new_vector);
 	return *return_polinomio;
 }
 
