@@ -257,7 +257,7 @@ void ed::testPolinomio()
 	std::cout<< "Resultado p1 += p2"<< std::endl;
 	p1 += p2;
 	std::cout<< "p1 = ";
-	p2.escribirPolinomio();
+	p1.escribirPolinomio();
 	std::cout << std::endl << std::endl;
 
 	// Operador de resta y asignación
