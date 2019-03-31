@@ -266,7 +266,7 @@ class Polinomio: public ed::PolinomioInterfaz
 		 * @brief Imprime por pantalla todos los monomios del polinomio haciendo uso de escribirMonomio()
 		 * @note Formato de un monomio: Coeficiente X^grado || Coeficiente 1: X^grado || Coeficiente -1: -X^grado || Grado 0: Coeficiente || Grado 1: X (sin grado)
 		 */
-		void escribirPolinomio();
+		void escribirPolinomio() const;
 
 		///////////////////////////////////////////////////////////////////////
 

@@ -12,6 +12,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
+#include <cstdio>
 
 #include <algorithm>
 using std::sort;
@@ -89,8 +90,8 @@ void Polinomio::_ordenaPolinomio() {
 
 Polinomio & Polinomio::operator=(Polinomio const &polinomio) {
 	if(*this != polinomio) {
-		//Utilizo el operador = por defecto
-		*this = polinomio;
+		//Igualo los objetos campo a campo
+		this->_vectorMonomios = polinomio.getVector();
 		return *this;
 	}
 	else return *this;
@@ -108,7 +109,7 @@ Polinomio & Polinomio::operator=(Monomio const &monomio) {
 
 Polinomio & Polinomio::operator=(double const &numero_real) {
 	//Creo un monomio con coeficiente = numero_real y grado = 0
-	Monomio monomio(0, numero_real);
+	Monomio monomio(numero_real, 0);
 	//Limpio el vector del polinomio y le añado unicamente el monomio creado
 	_vectorMonomios.clear();
 	_vectorMonomios.push_back(monomio);
@@ -205,7 +206,7 @@ void Polinomio::leerPolinomio() {
 	_ordenaPolinomio();
 }
 
-void Polinomio::escribirPolinomio() {
+void Polinomio::escribirPolinomio() const {
 	for(int i = 0; i < getNumeroMonomios(); i++) {
 		_vectorMonomios[i].escribirMonomio();
 		cout << " ";

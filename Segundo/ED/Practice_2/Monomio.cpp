@@ -128,7 +128,7 @@ void Monomio::leerMonomio() {
 	std::cin.ignore();
 }
 
-void Monomio::escribirMonomio() {
+void Monomio::escribirMonomio() const {
 	if(abs(getCoeficiente() - 0.0) < COTA_ERROR) cout << 0;
 	else if(getGrado() > 1){
 		if(abs(getCoeficiente() - (1.0)) < COTA_ERROR) cout << "X";

@@ -183,7 +183,7 @@ namespace ed
 				\brief Imprime el monomio por pantalla con un formato
 				\note Formato: Coeficiente X^grado || Coeficiente 1: X^grado || Coeficiente -1: -X^grado || Grado 0: Coeficiente || Grado 1: X (sin grado)
 			*/
-			void escribirMonomio();
+			void escribirMonomio() const;
 
 			//! \name Funciones auxiliares de la clase Monomio
 
