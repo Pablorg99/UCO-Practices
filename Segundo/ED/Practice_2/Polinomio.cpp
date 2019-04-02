@@ -232,9 +232,14 @@ void Polinomio::leerPolinomio() {
 void Polinomio::escribirPolinomio() const {
 	for(int i = 0; i < getNumeroMonomios(); i++) {
 		_vectorMonomios[i].escribirMonomio();
-		cout << " ";
 	}
 	cout << endl;
+	getVector().begin()->escribirMonomio();
+	cout << endl;
+	vector <Monomio>::iterator it;
+	for(it = getVector().begin(); it != getVector().end(); it++) {
+		it->escribirMonomio();
+	}
 }
 ///////////////////////////////////////////////////////////////////////
 
