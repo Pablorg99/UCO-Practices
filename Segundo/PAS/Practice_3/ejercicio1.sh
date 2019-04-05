@@ -6,7 +6,7 @@ else
 	dotc_files=$(find $1 -name "*.c" | wc -l)
 	doth_files=$(find $1 -name "*.h" | wc -l)
 	echo "Tenemos $dotc_files ficheros con extensión .c y $doth_files ficheros con extensión .h"
-	for file in $(find $1 -type f -name "*.c" -or -type f -name "*.h" | sort -k1) 
+	for file in $(find $1 -type f -name "*.c" -or -type f -name "*.h") 
 	do
 		n_lines=$(wc -l < $file)
 		n_chars=$(wc -m < $file)
