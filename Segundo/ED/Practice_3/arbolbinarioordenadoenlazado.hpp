@@ -35,70 +35,80 @@ namespace ed
 		public:
 			NodoArbolBinario (const G &info)
 			{
-				// TODO
+			    _info = info;
+			    _derecho = NULL;
+			    _izquierdo = NULL;
 			}
 
-			NodoArbolBinario (const NodoArbolBinario &n)
+			NodoArbolBinario (const NodoArbolBinario &nodo)
 			{
-				// TODO
+				*this = nodo;
 			}
 
 			/*!\brief Observadores.*/
 			const G & getInfo() const
 			{
-				// TODO
+				return _info;
 			}
 
 			NodoArbolBinario *getIzquierdo() const
 			{
-				// TODO
+				return _izquierdo;
 			}
 
 			NodoArbolBinario *getDerecho() const
 			{
-				// TODO
+				return _derecho;
 			}
 
 			bool esHoja() const
 			{
-				// TODO
+				if(_derecho == NULL && _izquierdo == NULL) return true;
 				return false;
 			}
 
 			void recorridoPreOrden (OperadorNodo<G> &operador) const
 			{
-				// TODO
+				operador->aplicar(getInfo());
+				if(getIzquierdo() != NULL) getIzquierda()->recorridoPreOrden(operador);
+				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
 			}
 
 			void recorridoPostOrden (OperadorNodo<G> &operador) const
 			{
-				// TODO
+				if(getIzquierdo() != NULL) getIzquierda()->recorridoPreOrden(operador);
+				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
+				operador->aplicar(getInfo());
 			}
 
 			void recorridoInOrden (OperadorNodo<G> &operador) const
 			{
-				// TODO
+				if(getIzquierdo() != NULL) getIzquierda()->recorridoPreOrden(operador);
+				operador->aplicar(getInfo());
+				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
 			}
 
 			/*!\brief Modificadores. */
 			void setInfo(const G &info)
 			{
-				// TODO
+				_info = info;
 			}
 
-			void setIzquierdo(NodoArbolBinario *n)
+			void setIzquierdo(NodoArbolBinario *nodo)
 			{
-				// TODO
+				_izquierdo = *nodo;
 			}
 
-			void setDerecho(NodoArbolBinario *n)
+			void setDerecho(NodoArbolBinario *nodo)
 			{
-				// TODO
+				_derecho = *nodo
 			}
 
-			NodoArbolBinario & operator=(const NodoArbolBinario &n)
+			NodoArbolBinario & operator=(const NodoArbolBinario &nodo)
 			{
-				// TODO
+				_info = nodo.getInfo();
+				_derecho = nodo.getDerecho();
+				_izquierdo = nodo.getIzquierdo();	
 			}
 
 		}; //Fin clase NodoArbolBinario
@@ -112,12 +122,13 @@ namespace ed
 
 		ArbolBinarioOrdenadoEnlazado ()
 		{
-			// TODO
+
 		}
 
-		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G>& a)
+		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G>& arbol)
 		{
-			// TODO
+			*this = a;
+
 		}
 
 		~ArbolBinarioOrdenadoEnlazado ()
@@ -127,20 +138,26 @@ namespace ed
 			cout << "Destructor Usado \n";
 		}
 
-		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado& a)
+		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado& arbol)
 		{
-			// TODO
+			if(*this != arbol) {
+				_raiz = arbol._raiz;
+				_actual = arbol._actual;
+				_padre = arbol._padre
+			}
 		}
 
 		bool insertar(const G &x)
 		{
-			// TODO
+			
 			return false;
 		}
 
 		void borrarArbol()
 		{
-			// TODO
+			_raiz = NULL;
+			_actual = NULL;
+			_padre = NULL; 
 		}
 
 		bool borrar()
@@ -172,27 +189,31 @@ namespace ed
 
 		bool estaVacio() const
 		{
-			// TODO
+			if(_raiz == NULL) return true;
 			return false;
 		}
 
 		G raiz() const
 		{
-			// TODO
+			if(this->estaVacio() == false) return _raiz->getInfo();
+			else return NULL;
 		}
 
 		bool existeActual() const
 		{
-			// TODO
+			if(estaVacio() == false) {
+				if(_actual != NULL) return true;
+			}
 			return false;
 		}
 
 		G actual() const
 		{
-			// TODO
+			if(existeActual()) return _actual;
+			else return false;
 		}
 
-		/*!@}*/
+		/* !@} */
 	};
 
 } //namespace ed
