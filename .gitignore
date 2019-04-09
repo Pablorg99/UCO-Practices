@@ -1,6 +1,7 @@
 #Editor Files
 .vscode
 .idea
+cmake*
 #Testing Tools
 GoogleTest-Master
 #Libraries
