@@ -6,38 +6,43 @@ if [ $# -lt 1 ] || [ $# -gt 3 ]; then
 	exit 1
 fi
 
-# Cambia los valores por defecto si se indica y son correctos
-if [ $# -eq 3 ]; then
-	if [ $2 -lt $3 ]; then
-		umbral1=$2
-		umbral2=$3
-	else
-		echo "El umbral1 introducido es mayor o igual que el umbral2 de manera que se usaran los valores por defecto"
-		umbral1=10000 	
-		umbral2=100000
-	fi
+# Establezco los valores por defecto
+umbral1=10000
+umbral2=100000
+
+# Cambia los valores si corresponde
+if [ $2 -ne 0 ]; then
+	umbral1=$2
+fi
+
+if [ $3 -ne 0 ]; then
+	umbral1=$3
+fi
+
+# Si el umbral menor se ha introducido después del mayor, se intercambian los valores
+if [ $umbral1 -ge $umbral2 ]; then
+	aux=$umbral2
+	umbral2=$umbral1
+	umbral1=$aux
+fi
+
+# Creacion de carpetas: "pequenos","medianos" y "grandes"
+if [[ -d "pequenos" && "medianos" && "grandes" ]]; then
+	rm -rf pequenos medianos grandes
+	mkdir pequenos medianos grandes
+	echo "Las carpetas de salida ya existen, se va a proceder a borrarlas..."
 else
-	umbral1=10000
-	umbral2=100000
+	echo "Creando las carpetas pequenos, medianos y grandes"
+	mkdir pequenos medianos grandes
 fi
 
-# 
-if [ ! -d "pequeños" ]; then
-	mkdir pequeños
-fi
+echo "Copiando los archivos..."
+echo "$umbral1"
 
-if [ ! -d "medianos" ]; then
-	mkdir medianos
-fi
-
-if [ ! -d "grandes" ]; then
-	mkdir grandes
-fi
-
-# Ficheros pequeños
+# Ficheros pequeñosñ
 for file in $(find $1 -size -"$umbral1"c -type f -or -size "$umbral1"c -type f)
 do
-	cp $file pequeños
+	cp $file pequenos
 done
 
 # Ficheros medianos
