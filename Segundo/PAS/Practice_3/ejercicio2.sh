@@ -2,6 +2,7 @@
 
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
 	echo "La ejecución correcta es: $ ejercicio2.sh <directorio> [numero_bytes]"
+	exit 1
 fi
 
 if [ $# -eq 2 ]; then

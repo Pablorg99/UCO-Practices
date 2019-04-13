@@ -2,6 +2,7 @@
 
 if [ $# != 1 ]; then
 	echo "Indique un directorio sobre el que buscar"
+	exit 1
 else
 	dotc_files=$(find $1 -name "*.c" | wc -l)
 	doth_files=$(find $1 -name "*.h" | wc -l)
