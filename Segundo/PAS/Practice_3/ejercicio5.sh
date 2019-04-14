@@ -12,7 +12,7 @@ for file in $(find ~/Copia -type f)
 do
 	creation=$(stat $file -c %X)
 	let time=$(date +%s)-$creation
-	if [ $time -gt 5 ]; then
+	if [ $time -gt 200 ]; then
 		echo "Borrando $file de $time segundos..."
 		rm -f $file
 	fi

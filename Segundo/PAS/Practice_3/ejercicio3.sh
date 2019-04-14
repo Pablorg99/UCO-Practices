@@ -11,11 +11,12 @@ umbral1=10000
 umbral2=100000
 
 # Cambia los valores si corresponde
-if [ $2 -ne 0 ]; then
+
+if [ $# -gt 1 ] && [ "$2" -ne 0 ]; then
 	umbral1=$2
 fi
 
-if [ $3 -ne 0 ]; then
+if [ $# -gt 2 ] && [ "$3" -ne 0 ]; then
 	umbral1=$3
 fi
 
@@ -37,9 +38,8 @@ else
 fi
 
 echo "Copiando los archivos..."
-echo "$umbral1"
 
-# Ficheros pequeñosñ
+# Ficheros pequeños
 for file in $(find $1 -size -"$umbral1"c -type f -or -size "$umbral1"c -type f)
 do
 	cp $file pequenos
