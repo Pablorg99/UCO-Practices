@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# Check if arguments are correct, if not print error message and exit
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
 	echo "La ejecución correcta es: $ ejercicio2.sh <directorio> [numero_bytes]"
 	exit 1
 fi
 
+# n_bytes is an optional argument, so if not specified it will be 0
 if [ $# -eq 2 ]; then
 	n_bytes=$2
 else 

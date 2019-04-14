@@ -23,6 +23,7 @@ function listFiles() {
 	echo "</ul>" >> "$htmlFile"
 }
 
+# Write all the html file structure and call listFile with the directory passed by the user 
 echo "<head>" > "$htmlFile" 
 echo "<title>Listado directorios de $1/</title>" >> "$htmlFile"
 echo "</head>" >> "$htmlFile"
