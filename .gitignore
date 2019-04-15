@@ -2,6 +2,7 @@
 .vscode
 .idea
 cmake*
+CMake*
 #Testing Tools
 GoogleTest-Master
 #Libraries
