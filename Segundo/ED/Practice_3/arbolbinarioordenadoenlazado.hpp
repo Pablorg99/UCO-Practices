@@ -33,7 +33,7 @@ namespace ed
 			NodoArbolBinario * _derecho;  //Puntero al hijo derecho
 
 		public:
-			NodoArbolBinario(const G &info)
+			explicit NodoArbolBinario(const G &info)
 			{
 			    _info = info;
 			    _derecho = NULL;
@@ -63,9 +63,8 @@ namespace ed
 
 			bool esHoja() const
 			{
-				if(_derecho == NULL && _izquierdo == NULL) return true;
-				return false;
-			}
+                return _derecho == NULL && _izquierdo == NULL;
+            }
 
 			void recorridoPreOrden (OperadorNodo<G> &operador) const
 			{
@@ -120,10 +119,7 @@ namespace ed
 
 	public:
 
-		ArbolBinarioOrdenadoEnlazado()
-		{
-
-		}
+		ArbolBinarioOrdenadoEnlazado() = default;
 
 		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G>& arbol)
 		{
@@ -134,7 +130,7 @@ namespace ed
 		{
 			if (! estaVacio())
 			borrarArbol();
-			cout << "Destructor Usado \n";
+			cout << "Destructor Usado\n";
 		}
 
 		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado& arbol)
@@ -188,9 +184,8 @@ namespace ed
 
 		bool estaVacio() const
 		{
-			if(_raiz == NULL) return true;
-			return false;
-		}
+            return _raiz == NULL;
+        }
 
 		G raiz() const
 		{
