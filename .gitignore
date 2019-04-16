@@ -3,6 +3,12 @@
 .idea
 cmake*
 CMake*
+# Latex
+*.aux
+*.log
+*.toc
+*.synctex.gz
+*main.pdf
 #Testing Tools
 GoogleTest-Master
 #Libraries
