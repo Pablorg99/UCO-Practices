@@ -5,4 +5,4 @@
 
 Persona generarDatosPersonales();
 
-#endif //__GENERAR_ALUMNO_HPP__
+#endif //__GENERAR_PERSONA_HPP__

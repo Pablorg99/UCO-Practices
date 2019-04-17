@@ -144,8 +144,8 @@ namespace ed
 
 		bool insertar(const G &x)
 		{
-			
-			return false;
+            // TODO
+            return false;
 		}
 
 		void borrarArbol()
@@ -178,7 +178,7 @@ namespace ed
 
 		bool buscar(const G& x) const
 		{
-
+            // TODO
 			return false;
 		}
 
