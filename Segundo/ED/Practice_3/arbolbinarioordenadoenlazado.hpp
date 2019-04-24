@@ -121,7 +121,7 @@ namespace ed
 
 		ArbolBinarioOrdenadoEnlazado() = default;
 
-		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G>& arbol)
+		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G> &arbol)
 		{
 			*this = arbol;
 		}
@@ -133,7 +133,7 @@ namespace ed
 			cout << "Destructor Usado\n";
 		}
 
-		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado& arbol)
+		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado &arbol)
 		{
 			if(*this != arbol) {
 				_raiz = arbol._raiz;
@@ -142,10 +142,26 @@ namespace ed
 			}
 		}
 
-		bool insertar(const G &x)
+		bool insertar(const G &info)
 		{
-            // TODO
-            return false;
+            if(estaVacio()) _raiz = NodoArbolBinario(info);
+            else {
+                _actual = _raiz;
+                bool inserted = false;
+                while(true) {
+                    if(info > actual()) {
+                        if(_actual->getDerecho() != NULL) _actual = _actual->getDerecho();
+                        else _actual->setDerecho(NodoArbolBinario(info)); return true;
+                    }
+                    else if(info < actual()) {
+                        if(_actual->getIzquierdo() != NULL) _actual = _actual->getIzquierdo();
+                        else _actual->setIzquierdo(NodoArbolBinario(info)); return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
 		}
 
 		void borrarArbol()
