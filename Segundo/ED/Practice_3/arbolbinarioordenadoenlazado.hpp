@@ -144,13 +144,14 @@ namespace ed
 
 		bool insertar(const G &info)
 		{
+		    // Si el árbol está vacío se crea el nodo raíz con info
             if(estaVacio()) _raiz = NodoArbolBinario(info);
             else {
                 _actual = _raiz;
-                bool inserted = false;
                 while(true) {
                     if(info > actual()) {
                         if(_actual->getDerecho() != NULL) _actual = _actual->getDerecho();
+                        //Si el hijo apunta a NULL está vacío, por lo que se crea un nodo con info
                         else _actual->setDerecho(NodoArbolBinario(info)); return true;
                     }
                     else if(info < actual()) {
