@@ -2,7 +2,7 @@
 
 # Check that the arguments are correct
 if [ $# -ne 1 ] || [ ! -d "$1" ]; then
-	echo "La ejecución correcta es: $ ejericico6.sh <nombre_directorio>"
+	echo "La ejecución correcta es: $ ejercicio6.sh <nombre_directorio>"
 	exit 1
 fi
 
