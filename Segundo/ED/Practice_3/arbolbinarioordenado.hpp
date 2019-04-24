@@ -27,7 +27,7 @@ namespace ed
 
 		/*!\brief Inserta un elemento en el árbol.
 
-		Inserta en orden un elemento en el árbol. La insercción se realizará
+		Inserta en orden un elemento en el árbol. La inserción se realizará
 		siempre como una hoja, por lo que el arbol no estará balanceado
 		en general.
 
