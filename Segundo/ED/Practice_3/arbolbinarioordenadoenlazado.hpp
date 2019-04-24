@@ -176,10 +176,25 @@ namespace ed
 			_raiz->recorridoInOrden(operador);
 		}
 
-		bool buscar(const G& x) const
+		bool buscar(const G& info) const
 		{
-            // TODO
-			return false;
+            _actual = _raiz;
+            _padre = NULL;
+            //Mientras que exista un nodo hijo que comparar
+            while(_actual != NULL) {
+                if(actual() > info) {
+                   _padre = _actual;
+                   _actual = _actual->getIzquierdo();
+                }
+                else if(actual() < info) {
+                    _padre = _actual;
+                    _actual = _actual->getDerecho();
+                }
+                else {
+                    return true;
+                }
+            }
+            return false;
 		}
 
 		bool estaVacio() const
@@ -190,7 +205,6 @@ namespace ed
 		G raiz() const
 		{
 			if(! estaVacio()) return _raiz->getInfo();
-			else return NULL;
 		}
 
 		bool existeActual() const
@@ -203,8 +217,7 @@ namespace ed
 
 		G actual() const
 		{
-			if(existeActual()) return _actual;
-			else return false;
+			if(existeActual()) return _actual->getInfo();
 		}
 
 		/* !@} */
