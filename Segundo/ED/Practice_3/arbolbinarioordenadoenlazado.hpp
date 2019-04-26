@@ -105,7 +105,7 @@ namespace ed
 
 			NodoArbolBinario & operator=(const NodoArbolBinario &nodo)
 			{
-				_info = nodo.getInfo();
+				setInfo(nodo.getInfo());
 				_derecho = nodo.getDerecho();
 				_izquierdo = nodo.getIzquierdo();
 			}
@@ -116,6 +116,18 @@ namespace ed
 		NodoArbolBinario * _raiz; /*!<La raíz del árbol*/
 		NodoArbolBinario * _actual; /*!<Cursor al nodo actual*/
 		NodoArbolBinario * _padre; /*!<Cursor al nodo actual*/
+
+		// Métodos privados
+        void _sucesorInmediato() {
+            // Movemos el cursor una vez al hijo derecho para buscar en los mayores a actual
+		    _padre = _actual;
+		    _actual = _actual->getDerecho();
+		    // Mientras exista un hijo izquierdo, movemos los cursores
+		    while(_actual->getIzquierdo() != NULL) {
+		        _padre = _actual;
+                _actual = _actual->getIzquierdo();
+		    }
+		}
 
 	public:
 
@@ -174,8 +186,39 @@ namespace ed
 
 		bool borrar()
 		{
-			// TODO
-			return false;
+			if(!existeActual()) return false;
+			else {
+			    // Si es hoja, se borra el hijo derecho/izquierdo del padre, según sea el actual
+                if(_actual->esHoja()) {
+                    // Si actual es el hijo izquierdo del padre
+                    if(_padre->getIzquierdo() == _actual) _padre->setIzquierdo(NULL);
+                    // Si es el derecho
+                    else _padre->setDerecho(NULL);
+                }
+                // Si tiene 1 o 2 hijos
+                else {
+                    // Si actual solo tiene hijo derecho
+                    if((_actual->getIzquierdo() == NULL) && (_actual->getDerecho() != NULL)) {
+                        // Si actual es el hijo izquierdo del padre
+                        if(_padre->getIzquierdo() == _actual) _padre->setIzquierdo(_actual->getDerecho());
+                        // Si es el derecho
+                        else _padre->setDerecho(_actual->getDerecho());
+                    }
+                    // Si actual solo tiene hijo izquierdo
+                    else if((_actual->getDerecho() == NULL) && (_actual->getIzquierdo() != NULL)) {
+                        // Si actual es el hijo izquierdo del padre
+                        if(_padre->getIzquierdo() == _actual) _padre->setIzquierdo(_actual->getIzquierdo());
+                        // Si es el derecho
+                        else _padre->setDerecho(_actual->getIzquierdo());
+                    }
+                    // Tiene hijo derecho e izquierdo
+                    else {
+                        NodoArbolBinario * aux_actual = _actual;
+                        // Movemos el cursor al sucesor inmediato
+                        _sucesorInmediato();
+                    }
+                }
+			}
 		}
 
 		void recorridoPreOrden(OperadorNodo<G> &operador) const
@@ -211,6 +254,9 @@ namespace ed
                     return true;
                 }
             }
+            // Si no se encuentra el nodo, se pone _actual apuntando a raíz y padre a NULL y se devuelve false
+            _actual = _raiz;
+            _padre = NULL;
             return false;
 		}
 
