@@ -35,9 +35,9 @@ namespace ed
 		public:
 			explicit NodoArbolBinario(const G &info)
 			{
-			    _info = info;
-			    _derecho = NULL;
-			    _izquierdo = NULL;
+			    setInfo(info);
+			    setDerecho(NULL);
+			    setIzquierdo(NULL);
 			}
 
 			NodoArbolBinario(const NodoArbolBinario &nodo)
@@ -68,7 +68,7 @@ namespace ed
 
 			void recorridoPreOrden (OperadorNodo<G> &operador) const
 			{
-				operador->aplicar(getInfo());
+				operador.aplicar(getInfo());
 				if(getIzquierdo() != NULL) getIzquierdo()->recorridoPreOrden(operador);
 				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
 			}
@@ -77,13 +77,13 @@ namespace ed
 			{
 				if(getIzquierdo() != NULL) getIzquierdo()->recorridoPreOrden(operador);
 				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
-				operador->aplicar(getInfo());
+				operador.aplicar(getInfo());
 			}
 
 			void recorridoInOrden (OperadorNodo<G> &operador) const
 			{
 				if(getIzquierdo() != NULL) getIzquierdo()->recorridoPreOrden(operador);
-				operador->aplicar(getInfo());
+				operador.aplicar(getInfo());
 				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
 			}
 
@@ -95,19 +95,19 @@ namespace ed
 
 			void setIzquierdo(NodoArbolBinario *nodo)
 			{
-				_izquierdo = *nodo;
+				_izquierdo = nodo;
 			}
 
 			void setDerecho(NodoArbolBinario *nodo)
 			{
-				_derecho = *nodo;
+				_derecho = nodo;
 			}
 
 			NodoArbolBinario & operator=(const NodoArbolBinario &nodo)
 			{
 				setInfo(nodo.getInfo());
-				_derecho = nodo.getDerecho();
-				_izquierdo = nodo.getIzquierdo();
+				setIzquierdo(nodo.getIzquierdo());
+				setDerecho(nodo.getDerecho());
 			}
 
 		}; //Fin clase NodoArbolBinario
@@ -129,9 +129,17 @@ namespace ed
 		    }
 		}
 
+		void _swapInfo(NodoArbolBinario *nodo) {
+            G aux_info = nodo->getInfo();
+            nodo->setInfo(_actual->getInfo());
+            _actual->setInfo(aux_info);
+        }
+
 	public:
 
-		ArbolBinarioOrdenadoEnlazado() = default;
+		ArbolBinarioOrdenadoEnlazado() {
+
+        };
 
 		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G> &arbol)
 		{
@@ -140,9 +148,10 @@ namespace ed
 
 		~ArbolBinarioOrdenadoEnlazado()
 		{
-			if (! estaVacio())
-			borrarArbol();
-			cout << "Destructor Usado\n";
+            if (! estaVacio()) {
+                borrarArbol();
+                cout << "Destructor Usado" << endl;
+            }
 		}
 
 		ArbolBinarioOrdenadoEnlazado &operator=(const ArbolBinarioOrdenadoEnlazado &arbol)
@@ -157,24 +166,38 @@ namespace ed
 		bool insertar(const G &info)
 		{
 		    // Si el árbol está vacío se crea el nodo raíz con info
-            if(estaVacio()) _raiz = NodoArbolBinario(info);
+            if(estaVacio()) _raiz = new NodoArbolBinario(info);
             else {
+                _padre = NULL;
                 _actual = _raiz;
                 while(true) {
                     if(info > actual()) {
-                        if(_actual->getDerecho() != NULL) _actual = _actual->getDerecho();
+                        if(_actual->getDerecho() != NULL) {
+                            _padre = _actual;
+                            _actual = _actual->getDerecho();
+                        }
                         //Si el hijo apunta a NULL está vacío, por lo que se crea un nodo con info
-                        else _actual->setDerecho(NodoArbolBinario(info)); return true;
+                        else {
+                            _actual->setDerecho(new NodoArbolBinario(info));
+                            return true;
+                        }
                     }
                     else if(info < actual()) {
-                        if(_actual->getIzquierdo() != NULL) _actual = _actual->getIzquierdo();
-                        else _actual->setIzquierdo(NodoArbolBinario(info)); return true;
+                        if(_actual->getIzquierdo() != NULL) {
+                            _padre = _actual;
+                            _actual = _actual->getIzquierdo();
+                        }
+                        else {
+                            _actual->setIzquierdo(new NodoArbolBinario(info));
+                            return true;
+                        }
                     }
                     else {
                         return false;
                     }
                 }
             }
+            return true;
 		}
 
 		void borrarArbol()
@@ -191,32 +214,58 @@ namespace ed
 			    // Si es hoja, se borra el hijo derecho/izquierdo del padre, según sea el actual
                 if(_actual->esHoja()) {
                     // Si actual es el hijo izquierdo del padre
-                    if(_padre->getIzquierdo() == _actual) _padre->setIzquierdo(NULL);
+                    if(_padre->getIzquierdo() == _actual) {
+                        _padre->setIzquierdo(NULL);
+                        return true;
+                    }
                     // Si es el derecho
-                    else _padre->setDerecho(NULL);
+                    else {
+                        _padre->setDerecho(NULL);
+                        return true;
+                    }
                 }
                 // Si tiene 1 o 2 hijos
                 else {
                     // Si actual solo tiene hijo derecho
                     if((_actual->getIzquierdo() == NULL) && (_actual->getDerecho() != NULL)) {
                         // Si actual es el hijo izquierdo del padre
-                        if(_padre->getIzquierdo() == _actual) _padre->setIzquierdo(_actual->getDerecho());
+                        if(_padre->getIzquierdo() == _actual) {
+                            _padre->setIzquierdo(_actual->getDerecho());
+                            return true;
+                        }
                         // Si es el derecho
-                        else _padre->setDerecho(_actual->getDerecho());
+                        else {
+                            _padre->setDerecho(_actual->getDerecho());
+                            return true;
+                        }
                     }
                     // Si actual solo tiene hijo izquierdo
                     else if((_actual->getDerecho() == NULL) && (_actual->getIzquierdo() != NULL)) {
                         // Si actual es el hijo izquierdo del padre
-                        if(_padre->getIzquierdo() == _actual) _padre->setIzquierdo(_actual->getIzquierdo());
+                        if(_padre->getIzquierdo() == _actual) {
+                            _padre->setIzquierdo(_actual->getIzquierdo());
+                            return true;
+                        }
                         // Si es el derecho
-                        else _padre->setDerecho(_actual->getIzquierdo());
+                        else {
+                            _padre->setDerecho(_actual->getIzquierdo());
+                            return true;
+                        }
                     }
                     // Tiene hijo derecho e izquierdo
                     else {
-                        NodoArbolBinario * aux_actual = _actual;
+                        NodoArbolBinario * ex_actual = _actual;
                         // Movemos el cursor al sucesor inmediato
                         _sucesorInmediato();
+                        // Intercambiamos el parámetro info del nuevo actual con el anterior
+                        _swapInfo(ex_actual);
+                        // Borramos el actual, que tiene la info del nodo a borrar pero desordenada
+                        borrar();
                     }
+                    // Dejamos los cursores en la raíz y devolvemos true
+                    _actual = _raiz;
+                    _padre = NULL;
+                    return true;
                 }
 			}
 		}
@@ -236,7 +285,7 @@ namespace ed
 			_raiz->recorridoInOrden(operador);
 		}
 
-		bool buscar(const G& info) const
+		bool buscar(const G& info)
 		{
             _actual = _raiz;
             _padre = NULL;
@@ -267,7 +316,8 @@ namespace ed
 
 		G raiz() const
 		{
-			if(! estaVacio()) return _raiz->getInfo();
+			assert(! estaVacio());
+			_raiz->getInfo();
 		}
 
 		bool existeActual() const
@@ -280,7 +330,8 @@ namespace ed
 
 		G actual() const
 		{
-			if(existeActual()) return _actual->getInfo();
+		    assert(existeActual());
+			return _actual->getInfo();
 		}
 
 		/* !@} */
