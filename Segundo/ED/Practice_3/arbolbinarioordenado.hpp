@@ -95,7 +95,7 @@ namespace ed
 		\arg[in] x es el elemento a buscar.
 		\return true si el elemento es encontrado, false en otro caso.
 		*/
-		virtual bool buscar (const G& x) const = 0;
+		virtual bool buscar (const G& x) = 0;
 
 		/*!\brief Comprueba si el árbol está vacío.
 		\return true si el árbol está vacío y false si no lo está.
