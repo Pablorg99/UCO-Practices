@@ -5,6 +5,7 @@
 #include <cassert>
 #include "arbolbinarioordenado.hpp"
 #include "operadornodo.hpp"
+#include "macros.hpp"
 
 using namespace std;
 /*!
@@ -75,16 +76,16 @@ namespace ed
 
 			void recorridoPostOrden (OperadorNodo<G> &operador) const
 			{
-				if(getIzquierdo() != NULL) getIzquierdo()->recorridoPreOrden(operador);
-				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
+				if(getIzquierdo() != NULL) getIzquierdo()->recorridoPostOrden(operador);
+				if(getDerecho() != NULL) getDerecho()->recorridoPostOrden(operador);
 				operador.aplicar(getInfo());
 			}
 
 			void recorridoInOrden (OperadorNodo<G> &operador) const
 			{
-				if(getIzquierdo() != NULL) getIzquierdo()->recorridoPreOrden(operador);
+				if(getIzquierdo() != NULL) getIzquierdo()->recorridoInOrden(operador);
 				operador.aplicar(getInfo());
-				if(getDerecho() != NULL) getDerecho()->recorridoPreOrden(operador);
+				if(getDerecho() != NULL) getDerecho()->recorridoInOrden(operador);
 			}
 
 			/*!\brief Modificadores. */
@@ -138,7 +139,9 @@ namespace ed
 	public:
 
 		ArbolBinarioOrdenadoEnlazado() {
-
+            _raiz = NULL;
+            _actual  = NULL;
+            _padre = NULL;
         };
 
 		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G> &arbol)
@@ -150,7 +153,8 @@ namespace ed
 		{
             if (! estaVacio()) {
                 borrarArbol();
-                cout << "Destructor Usado" << endl;
+                cout << PLACE(13, 5);
+                cout << "Destructor Usado" << endl << endl;
             }
 		}
 

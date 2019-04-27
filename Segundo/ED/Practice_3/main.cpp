@@ -6,6 +6,7 @@
 #include "operadornodo.hpp"
 #include "persona.hpp"
 #include "generarpersona.hpp"
+#include "macros.hpp"
 
 void printMenu();
 void writePersons(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree);
@@ -18,34 +19,39 @@ using namespace ed;
 
 int main()
 {
-    ArbolBinarioOrdenadoEnlazado<Persona> tree;
     srand(time(NULL));
+    ArbolBinarioOrdenadoEnlazado<Persona> tree;
+    writePersons(tree);
+
     int option = 0;
 
     do {
-        option = 0;
         printMenu();
-
-        cout << "Selecciona una opción: ";
+        PLACE(11, 3);
+        cout << BIYELLOW;
+        cout << "Seleccione una opción: ";
+        cout << RESET;
         cin >> option;
+        cout << endl;
+
         switch(option) {
             case 1:
-                writePersons(tree);
+                printTree(tree);
                 break;
             case 2:
                 checkPerson(tree);
                 break;
             case 3:
-                printTree(tree);
-                break;
-            case 4:
                 deletePerson(tree);
                 break;
-            case 5:
+            case 4:
                 deleteTree(tree);
                 break;
+            case 0:
+                break;
             default:
-                cout << "Introduzca una opción del menú" << endl;
+                system("clear");
+                cout << "Introduzca una opción válida" << endl;
                 sleep(2);
                 break;
         }
@@ -53,48 +59,52 @@ int main()
 }
 
 void printMenu() {
-    system("clear");
-    cout << "Menú Principal" << endl;
-    cout << "\t1: Escribe un número de personas en el árbol" << endl;
-    cout << "\t2: Comprueba si una persona, dados sus datos, existe en el árbol" << endl;
-    cout << "\t3: Imprime el árbol usando los 3 tipos de recorridos" << endl;
-    cout << "\t4: Borra a una persona, dados sus datos" << endl;
-    cout << "\t5: Borra el árbol" << endl;
-    cout << endl << "\t0: Salir del programa" << endl;
+
+    cout << CLEAR_SCREEN;
+    PLACE(2, 3);
+    cout << BIBLUE;
+    cout << "MENÚ PRINCIPAL" << endl ;
+    cout << RESET;
+
+    PLACE(4, 5);
+    cout << "[1] Imprime el árbol usando los 3 tipos de recorridos" << endl;
+    PLACE(5, 5);
+    cout << "[2] Comprueba si una persona, dados sus datos, existe en el árbol" << endl;
+    PLACE(6, 5);
+    cout << "[3] Borra a una persona, dados sus datos" << endl;
+    PLACE(7, 5);
+    cout << "[4] Borra el árbol" << endl;
+
+    PLACE(9, 5);
+    cout << BIRED;
+    cout << "[0] Salir del programa" << endl;
+    cout << RESET;
 }
 
 void writePersons(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
-    system("clear");
+    cout << CLEAR_SCREEN;
     int nPersons = 0;
+    int x = 2;
+    PLACE(x, 3);
+    cout << BIGREEN;
     cout << "Introduzca un número de personas a escribir en el árbol: ";
+    cout << RESET;
     cin >> nPersons;
+    x++;
     while(nPersons < 1) {
+        PLACE(++x, 4);
+        cout << BIGREEN;
         cout << "Introduzca un número válido: ";
+        cout << RESET;
         cin >> nPersons;
     }
     for(int i = 0; i < nPersons; ++i) {
         tree.insertar(generarDatosPersonales());
     }
-    cout << "Se han introducido las personas" << endl;
-    cout << "Pulsa intro para continuar: ";
-    cin.get();
-    cin.ignore();
-}
-
-void checkPerson(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
-    system("clear");
-    Persona persona;
-    cout << "Introduzca los datos de la persona:" << endl;
-    cin >> persona;
-    if(tree.buscar(persona)) {
-        cout << "Existe la persona: ";
-        persona.mostrarPersona();
-    }
-    else {
-        cout << "No se ha encontrado la persona: ";
-        persona.mostrarPersona();
-    }
-    cout << "Pulsa intro para continuar: ";
+    PLACE(++x, 3);
+    cout << BIBLUE;
+    cout << "Pulse intro para pasar al menú principal: ";
+    cout << RESET;
     cin.get();
     cin.ignore();
 }
@@ -102,29 +112,82 @@ void checkPerson(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
 void printTree(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
     system("clear");
     EscribirNodo<Persona> operador;
+    cout << BIGREEN;
     cout << "Recorrido PreOrden:" << endl;
+    cout << RESET;
     tree.recorridoPreOrden(operador);
-    cout << "Recorrido PreOrden:" << endl;
+    cout << BIGREEN;
+    cout << "Recorrido InOrden:" << endl;
+    cout << RESET;
     tree.recorridoInOrden(operador);
-    cout << "Recorrido PreOrden:" << endl;
+    cout << BIGREEN;
+    cout << "Recorrido PostOrden:" << endl;
+    cout << RESET;
     tree.recorridoPostOrden(operador);
-    cout << "Pulsa intro para continuar: ";
+    cout << BIBLUE;
+    cout << endl << "Pulse intro para volver al menú principal:  ";
+    cout << RESET;
     cin.get();
     cin.ignore();
 }
 
-void deletePerson(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
-    system("clear");
+void checkPerson(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
+    cout << CLEAR_SCREEN;
     Persona persona;
-    cout << "Introduzca los datos de la persona a borrar:" << endl;
+    PLACE(2, 3);
+    cout << BIGREEN;
+    cout << "Introduzca los datos de la persona:" << endl << endl;
+    cout << RESET;
+    cin >> persona;
+    if(tree.buscar(persona)) {
+        PLACE(8, 3);
+        cout << BIGREEN;
+        cout << "Existe la persona: ";
+        cout << RESET;
+        persona.mostrarPersona();
+    }
+    else {
+        PLACE(8, 3);
+        cout << BIGREEN;
+        cout << "No se ha encontrado la persona: ";
+        cout << RESET;
+        persona.mostrarPersona();
+    }
+    PLACE(10, 3);
+    cout << BIBLUE;
+    cout << "Pulse intro para volver al menú principal: ";
+    cout << RESET;
+    cin.get();
+    cin.ignore();
+}
+
+
+void deletePerson(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
+    cout << CLEAR_SCREEN;
+    Persona persona;
+    PLACE(2, 3);
+    cout << BIGREEN;
+    cout << "Introduzca los datos de la persona a borrar:" << endl << endl;
+    cout << RESET;
     cin >> persona;
     // Se busca a la persona
     if(tree.buscar(persona)) {
-        cout << "Se ha encontrado a la persona, se procede a borrarla" << endl;
+        PLACE(8, 3);
+        cout << BIGREEN;
+        cout << "Se ha encontrado a la persona, se procede a borrarla..." << endl;
+        cout << RESET;
         tree.borrar();
     }
-    else cout << "No se ha encontrado a la persona" << endl;
-    cout << "Pulsa intro para continuar: ";
+    else {
+        PLACE(8, 3);
+        cout << BIGREEN;
+        cout << "No se ha encontrado a la persona" << endl;
+        cout << RESET;
+    }
+    PLACE(10, 3);
+    cout << BIBLUE;
+    cout << "Pulse intro para volver al menú principal: ";
+    cout << RESET;
     cin.get();
     cin.ignore();
 }
@@ -132,18 +195,28 @@ void deletePerson(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
 void deleteTree(ed::ArbolBinarioOrdenadoEnlazado<Persona> &tree) {
     system("clear");
     string answer;
-    cout << "Se ba a borrar el árbol, ¿está seguro? [y/n]: ";
+    PLACE(2, 3);
+    cout << BIGREEN;
+    cout << "Se ba a borrar el árbol, ¿está seguro? [si/no]: ";
+    cout << RESET;
     cin >> answer;
-    while((answer != "y") || (answer != "n")) {
-        cout << "Responda correctamente [y/n]: ";
-        cin >> answer;
-    }
-    if(answer == "y") {
+    if(answer == "si") {
         tree.borrarArbol();
+        PLACE(4, 4);
+        cout << BIGREEN;
         cout << "Se ha borrado el árbol" << endl;
+        cout << RESET;
     }
-    else if(answer == "n") cout << "No se ha borrado el árbol" << endl;
-    cout << "Pulsa intro para continuar: ";
+    else {
+        PLACE(4, 4);
+        cout << BIGREEN;
+        cout << "No se ha borrado el árbol" << endl;
+        cout << RESET;
+    }
+    PLACE(6, 3);
+    cout << BIBLUE;
+    cout << "Pulse intro para volver al menú principal: ";
+    cout << RESET;
     cin.get();
     cin.ignore();
 }
