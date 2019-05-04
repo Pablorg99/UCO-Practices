@@ -144,7 +144,7 @@ namespace ed
             _padre = NULL;
         };
 
-		ArbolBinarioOrdenadoEnlazado (const ArbolBinarioOrdenadoEnlazado<G> &arbol)
+		ArbolBinarioOrdenadoEnlazado(const ArbolBinarioOrdenadoEnlazado<G> &arbol)
 		{
 			*this = arbol;
 		}
