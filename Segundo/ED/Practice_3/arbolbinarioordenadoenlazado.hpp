@@ -153,7 +153,7 @@ namespace ed
 		{
             if (! estaVacio()) {
                 borrarArbol();
-                cout << PLACE(13, 5);
+            	PLACE(13, 5);
                 cout << "Destructor Usado" << endl << endl;
             }
 		}
