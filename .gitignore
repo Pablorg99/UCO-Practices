@@ -17,5 +17,6 @@ GoogleTest-Master
 *.o
 #Executables
 *.out
+*.exe
 #Documentation
 *html
