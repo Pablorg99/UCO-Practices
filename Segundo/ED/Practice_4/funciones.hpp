@@ -14,32 +14,27 @@ using namespace ed;
 
 int menu()
 {
-  int opcion;
+    int opcion;
 
-  system("clear");
-  cout << "  0. Salir................................\n";
-  cout << "  1. Cargar grafo desde fichero...........\n";
-  cout << "  2. Algoritmo de Floyd (GD y GND)......\n";
+    system("clear");
+    cout << "  0. Salir................................\n";
+    cout << "  1. Cargar grafo desde fichero...........\n";
+    cout << "  2. Algoritmo de Floyd (GD y GND)......\n";
+    cout << "Introduzca opcion...:";
+    cin >> opcion;
 
-  cout << "Introduzca opcion...:";
-  cin >> opcion;
-
-  return opcion;
+    return opcion;
 }
 
 template <class G_Nodo, class G_Lado>
-bool cargarGrafo(Grafo<G_Nodo, G_Lado> * &g)
-{
-  string ficheroMatriz, ficheroEtiquetas;
+bool cargarGrafo(Grafo<G_Nodo, G_Lado> * &g) {
+    string ficheroMatriz, ficheroEtiquetas;
+    cout << "Fichero de la matriz de conexion: ";
+    cin >> ficheroMatriz;
+    cout << "Fichero de las etiquetas: ";
+    cin >> ficheroEtiquetas;
 
-  cout << "Fichero de la matriz de conexion: ";
-  cin >> ficheroMatriz;
-
-  cout << "Fichero de las etiquetas: ";
-  cin >> ficheroEtiquetas;
-
-  // TODO
-
+    // TODO
 }
 
 template <class G_Nodo, class G_Lado>
