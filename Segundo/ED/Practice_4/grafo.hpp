@@ -13,21 +13,18 @@ namespace ed {
 	private:
 		G_Lado **_lados;
 		G_Nodo *_nodos;
-		int _numeroNodos;
+		int *_numeroNodos;
 
 	public:
 		Grafo() {
-		    _lados = NULL;
-		    _nodos = NULL;
+		    _numeroNodos = new int;
+		    *_numeroNodos = 0;
+		    _lados = new G_Lado*;
+		    _nodos = new G_Nodo;
 		}
 
-		Grafo(int nodes) {
-		    _numeroNodos = nodes;
-            _nodos = new G_Nodo[_numeroNodos];
-		    _lados = new G_Lado*[_numeroNodos];
-            for (int i = 0; i < _numeroNodos; ++i) {
-                _lados[i] = new G_Lado[_numeroNodos];
-            }
+        Grafo(int nodes) {
+		    allocateMemory(nodes);
 		}
 
 		Grafo(const Grafo& graph) {
@@ -38,33 +35,81 @@ namespace ed {
             borrarGrafo();
 		}
 
+		inline int getNodeNumber() {
+            return *_numeroNodos;
+		}
+
+		void setNode(int index, G_Nodo node) {
+		    _nodos[index] = node;
+		}
+
+		void setEdge(int row, int column, G_Lado edge) {
+		    _lados[row][column] = edge;
+		}
+
+		void setNodeNumber(int nodeNumber) {
+		    *_numeroNodos = nodeNumber;
+		}
+
+        void allocateMemory(int nodes) {
+            _numeroNodos = new int;
+            *_numeroNodos = nodes;
+            _nodos = new G_Nodo[*_numeroNodos];
+            _lados = new G_Lado*[*_numeroNodos];
+            for (int i = 0; i < *_numeroNodos; ++i) {
+                _lados[i] = new G_Lado[*_numeroNodos];
+            }
+        }
+
+        void printMatrix() {
+            for (int i = 0; i < getNodeNumber(); ++i) {
+                cout << endl;
+                for (int j = 0; j < getNodeNumber(); ++j) {
+                    cout << _lados[i][j] << " ";
+                }
+            }
+            cout << endl;
+		}
+
+		void printArray() {
+            for (int i = 0; i < getNodeNumber(); ++i) {
+                cout << _nodos[i] << endl;
+            }
+		}
+
 		void borrarGrafo() {
-            delete _nodos;
-            for (int i = 0; i < _numeroNodos; ++i) {
+            delete [] _nodos;
+            for (int i = 0; i < *_numeroNodos; ++i) {
                 delete [] _lados[i];
             }
             delete [] _lados;
+		    delete _numeroNodos;
+            _numeroNodos = NULL;
+            _nodos = NULL;
+            _lados = NULL;
 		}
 
 		Grafo& operator=(const Grafo& graph) {
-            // Copio el entero
-            _numeroNodos = graph._numeroNodos;
-            // Reservo memoria para nodos y lados como en el constructor Grafo(int nodes)
-		    _nodos = new G_Nodo[_numeroNodos];
-            _lados = new G_Lado*[_numeroNodos];
-            for (int i = 0; i < _numeroNodos; ++i) {
-                _lados[i] = new G_Lado[_numeroNodos];
+            // Reservo memoria para el entero y copio el del grafo pasado
+            _numeroNodos = new int;
+            *_numeroNodos = *graph._numeroNodos;
+            // Reservo memoria para nodos y lados como en allocateMemory(int nodes)
+		    _nodos = new G_Nodo[*_numeroNodos];
+            _lados = new G_Lado*[*_numeroNodos];
+            for (int i = 0; i < *_numeroNodos; ++i) {
+                _lados[i] = new G_Lado[*_numeroNodos];
             }
             // Copio los valores los nodos del grafo pasado al actual
-            for (int i = 0; i < _numeroNodos; ++i) {
+            for (int i = 0; i < *_numeroNodos; ++i) {
                 _nodos[i] = graph._nodos[i];
             }
             // Hago lo propio con los lados
-            for (int i = 0; i < _numeroNodos; ++i) {
-                for (int j = 0; j < _numeroNodos; ++j) {
+            for (int i = 0; i < *_numeroNodos; ++i) {
+                for (int j = 0; j < *_numeroNodos; ++j) {
                     _lados[i][j] = graph._lados[i][j];
                 }
             }
+            return *this;
         }
 	};
 }
