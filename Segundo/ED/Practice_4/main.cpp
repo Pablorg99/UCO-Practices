@@ -12,7 +12,7 @@ using namespace ed;
 
 int main()
 {
-	Grafo<string, int> *g;
+	Grafo<string, int> *g = new Grafo<string, int>();
 	int opcion;
 	bool grafoIntroducido = false;
 
