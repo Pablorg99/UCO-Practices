@@ -35,8 +35,16 @@ namespace ed {
             borrarGrafo();
 		}
 
-		inline int getNodeNumber() {
+		inline int getNodeNumber() const {
             return *_numeroNodos;
+		}
+
+		inline G_Nodo getNode(int index) const {
+            return _nodos[index];
+		}
+
+		inline G_Lado getEdge(int row, int column) const {
+            return _lados[row][column];
 		}
 
 		void setNode(int index, G_Nodo node) {
@@ -47,9 +55,6 @@ namespace ed {
 		    _lados[row][column] = edge;
 		}
 
-		void setNodeNumber(int nodeNumber) {
-		    *_numeroNodos = nodeNumber;
-		}
 
         void allocateMemory(int nodes) {
             _numeroNodos = new int;
@@ -63,18 +68,19 @@ namespace ed {
 
         void printMatrix() {
             for (int i = 0; i < getNodeNumber(); ++i) {
-                cout << endl;
                 for (int j = 0; j < getNodeNumber(); ++j) {
                     cout << _lados[i][j] << " ";
                 }
+                cout << endl;
             }
             cout << endl;
 		}
 
 		void printArray() {
             for (int i = 0; i < getNodeNumber(); ++i) {
-                cout << _nodos[i] << endl;
+                cout << _nodos[i] << " ";
             }
+            cout << endl;
 		}
 
 		void borrarGrafo() {

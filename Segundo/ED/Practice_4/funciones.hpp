@@ -13,8 +13,7 @@
 using namespace std;
 using namespace ed;
 
-int menu()
-{
+int menu() {
     int opcion;
 
     system("clear");
@@ -50,8 +49,9 @@ bool cargarGrafo(Grafo<G_Nodo, G_Lado> * &g) {
     // AHORA PASO LOS VALORES AL GRAFO
     // Cada línea del fichero de etiquetas es un nodo
     inputFile.open(ficheroEtiquetas.c_str());
-    while(getline(inputFile, aux)) {
-        node = aux;
+    while(inputFile >> aux) {
+        stringstream stream(aux);
+        stream >> node;
         g->setNode(index, node);
         index++;
     }
@@ -61,26 +61,33 @@ bool cargarGrafo(Grafo<G_Nodo, G_Lado> * &g) {
     for (int row = 0; row < g->getNodeNumber(); ++row) {
         for (int column = 0; column < g->getNodeNumber() - 1; ++column) {
             getline(inputFile, aux, ' ');
-            int lado = atoi(aux.c_str());
-            edge = lado;
+            stringstream stream(aux);
+            stream >> edge;
             g->setEdge(row, column, edge);
         }
         // Para recoger el último valor, el carácter separador debe cambiar
         getline(inputFile, aux, '\n');
-        int lado = atoi(aux.c_str());
-        edge = lado;
+        stringstream stream(aux);
+        stream >> edge;
         g->setEdge(row, g->getNodeNumber() - 1, edge);
     }
     inputFile.close();
+    cout << "MATRIZ DE DISTANCIAS:" << endl;
     g->printMatrix();
+    cout << "VECTOR DE NODOS: ";
     g->printArray();
     return true;
 }
 
 template <class G_Nodo, class G_Lado>
-void algoritmoFloyd(const Grafo<G_Nodo, G_Lado> &g)
-{
-  // TODO
+void algoritmoFloyd(const Grafo<G_Nodo, G_Lado> &g) {
+    AlgoritmosGrafos <G_Nodo, G_Lado>algorithm(g);
+    algorithm.floydAlgorithm(g);
+    algorithm.printMatrices(g);
+    // Pide al usuario 2 nodos e imprime: la distancia mínima entre los nodos
+    // y el camino a seguir para llegar al segundo desde el primero
+    cout << endl << "Se va a comprobar el funcionamiento del algoritmo, especifique dos nodos del grafo." << endl;
+    algorithm.askPath(g);
 }
 
 #endif
