@@ -1,14 +1,12 @@
 #Editor Files
 .vscode
 .idea
-cmake*
-CMake*
+cmake-build-debug
 # Latex
 *.aux
 *.log
 *.toc
 *.synctex.gz
-*main.pdf
 #Testing Tools
 GoogleTest-Master
 #Libraries
