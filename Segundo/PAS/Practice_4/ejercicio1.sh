@@ -2,7 +2,6 @@
 
 if [[ $# -ne 1 || ! -f $1 ]]; then
 	echo "La ejecución correcta del programa es: ejercicio1.sh <rutaFichero.txt>"
-	echo $1
 	exit 1
 fi
 
