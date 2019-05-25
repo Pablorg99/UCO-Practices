@@ -18,3 +18,5 @@ GoogleTest-Master
 *.exe
 #Documentation
 *html
+#Others
+*.sinLineasVacias
