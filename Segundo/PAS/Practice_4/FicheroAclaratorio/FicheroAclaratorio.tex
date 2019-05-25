@@ -1,7 +1,3 @@
-% ------------------------------------------------------------------------------ %
-% Pablo Rodríguez Guillén's personal template for all documents (at the moment)
-% ------------------------------------------------------------------------------ %
-
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -23,9 +19,6 @@
 
 \begin{document}
 
-% Uncomment for setting Bibliography without having to cite
-% \nocite{*}
-
 \maketitle
 \tableofcontents
 \newpage
@@ -36,16 +29,23 @@ El ejercicio hace uso principalmente del comando \emph{grep} con algunas de sus 
 Cada uno de los apartados está codificado en el fichero \emph{ejercicio1.sh} y la explicación concreta de cada uno está disponible a través de comentarios de bash. Al inicio del script se encuentra la comprobación de errores al pasar el argumento, que debe ser un fichero. A continuación se muestra la primera parte de la ejecución del script, no se mostrará entera ya que la salida es extensa.
 
 \begin{figure}[ht]
+	\centering
 	\includegraphics[width=1\textwidth]{images/ejercicio1.png}
 	\caption{Salida de los 4 primeros apartados del ejercicio 1}
 \end{figure}
 
-\section{ejercicio2.sh}
+\section{ejercicio4.sh}
+Este script requiere dos argumentos, si alguno de estos no se especifican o se introducen de manera incorrecta (el fichero no existe o el número de segundos es un número menor o igual a 0), se termina la ejecución del script. Respecto a estos argumentos, decir que el fichero pasado como argumento será uno que contenga una dirección IP válida en cada línea y que el número de segundos será el que el script usará para determinar que un servidor no ha respondido.
 
+El script hace un bucle en el que en cada iteración, la variable \emph{\$ip} es una línea del fichero pasado como argumento y se utiliza como destino en el comando \emph{ping}. Este se ejecuta con dos opciones: \emph{-c 1} que hace que el ping solo envíe un paquete y \emph{-W}, que como se indica en el propio script, devuelve un error cuando el número de segundos especificado como argumento de esta opción transcurre sin que haya habido respuesta por el servidor. Por último destacar que la sentencia condicional \emph{if} no usa \emph{[ expression ]} porque no evalúa una expresión, sino una variable que se trata como un booleano.
 
-% Uncomment for setting bibliography
-% \addcontentsline{toc}{section}{Referencias}
-% \bibliography{bibliography}
-% \bibliographystyle{unsrt}
+\begin{figure}[ht]
+	\centering
+	\includegraphics{images/ejercicio4.png}
+	\caption{Salida de la ejecución del ejercicio 4}	
+\end{figure}
+
+El resto de explicaciones concretas del script están documentadas en el código del mismo a través de comentarios.
+
 
 \end{document}
