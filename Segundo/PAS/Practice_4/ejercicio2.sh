@@ -14,5 +14,8 @@ fi
 
 grep -E '^.+[^=+]$' peliculas.txt | sed -r 
 '
-	s/[0-9]{2}/[0-9]{2}/[0-9]{4}/	
+	s/\(([0-9]{2}\/[0-9]{2}\/[0-9]{4})\)/|-> Fecha de estreno: \1/g;
+    s/Dirigida por (.+)/|-> Director: \1/g;
+    s/Reparto: (.+)/|-> Reparto: \1/g;
+    s/^([1-9]hr\s.*min)/|-> Duración: \1/g;
 '  
