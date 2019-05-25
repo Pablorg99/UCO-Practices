@@ -2,6 +2,7 @@
 
 if [ $# -gt 1 ]; then
     echo "La ejecución correcta del programa tiene la siguiente forma: ejercicio2.sh [rutaFichero]"
+    exit 1
 fi
 
 echo "================"
