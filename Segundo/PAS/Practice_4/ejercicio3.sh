@@ -12,7 +12,7 @@ ls -a $HOME | grep -E '^\..*'
 echo "================"
 if [[ $# -ne 1 || ! -f $1 ]]; then
     echo "Si quiere hacer una copia de un fichero sin líneas vacías, añada la ruta del directorio como argumento del script"
-else 
+else
     echo "El fichero $1 sin lineas vacías se ha guardado en $1.sinLineasVacias"
     sed -nr 's/(^.+$)/\1/p' $1 > $1.sinLineasVacias
 fi
