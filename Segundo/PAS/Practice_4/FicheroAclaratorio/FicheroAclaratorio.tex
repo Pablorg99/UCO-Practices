@@ -26,7 +26,7 @@
 \section{ejercicio1.sh}
 El ejercicio hace uso principalmente del comando \emph{grep} con algunas de sus opciones, principalmente la opción \emph{--colour} que hace que el patrón que coincida con la expresión regular se resalte con color en la salida de pantalla. El comando \emph{sed} también es utilizado en el último apartado del ejercicio. A la salida de este se le aplica un grep para resaltar las modificaciones.
 
-Cada uno de los apartados está codificado en el fichero \emph{ejercicio1.sh} y la explicación concreta de cada uno está disponible a través de comentarios de bash. Al inicio del script se encuentra la comprobación de errores al pasar el argumento, que debe ser un fichero. A continuación se muestra la primera parte de la ejecución del script, no se mostrará entera ya que la salida es extensa.
+Cada uno de los apartados está codificado en el fichero \emph{ejercicio1.sh} y la explicación concreta de cada uno está disponible a través de comentarios de \emph{bash}. Al inicio del script se encuentra la comprobación de errores al pasar el argumento, que debe ser un fichero. A continuación se muestra la primera parte de la ejecución del script, no se mostrará entera ya que la salida es extensa.
 
 \begin{figure}[ht]
 	\centering
@@ -79,6 +79,32 @@ El script hace un bucle en el que en cada iteración, la variable \emph{\$ip} es
 \end{figure}
 
 El resto de explicaciones concretas del script están documentadas en el código del mismo a través de comentarios.
+
+\newpage
+
+\section{ejercicio5.sh}
+El ejercicio 5 no requiere ningún argumento por línea de comandos, se ha añadido una comprobación al inicio del script que avisa al usuario de que este no necesita ningún argumento.
+
+El script consta de tres apartados muy similares. En los tres se hace uso del comando \emph{sed} junto a su comando \emph{s} para formatear el contenido del fichero de cada apartado. Se usan expresiones regulares basadas en el mismo funcionamiento que las del ejercicio 3. El funcionamiento de todo el script está casi unicamente basado en el funcionamiento de estas expresiones regulares, las cuales están perfectamente epxlicadas en el script correspondiente al ejercicio en comentarios.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{images/ejercicio5.png}
+	\caption{Ejecución del ejercicio 5}
+\end{figure}
+
+\newpage
+
+\section{ejercicio6.sh}
+Este ejercicio debe recibir un único argumento, este será la ruta de una \emph{shell}. Si no se recibe un solo argumento se imprime un mensaje de error y se detiene la ejecución.
+
+Se hace uso del comando \emph{grep} para que solo se muestren las líneas que contengan el argumento especificado. Si el script no muestra ninguna información es que no existe ningún usuario con la \emph{shell} especificada. A la salida del grep se le aplica un \emph{sed} con una expresión regular que se corresponde con el formato de la línea. Haciendo uso del comando \emph{s} se establece el nuevo formato.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{images/ejercicio6.png}
+	\caption{Ejecuciones de ejercicio6.sh}
+\end{figure}
 
 
 \end{document}
