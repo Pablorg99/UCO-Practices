@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -34,6 +34,22 @@ Cada uno de los apartados está codificado en el fichero \emph{ejercicio1.sh} y 
 	\caption{Salida de los 4 primeros apartados del ejercicio 1}
 \end{figure}
 
+\newpage
+
+\section{ejercicio2.sh}
+Este ejercicio comprueba que se le pasa un solo argumento por línea de comandos y que ese argumento, es la ruta de un fichero regular que existe en la máquina en la que se está ejecutando el script.
+
+En primer lugar se hace un \emph{grep -v -E} que hace que se impriman las líneas que no coinciden con la expresión regular especificada. A esta salida se le aplica un \emph{sed} con varios comandos. El primero de ellos es un \emph{d}, que elimina las líneas que emparejan con la expresión regular precendente. El resto son comandos \emph{s} que tiene dos partes separadas por el carácter \emph{/}. La primera de ellas es una expresión regular en la que podemos crear una referencia para repetir el contenido de esta en la segunda parte. En esta segunda parte, especificamos la cadena que va a sustituir al texto que empareje con la expresión regular de la primera parte, recalcar que sustituye a la expresión entera no a la referencia. Esta referencia también puede llamarse argumento t se utiliza para repetir una parte de la cadena en la sustitución.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{images/ejercicio2.png}
+\end{figure}
+
+Todos los emparejamientos de las expresiones regulares están explicados en el script a través de comentarios.
+
+\newpage
+
 \section{ejercicio4.sh}
 Este script requiere dos argumentos, si alguno de estos no se especifican o se introducen de manera incorrecta (el fichero no existe o el número de segundos es un número menor o igual a 0), se termina la ejecución del script. Respecto a estos argumentos, decir que el fichero pasado como argumento será uno que contenga una dirección IP válida en cada línea y que el número de segundos será el que el script usará para determinar que un servidor no ha respondido.
 
@@ -42,7 +58,7 @@ El script hace un bucle en el que en cada iteración, la variable \emph{\$ip} es
 \begin{figure}[ht]
 	\centering
 	\includegraphics{images/ejercicio4.png}
-	\caption{Salida de la ejecución del ejercicio 4}	
+	\caption{Salida de la ejecución del ejercicio 4}
 \end{figure}
 
 El resto de explicaciones concretas del script están documentadas en el código del mismo a través de comentarios.
