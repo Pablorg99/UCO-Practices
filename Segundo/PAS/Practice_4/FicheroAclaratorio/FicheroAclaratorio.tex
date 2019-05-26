@@ -50,6 +50,23 @@ Todos los emparejamientos de las expresiones regulares están explicados en el s
 
 \newpage
 
+\section{ejercicio3.sh}
+Este script permite un argumento opcional, si recibe más de un argumento se imprime por pantalla un mensaje de error y se abandona la ejecución del script. El primer apartado consiste en aplicar un \emph{grep} que empareje con todos los archivos ocultos de la salida de un \emph{ls -a} en el directorio \emph{home} del usuario que ejecute el script.
+
+La ejecución del segundo apartado varía según si se incluye el argumento opcional. Si se especifica un fichero de texto por línea de comandos. Se hace una copia del mismo eliminando las líneas vacías, haciendo uso de \emph{grep} y el operador \emph{\textgreater}
+
+El tercer apartado utiliza el comando \emph{sed} precedido de \emph{grep} (por razones especificadas en el script) para mostrar algunos campos de los procesos ejecutados por el usuario actual. La expresión regular de este \emph{sed} está detallada en el script a través de comentarios.
+
+\begin{figure}[ht]
+	\centering
+	\subfloat[Comienzo del apartado 1]{\includegraphics[width=1\textwidth]{images/ejercicio3a.png}}
+	\qquad
+	\subfloat[Apartado 2 y parte del apartado 3]{\includegraphics[width=1\textwidth]{images/ejercicio3b.png}}
+	\caption{Ejecución del script ejercicio3.sh}
+\end{figure}
+
+\newpage
+
 \section{ejercicio4.sh}
 Este script requiere dos argumentos, si alguno de estos no se especifican o se introducen de manera incorrecta (el fichero no existe o el número de segundos es un número menor o igual a 0), se termina la ejecución del script. Respecto a estos argumentos, decir que el fichero pasado como argumento será uno que contenga una dirección IP válida en cada línea y que el número de segundos será el que el script usará para determinar que un servidor no ha respondido.
 
