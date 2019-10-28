@@ -5,35 +5,48 @@
  */
 
 #include "prueba.h"
+#include <string.h>
 
+void calculadora_prog_1(char *host, enum operation *operation, int number1, int number2);
 
-void
-calculadora_prog_1(char *host)
+void calculadora_prog_1(char *host, enum operation *operation, int number1, int number2)
 {
-	CLIENT *clnt;
-	int  *result_1;
-	operandos  suma_1_arg;
-	int  *result_2;
-	operandos  multiplicacion_1_arg;
+	CLIENT *client;
+	operandos numbers;
+	int *result;
 
 #ifndef	DEBUG
-	clnt = clnt_create (host, CALCULADORA_PROG, CALCULADORA_VERS, "udp");
-	if (clnt == NULL) {
+	client = clnt_create (host, CALCULADORA_PROG, CALCULADORA_VERS, "udp");
+	if (client == NULL) {
 		clnt_pcreateerror (host);
 		exit (1);
 	}
 #endif	/* DEBUG */
 
-	result_1 = suma_1(&suma_1_arg, clnt);
-	if (result_1 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+	switch (operation) {
+		case 0:
+			result = suma_1(&number2, client);
+			if(result == NULL) {
+				clnt_perror (client, "call failed");
+			}
+			break;
+		case 1:
+
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		default:
+
+			break;
 	}
-	result_2 = multiplicacion_1(&multiplicacion_1_arg, clnt);
-	if (result_2 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
+
+
 #ifndef	DEBUG
-	clnt_destroy (clnt);
+	clnt_destroy(client);
 #endif	 /* DEBUG */
 }
 
@@ -41,13 +54,39 @@ calculadora_prog_1(char *host)
 int
 main (int argc, char *argv[])
 {
-	char *host;
+	enum operation {
+		suma = 0,
+		resta = 1,
+		multiplicacion = 2,
+		division = 3
+	};
 
-	if (argc < 2) {
-		printf ("usage: %s server_host\n", argv[0]);
+	char *host;
+	enum operation operation;
+	int number1;
+	int number2;
+
+	if (argc != 4) {
+		printf ("usage: %s <server_host> <SUMA|MULTIPLICACION> <NUMBER1> <NUMBER2>\n", argv[0]);
 		exit (1);
 	}
+	
+	if(strcmp(argv[2], "SUMA") == 0) {
+		operation = suma;
+	}
+	else if(strcmp(argv[2], "RESTA") == 0) {
+		operation = resta;
+	}
+	else if(strcmp(argv[2], "MULTIPICACION") == 0) {
+		operation = multiplicacion;
+	}
+	else if(strcmp(argv[2], "DIVISION") == 0) {
+		operation = division;
+	}
 	host = argv[1];
-	calculadora_prog_1 (host);
-exit (0);
+	number1 = atoi(argv[3]);
+	number1 = atoi(argv[3]);
+	calculadora_prog_1(host, &operation, number1, number2);
+	
+	exit(0);
 }
