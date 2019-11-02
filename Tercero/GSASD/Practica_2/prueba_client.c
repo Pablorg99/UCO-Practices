@@ -7,86 +7,129 @@
 #include "prueba.h"
 #include <string.h>
 
-void calculadora_prog_1(char *host, enum operation *operation, int number1, int number2);
-
-void calculadora_prog_1(char *host, enum operation *operation, int number1, int number2)
-{
-	CLIENT *client;
-	operandos numbers;
-	int *result;
-
-#ifndef	DEBUG
-	client = clnt_create (host, CALCULADORA_PROG, CALCULADORA_VERS, "udp");
-	if (client == NULL) {
-		clnt_pcreateerror (host);
-		exit (1);
-	}
-#endif	/* DEBUG */
-
-	switch (operation) {
-		case 0:
-			result = suma_1(&number2, client);
-			if(result == NULL) {
-				clnt_perror (client, "call failed");
-			}
-			break;
-		case 1:
-
-			break;
-		case 2:
-
-			break;
-		case 3:
-
-			break;
-		default:
-
-			break;
-	}
-
-
-#ifndef	DEBUG
-	clnt_destroy(client);
-#endif	 /* DEBUG */
-}
-
-
-int
-main (int argc, char *argv[])
-{
-	enum operation {
-		suma = 0,
-		resta = 1,
-		multiplicacion = 2,
-		division = 3
-	};
-
+int main(int argc, char *argv[]) {
 	char *host;
-	enum operation operation;
-	int number1;
-	int number2;
+	int operation;
+	operandos numbers;
+	CLIENT *client;
 
-	if (argc != 4) {
-		printf ("usage: %s <server_host> <SUMA|MULTIPLICACION> <NUMBER1> <NUMBER2>\n", argv[0]);
-		exit (1);
-	}
-	
-	if(strcmp(argv[2], "SUMA") == 0) {
-		operation = suma;
-	}
-	else if(strcmp(argv[2], "RESTA") == 0) {
-		operation = resta;
-	}
-	else if(strcmp(argv[2], "MULTIPICACION") == 0) {
-		operation = multiplicacion;
-	}
-	else if(strcmp(argv[2], "DIVISION") == 0) {
-		operation = division;
-	}
+	// Variables assignment logic
+	checkCommandLineArguments(argc, argv);
 	host = argv[1];
-	number1 = atoi(argv[3]);
-	number1 = atoi(argv[3]);
-	calculadora_prog_1(host, &operation, number1, number2);
+	numbers.a = atoi(argv[3]);
+	numbers.b = atoi(argv[3]);
+	operation = parseOperation(argv[2], argv[0]);
+	client = createClient(host);
+
+	// Server calling logic
+	callServerFunction(client, operation, &numbers);
+	clnt_destroy(client);
 	
 	exit(0);
+}
+
+void checkCommandLineArguments(int argc, char *argv[]) {
+	if (argc != 4) {
+		wrongInputMessage(argv[0]);
+	}
+}
+
+void wrongInputMessage(char *programName) {
+	fprintf(stderr, "uso: %s <IP_HOST> <SUMA|RESTA|MULTIPLICACION|DIVISION> <NÚMERO_1> <NÚMERO_2>\n", programName);
+	exit (1);
+}
+
+int parseOperation(char *operation, char *programName) {
+	if(strcmp(operation, "SUMA") == 0) {
+		return 0;
+	}
+	else if(strcmp(operation, "RESTA") == 0) {
+		return 1;
+	}
+	else if(strcmp(operation, "MULTIPICACION") == 0) {
+		return 2;
+	}
+	else if(strcmp(operation, "DIVISION") == 0) {
+		return 3;
+	}
+	else {
+		wrongInputMessage(programName);
+	}
+}
+
+CLIENT * createClient(char *host) {
+	CLIENT *client;
+
+	client = clnt_create (host, CALCULADORA_PROG, CALCULADORA_VERS, "udp");
+	if (client == NULL) {
+		clnt_pcreateerror(host);
+		exit (1);
+	}
+
+	return client;
+}
+
+void callServerFunction(CLIENT *client, int operation, operandos *numbers) {
+	switch (operation) {
+		case 0: // SUMA
+			callAdditionFunction(client, numbers);
+			break;
+		case 1: // RESTA
+			callSubstractionFunction(client, numbers);
+			break;
+		case 2: // MULTIPLICACION
+			callMultiplicationFunction(client, numbers);
+			break;
+		case 3: // DIVISION
+			callDivisionFunction(client, numbers);
+			break;
+		default:
+			fprintf(stderr, "Error identificando la operación\n");
+			exit(1);
+			break;
+	}
+}
+
+void callAdditionFunction(CLIENT *client, operandos *numbers) {
+	int *result;
+
+	result = suma_1(numbers, client);
+	if(result == NULL) {
+		clnt_perror (client, "Llamada a suma fallida\n");
+	}
+
+	printf("El resultado de la suma es %d\n", *result);
+}
+
+void callSubstractionFunction(CLIENT *client, operandos *numbers) {
+	int *result;
+
+	result = suma_1(numbers, client);
+	if(result == NULL) {
+		clnt_perror (client, "Llamada a suma fallida\n");
+	}
+
+	printf("El resultado de la suma es %d\n", *result);
+}
+
+void callAdditionFunction(CLIENT *client, operandos *numbers) {
+	int *result;
+
+	result = suma_1(numbers, client);
+	if(result == NULL) {
+		clnt_perror (client, "Llamada a suma fallida\n");
+	}
+
+	printf("El resultado de la suma es %d\n", *result);
+}
+
+void callAdditionFunction(CLIENT *client, operandos *numbers) {
+	int *result;
+
+	result = suma_1(numbers, client);
+	if(result == NULL) {
+		clnt_perror (client, "Llamada a suma fallida\n");
+	}
+
+	printf("El resultado de la suma es %d\n", *result);
 }
