@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	checkCommandLineArguments(argc, argv);
 	host = argv[1];
 	numbers.a = atoi(argv[3]);
-	numbers.b = atoi(argv[3]);
+	numbers.b = atoi(argv[4]);
 	operation = parseOperation(argv[2], argv[0]);
 	client = createClient(host);
 
@@ -47,7 +47,7 @@ int parseOperation(char *operation, char *programName) {
 	else if(strcmp(operation, "RESTA") == 0) {
 		return 1;
 	}
-	else if(strcmp(operation, "MULTIPICACION") == 0) {
+	else if(strcmp(operation, "MULTIPLICACION") == 0) {
 		return 2;
 	}
 	else if(strcmp(operation, "DIVISION") == 0) {
