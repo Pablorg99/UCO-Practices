@@ -25,6 +25,21 @@ suma_1(operandos *argp, CLIENT *clnt)
 }
 
 int *
+resta_1(operandos *argp, CLIENT *clnt)
+{
+	static int clnt_res;
+
+	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	if (clnt_call (clnt, RESTA,
+		(xdrproc_t) xdr_operandos, (caddr_t) argp,
+		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
+		TIMEOUT) != RPC_SUCCESS) {
+		return (NULL);
+	}
+	return (&clnt_res);
+}
+
+int *
 multiplicacion_1(operandos *argp, CLIENT *clnt)
 {
 	static int clnt_res;
@@ -33,6 +48,21 @@ multiplicacion_1(operandos *argp, CLIENT *clnt)
 	if (clnt_call (clnt, MULTIPLICACION,
 		(xdrproc_t) xdr_operandos, (caddr_t) argp,
 		(xdrproc_t) xdr_int, (caddr_t) &clnt_res,
+		TIMEOUT) != RPC_SUCCESS) {
+		return (NULL);
+	}
+	return (&clnt_res);
+}
+
+float *
+division_1(operandos *argp, CLIENT *clnt)
+{
+	static float clnt_res;
+
+	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	if (clnt_call (clnt, DIVISION,
+		(xdrproc_t) xdr_operandos, (caddr_t) argp,
+		(xdrproc_t) xdr_float, (caddr_t) &clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}

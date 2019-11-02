@@ -27,18 +27,30 @@ typedef struct operandos operandos;
 #define SUMA 1
 extern  int * suma_1(operandos *, CLIENT *);
 extern  int * suma_1_svc(operandos *, struct svc_req *);
-#define MULTIPLICACION 2
+#define RESTA 2
+extern  int * resta_1(operandos *, CLIENT *);
+extern  int * resta_1_svc(operandos *, struct svc_req *);
+#define MULTIPLICACION 3
 extern  int * multiplicacion_1(operandos *, CLIENT *);
 extern  int * multiplicacion_1_svc(operandos *, struct svc_req *);
+#define DIVISION 4
+extern  float * division_1(operandos *, CLIENT *);
+extern  float * division_1_svc(operandos *, struct svc_req *);
 extern int calculadora_prog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define SUMA 1
 extern  int * suma_1();
 extern  int * suma_1_svc();
-#define MULTIPLICACION 2
+#define RESTA 2
+extern  int * resta_1();
+extern  int * resta_1_svc();
+#define MULTIPLICACION 3
 extern  int * multiplicacion_1();
 extern  int * multiplicacion_1_svc();
+#define DIVISION 4
+extern  float * division_1();
+extern  float * division_1_svc();
 extern int calculadora_prog_1_freeresult ();
 #endif /* K&R C */
 

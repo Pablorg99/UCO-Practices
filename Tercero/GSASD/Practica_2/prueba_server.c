@@ -9,7 +9,7 @@
 int *
 suma_1_svc(operandos *argp, struct svc_req *rqstp)
 {
-	static int result;
+	static int  result;
 
 	result = argp->a + argp->b;
 
@@ -17,11 +17,31 @@ suma_1_svc(operandos *argp, struct svc_req *rqstp)
 }
 
 int *
+resta_1_svc(operandos *argp, struct svc_req *rqstp)
+{
+	static int  result;
+
+	result = argp->a - argp->b;
+
+	return &result;
+}
+
+int *
 multiplicacion_1_svc(operandos *argp, struct svc_req *rqstp)
 {
-	static int result;
+	static int  result;
 
 	result = argp->a * argp->b;
+
+	return &result;
+}
+
+float *
+division_1_svc(operandos *argp, struct svc_req *rqstp)
+{
+	static float  result;
+
+	result = (float) argp->a / (float) argp->b;
 
 	return &result;
 }
