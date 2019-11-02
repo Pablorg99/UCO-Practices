@@ -9,11 +9,9 @@
 int *
 suma_1_svc(operandos *argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static int result;
 
-	/*
-	 * insert server code here
-	 */
+	result = argp->a + argp->b;
 
 	return &result;
 }
@@ -21,11 +19,9 @@ suma_1_svc(operandos *argp, struct svc_req *rqstp)
 int *
 multiplicacion_1_svc(operandos *argp, struct svc_req *rqstp)
 {
-	static int  result;
+	static int result;
 
-	/*
-	 * insert server code here
-	 */
+	result = argp->a * argp->b;
 
 	return &result;
 }
