@@ -26,7 +26,10 @@ RPCGENFLAGS =
 
 # Targets 
 
-all : $(CLIENT) $(SERVER)
+all : $(CLIENT) $(SERVER) suma_local.out
+
+suma_local.out: suma_local.c
+	gcc suma_local.c -o suma_local.out -Wall -pedantic
 
 $(TARGETS) : $(SOURCES.x) 
 	rpcgen $(RPCGENFLAGS) $(SOURCES.x)
