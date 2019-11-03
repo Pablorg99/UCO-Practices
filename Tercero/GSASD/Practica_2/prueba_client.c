@@ -17,9 +17,9 @@ int main(int argc, char *argv[]) {
 	// Variables assignment logic
 	checkCommandLineArguments(argc, argv);
 	host = argv[1];
+	operation = parseOperation(argv[2], argv[0]);
 	numbers.a = atoi(argv[3]);
 	numbers.b = atoi(argv[4]);
-	operation = parseOperation(argv[2], argv[0]);
 	client = createClient(host);
 
 	// Server calling logic
@@ -107,7 +107,7 @@ void callSubstractionFunction(CLIENT *client, operandos *numbers) {
 
 	result = resta_1(numbers, client);
 	if(result == NULL) {
-		clnt_perror (client, "Llamada a suma fallida\n");
+		clnt_perror (client, "Llamada a resta fallida\n");
 	}
 
 	printf("El resultado de la resta es %d\n", *result);
@@ -118,7 +118,7 @@ void callMultiplicationFunction(CLIENT *client, operandos *numbers) {
 
 	result = multiplicacion_1(numbers, client);
 	if(result == NULL) {
-		clnt_perror (client, "Llamada a suma fallida\n");
+		clnt_perror (client, "Llamada a multiplicación fallida\n");
 	}
 
 	printf("El resultado de la multiplicación es %d\n", *result);
@@ -134,7 +134,7 @@ void callDivisionFunction(CLIENT *client, operandos *numbers) {
 
 	result = division_1(numbers, client);
 	if(result == NULL) {
-		clnt_perror (client, "Llamada a suma fallida\n");
+		clnt_perror (client, "Llamada a división fallida\n");
 	}
 
 	printf("El resultado de la división es %f\n", *result);
