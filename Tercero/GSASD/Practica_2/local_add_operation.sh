@@ -2,8 +2,8 @@
 
 SECONDS=0
 echo "Ejecutando el programa suma_local 10.000 veces..."
-for i in {1..10000}; do
-./suma_local.out 3 5 >> suma_local.log
+for iteration in {1..10000}; do
+./suma_local.out 0 $iteration
 done
 
 calls_duration=$SECONDS
