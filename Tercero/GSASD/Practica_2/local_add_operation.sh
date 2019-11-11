@@ -7,4 +7,4 @@ for iteration in {1..10000}; do
 done
 
 calls_duration=$SECONDS
-echo "Las 100.000 ejecuciones se han realizado en $calls_duration segundos."
+echo "Las 10.000 ejecuciones se han realizado en $calls_duration segundos."
