@@ -1,24 +1,11 @@
-import importlib
+from controller.domain import DomainController
 
 
-class Classification:
-    def __init__(self, name, attributes):
-        self.__model = self.__get_model_from(name, attributes)
-        self.__objects = self.__get_objects_from(name)
-
-    def __get_model_from(self, name, attributes):
-        module_name = "model." + name + "." + name
-        module = importlib.import_module(module_name)
-        class_name = name.capitalize()
-        model = getattr(module, class_name)
-        return model(attributes)
-
-    def __get_objects_from(self, name):
-        module_name = "model." + name + "." + name + "_objects"
-        module = importlib.import_module(module_name)
-        objects_name = name + "s"
-        objects = getattr(module, objects_name)
-        return objects
+class ClassificationController:
+    def __init__(self, domain_name, model, objects):
+        self.__domain_controller = DomainController(domain_name)
+        self.__model = model
+        self.__objects = objects
 
     def get_matching_objects(self):
         matching_objects = []
