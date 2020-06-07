@@ -50,6 +50,8 @@ class MainWindow(QtGui.QWidget):
         attributes = self.__domain_controller.get_domain_attributes()
         input_data_table = QtGui.QTableWidget(len(attributes), 2)
         input_data_table.setHorizontalHeaderLabels(['Attribute', 'Value'])
+        input_data_table.setColumnWidth(0, 196)
+        input_data_table.setColumnWidth(1, 195)
         for i in range(0, len(attributes)):
             attribute_cell = QtGui.QTableWidgetItem(attributes[i])
             attribute_cell.setFlags(self.__get_uneditable_cell_flags())
