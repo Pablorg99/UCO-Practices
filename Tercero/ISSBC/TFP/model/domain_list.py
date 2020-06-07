@@ -1,1 +1,1 @@
-DOMAIN_LIST = ["fruit", "ball"]  # First item is default domain
+DOMAIN_LIST = ["fruit", "ball", "city"]  # First item is default domain
